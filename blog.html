@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — M. Arief Fardhiansyah</title>
+<!-- Set theme BEFORE render to avoid flash -->
+<script>
+(function(){
+  try {
+    var saved = sessionStorage.getItem('af-theme');
+    if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  } catch(e){}
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+/* ━━━ DARK THEME (default) ━━━ */
+:root,[data-theme="dark"]{
+  --bg:#0d0f12;--bg2:#141619;--bg3:#1a1d22;--surface:#1f2228;
+  --border:rgba(255,255,255,0.06);--text:#e6e8ec;--text2:#8c95a6;--text3:#52596a;
+  --gold:#c9a84c;--gold2:#e8c97a;
+  --nav-bg:rgba(13,15,18,0.93);
+  --nav-h:68px;--shadow:0 12px 48px rgba(0,0,0,0.55);--tr:0.3s ease;
+}
+[data-theme="light"]{
+  --bg:#dddad3;--bg2:#d4d0c8;--bg3:#cac6be;--surface:#e2dfd8;
+  --border:rgba(0,0,0,0.12);--text:#1a1714;--text2:#3d372e;--text3:#6b6358;
+  --gold:#7a5a0a;--gold2:#9a7214;
+  --nav-bg:rgba(212,208,200,0.96);
+  --shadow:0 12px 48px rgba(0,0,0,0.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.15}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background var(--tr)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 24px;height:100%}
+.nav-logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:36px;height:36px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold)}
+.logo-name{font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem;letter-spacing:0.03em}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{padding:7px 14px;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);transition:color var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:14px;right:14px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform var(--tr)}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.theme-btn{width:38px;height:38px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--tr);border-radius:4px}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all 0.3s}
+.mobile-nav{display:none;position:fixed;inset:0;top:var(--nav-h);background:var(--bg);z-index:999;flex-direction:column;padding:40px 32px;gap:4px;overflow-y:auto}
+.mobile-nav.open{display:flex}
+.mobile-nav a{padding:18px 0;font-size:1.3rem;font-family:'Playfair Display',serif;font-weight:600;color:var(--text2);border-bottom:1px solid var(--border);transition:color var(--tr)}
+.mobile-nav a:hover{color:var(--gold)}
+
+/* PAGE HERO */
+.page-hero{padding:calc(var(--nav-h) + 72px) 0 64px;background:var(--bg2);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 80% 50%,rgba(201,168,76,0.06) 0%,transparent 70%)}
+[data-theme="light"] .page-hero::before{background:radial-gradient(ellipse 600px 400px at 80% 50%,rgba(122,90,10,0.08) 0%,transparent 70%)}
+.page-hero-inner{position:relative;z-index:1}
+.page-hero-label{display:flex;align-items:center;gap:12px;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.page-hero-label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.page-hero-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;margin-bottom:12px}
+.page-hero-title em{color:var(--gold);font-style:normal}
+.page-hero-sub{font-size:0.95rem;color:var(--text2);max-width:560px;line-height:1.8;margin-bottom:28px}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3)}
+.breadcrumb a{transition:color var(--tr)}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb-sep{color:var(--text3)}
+
+/* BLOG LAYOUT */
+.blog-page{padding:72px 0 96px}
+.blog-page-inner{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start}
+
+/* FILTER BAR */
+.blog-filter{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:36px}
+.blog-filter-btn{padding:7px 18px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr)}
+.blog-filter-btn.active,.blog-filter-btn:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+[data-theme="dark"] .blog-filter-btn.active,[data-theme="dark"] .blog-filter-btn:hover{color:var(--bg)}
+
+/* BLOG CARDS — FULL LIST */
+.blog-list{display:flex;flex-direction:column;gap:28px}
+.blog-post-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:all var(--tr);display:grid;grid-template-columns:280px 1fr}
+.blog-post-card:hover{border-color:rgba(201,168,76,0.3);box-shadow:var(--shadow)}
+.blog-post-card.featured{grid-template-columns:1fr;grid-template-rows:auto auto}
+.blog-post-thumb{overflow:hidden;background:var(--bg2);position:relative}
+.blog-post-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;min-height:200px}
+.blog-post-card:hover .blog-post-thumb img{transform:scale(1.05)}
+.blog-post-cat{position:absolute;top:14px;left:14px;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;background:var(--gold);color:#fff}
+[data-theme="dark"] .blog-post-cat{color:var(--bg)}
+.blog-post-body{padding:28px;display:flex;flex-direction:column}
+.blog-post-meta{display:flex;align-items:center;gap:14px;font-size:0.68rem;color:var(--text3);font-weight:700;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:14px;flex-wrap:wrap}
+.blog-post-meta .date{color:var(--gold)}
+.blog-post-title{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;line-height:1.35;margin-bottom:12px;transition:color var(--tr)}
+.blog-post-card:hover .blog-post-title{color:var(--gold)}
+.blog-post-subtitle{font-size:0.88rem;color:var(--text2);line-height:1.75;margin-bottom:16px;flex:1}
+.blog-post-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:16px;margin-top:auto}
+.blog-post-tags{display:flex;gap:6px;flex-wrap:wrap}
+.bptag{padding:2px 8px;border:1px solid var(--border);font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)}
+.blog-view-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border:1.5px solid var(--gold);color:var(--gold);font-family:'Lato',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;transition:all var(--tr);white-space:nowrap;flex-shrink:0}
+.blog-view-btn:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .blog-view-btn:hover{color:var(--bg)}
+
+/* FEATURED BADGE */
+.featured-badge{display:inline-flex;align-items:center;gap:6px;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border:1px solid var(--gold);color:var(--gold);margin-bottom:14px;width:fit-content}
+
+/* SIDEBAR */
+.blog-sidebar{position:sticky;top:calc(var(--nav-h) + 24px);display:flex;flex-direction:column;gap:28px}
+.sidebar-block{background:var(--surface);border:1px solid var(--border);padding:24px}
+.sidebar-title{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.sidebar-title::before{content:'';width:18px;height:1px;background:var(--gold)}
+.sidebar-tags{display:flex;flex-wrap:wrap;gap:7px}
+.sidebar-tag{padding:4px 11px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3);cursor:pointer;transition:all var(--tr)}
+.sidebar-tag:hover{border-color:var(--gold);color:var(--gold)}
+.sidebar-recent{display:flex;flex-direction:column;gap:14px}
+.sidebar-recent-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
+.sidebar-recent-item:last-child{border-bottom:none;padding-bottom:0}
+.sidebar-recent-img{width:56px;height:56px;flex-shrink:0;overflow:hidden;background:var(--bg2)}
+.sidebar-recent-img img{width:100%;height:100%;object-fit:cover}
+.sidebar-recent-date{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.sidebar-recent-title{font-size:0.82rem;font-weight:700;line-height:1.35;color:var(--text2);transition:color var(--tr)}
+.sidebar-recent-title:hover{color:var(--gold)}
+.sidebar-about{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.sidebar-avatar{width:72px;height:72px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0}
+.sidebar-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.sidebar-about-name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700}
+.sidebar-about-role{font-size:0.75rem;color:var(--text2);line-height:1.6}
+.sidebar-about-link{display:inline-block;margin-top:8px;padding:7px 18px;border:1.5px solid var(--gold);font-size:0.68rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--gold);transition:all var(--tr)}
+.sidebar-about-link:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .sidebar-about-link:hover{color:var(--bg)}
+
+/* PAGINATION */
+.pagination{display:flex;justify-content:center;gap:4px;margin-top:48px}
+.page-btn{width:40px;height:40px;border:1px solid var(--border);background:transparent;color:var(--text3);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;justify-content:center}
+.page-btn:hover,.page-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+[data-theme="dark"] .page-btn:hover,[data-theme="dark"] .page-btn.active{color:var(--bg)}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}
+.footer-logo em{color:var(--gold);font-style:normal}
+.footer-sub{font-size:0.75rem;color:var(--text3);letter-spacing:0.07em;text-align:center}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.footer-links a{font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3);transition:color var(--tr)}
+.footer-links a:hover{color:var(--gold)}
+.footer-divider{width:40px;height:1px;background:var(--border)}
+.footer-copy{font-size:0.72rem;color:var(--text3)}
+
+/* BTT */
+.btt{position:fixed;bottom:26px;right:26px;z-index:500;width:42px;height:42px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--tr);opacity:0;transform:translateY(10px)}
+.btt.visible{opacity:1;transform:translateY(0)}
+.btt:hover{border-color:var(--gold);color:var(--gold)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .blog-page-inner{grid-template-columns:1fr}
+  .blog-sidebar{position:static}
+  .blog-post-card{grid-template-columns:1fr}
+  .blog-post-thumb img{min-height:220px;max-height:260px}
+}
+@media(max-width:960px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:600px){
+  .container{padding:0 16px}
+  .blog-page{padding:48px 0 72px}
+  .page-hero{padding:calc(var(--nav-h) + 48px) 0 48px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark">AF</div>
+      <div class="logo-name">Portfolio</div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#certification">Certification</a>
+      <a href="index.html#project">Projects</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" title="Toggle tema gelap/terang">🌙</button>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="index.html#about" onclick="closeMobile()">About</a>
+  <a href="index.html#experience" onclick="closeMobile()">Experience</a>
+  <a href="index.html#certification" onclick="closeMobile()">Certification</a>
+  <a href="index.html#project" onclick="closeMobile()">Projects</a>
+  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="page-hero-label">Blog & Insights</div>
+    <h1 class="page-hero-title">Thoughts &amp; <em>Writings</em></h1>
+    <p class="page-hero-sub">Perspektif dari persimpangan antara dunia klinis dan teknologi kesehatan. Catatan nyata dari lapangan — tentang sistem, manusia, dan perubahan.</p>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Blog</span>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG MAIN CONTENT -->
+<div class="blog-page">
+  <div class="container">
+    <div class="blog-page-inner">
+
+      <!-- MAIN POSTS COLUMN -->
+      <div>
+        <!-- FILTER -->
+        <div class="blog-filter reveal">
+          <button class="blog-filter-btn active" onclick="filterBlog('all',this)">All Posts</button>
+          <button class="blog-filter-btn" onclick="filterBlog('healthcare-it',this)">Healthcare IT</button>
+          <button class="blog-filter-btn" onclick="filterBlog('training',this)">Training</button>
+          <button class="blog-filter-btn" onclick="filterBlog('career',this)">Career</button>
+          <button class="blog-filter-btn" onclick="filterBlog('data',this)">Data & Analytics</button>
+        </div>
+
+        <!-- POST LIST — dirender otomatis dari posts.js -->
+        <div class="blog-list" id="blogList">
+          <!-- JS akan mengisi konten ini -->
+        </div><!-- /blog-list -->
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">›</button>
+        </div>
+      </div><!-- /main column -->
+
+      <!-- SIDEBAR -->
+      <aside class="blog-sidebar">
+
+        <!-- ABOUT AUTHOR -->
+        <div class="sidebar-block reveal">
+          <div class="sidebar-title">About the Author</div>
+          <div class="sidebar-about">
+            <div class="sidebar-avatar">
+              <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnzbdbjDBENUlM9MdL6MZT-xlMdY0rRZVVtcNJ43zfLr6C4TO8232pBD1hfStp8q9v4UbCA8KIIhlz8tMLOzqNUAKjuMqYf88GQCgGsoGQFQzgM2Z1P2Mr7doJXzt6S6GzqUOtwnC_RjIVjpSV7HiKbHO_nQB527pIIWzzDK6gB6PTnO3__76-2fOmQ2x/s16000/1000111421.jpg" alt="Arief Fardhiansyah">
+            </div>
+            <div class="sidebar-about-name">Ns. M. Arief Fardhiansyah</div>
+            <div class="sidebar-about-role">HIS Officer · Data Analyst · Registered Nurse at Mayapada Hospital Jakarta Selatan</div>
+            <a href="index.html" class="sidebar-about-link">View Portfolio →</a>
+          </div>
+        </div>
+
+        <!-- RECENT POSTS — dirender otomatis dari posts.js -->
+        <div class="sidebar-block reveal">
+          <div class="sidebar-title">Recent Posts</div>
+          <div class="sidebar-recent" id="sidebarRecent">
+            <!-- JS akan mengisi konten ini -->
+          </div>
+        </div>
+
+        <!-- TAGS -->
+        <div class="sidebar-block reveal">
+          <div class="sidebar-title">Topics</div>
+          <div class="sidebar-tags">
+            <span class="sidebar-tag">HIS</span>
+            <span class="sidebar-tag">EMR</span>
+            <span class="sidebar-tag">Nursing</span>
+            <span class="sidebar-tag">Healthcare IT</span>
+            <span class="sidebar-tag">Training</span>
+            <span class="sidebar-tag">Data</span>
+            <span class="sidebar-tag">Career</span>
+            <span class="sidebar-tag">Analytics</span>
+            <span class="sidebar-tag">Workflow</span>
+            <span class="sidebar-tag">Innovation</span>
+          </div>
+        </div>
+
+      </aside>
+    </div><!-- /blog-page-inner -->
+  </div><!-- /container -->
+</div><!-- /blog-page -->
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">M. Arief <em>Fardhiansyah</em></div>
+      <div class="footer-sub">Healthcare IT Officer &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Registered Nurse &nbsp;·&nbsp; Jakarta Selatan</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#certification">Certification</a>
+        <a href="index.html#project">Projects</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 M. Arief Fardhiansyah · Crafted for healthcare innovation</div>
+    </div>
+  </div>
+</footer>
+
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="posts.js"></script>
+<script>
+// ══════════ THEME ══════════
+var themeBtn = document.getElementById('themeBtn');
+var html = document.documentElement;
+function getCurrentTheme() { return html.getAttribute('data-theme') || 'dark'; }
+function setTheme(t) {
+  html.setAttribute('data-theme', t);
+  themeBtn.textContent = (t === 'dark') ? '🌙' : '☀️';
+  try { sessionStorage.setItem('af-theme', t); } catch(e) {}
+}
+setTheme(getCurrentTheme());
+themeBtn.onclick = function() { setTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark'); };
+
+// ══════════ MOBILE NAV ══════════
+var hamburger = document.getElementById('hamburger');
+var mobileNav = document.getElementById('mobileNav');
+hamburger.onclick = function() { mobileNav.classList.toggle('open'); };
+function closeMobile() { mobileNav.classList.remove('open'); }
+
+// ══════════ BACK TO TOP ══════════
+window.addEventListener('scroll', function() {
+  document.getElementById('btt').classList.toggle('visible', window.scrollY > 400);
+}, {passive:true});
+
+// ══════════ RENDER BLOG LIST dari posts.js ══════════
+function escapedTitle(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderBlogList(filter) {
+  var list = document.getElementById('blogList');
+  var filtered = filter && filter !== 'all'
+    ? POSTS.filter(function(p){ return p.catSlug === filter; })
+    : POSTS;
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<p style="color:var(--text2);padding:24px 0">Tidak ada artikel dalam kategori ini.</p>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(function(p) {
+    var isFeatured = p.featured;
+    var tagsHtml = p.tags.map(function(t){ return '<span class="bptag">'+t+'</span>'; }).join('');
+    var featuredBadge = isFeatured ? '<div class="featured-badge">✦ Featured Post</div>' : '';
+    var thumbStyle = isFeatured ? ' style="min-height:260px"' : '';
+    var imgStyle = isFeatured ? ' style="max-height:360px"' : '';
+    return [
+      '<article class="blog-post-card '+(isFeatured?'featured ':'')+' reveal" data-cat="'+p.catSlug+'">',
+        '<div class="blog-post-thumb"'+thumbStyle+'>',
+          '<img src="'+p.image+'" alt="'+escapedTitle(p.imageAlt)+'" loading="lazy"'+imgStyle+'>',
+          '<span class="blog-post-cat">'+p.category+'</span>',
+        '</div>',
+        '<div class="blog-post-body">',
+          featuredBadge,
+          '<div class="blog-post-meta">',
+            '<span class="date">'+p.date+'</span>',
+            '<span>· '+p.readTime+'</span>',
+          '</div>',
+          '<h2 class="blog-post-title">'+escapedTitle(p.title)+'</h2>',
+          '<p class="blog-post-subtitle">'+p.excerpt+'</p>',
+          '<div class="blog-post-footer">',
+            '<div class="blog-post-tags">'+tagsHtml+'</div>',
+            '<a href="'+p.slug+'" class="blog-view-btn">View More →</a>',
+          '</div>',
+        '</div>',
+      '</article>'
+    ].join('');
+  }).join('');
+
+  // Re-trigger reveal observer on new elements
+  document.querySelectorAll('.reveal:not(.revealed)').forEach(function(el){ revObs.observe(el); });
+}
+
+function renderSidebarRecent() {
+  var container = document.getElementById('sidebarRecent');
+  if (!container) return;
+  var recent = POSTS.slice(0, 4);
+  container.innerHTML = recent.map(function(p) {
+    return [
+      '<a href="'+p.slug+'" class="sidebar-recent-item" style="text-decoration:none">',
+        '<div class="sidebar-recent-img">',
+          '<img src="'+p.image+'" alt="'+escapedTitle(p.imageAlt)+'" loading="lazy">',
+        '</div>',
+        '<div>',
+          '<div class="sidebar-recent-date">'+p.date+'</div>',
+          '<div class="sidebar-recent-title">'+escapedTitle(p.title)+'</div>',
+        '</div>',
+      '</a>'
+    ].join('');
+  }).join('');
+}
+
+// ══════════ SCROLL REVEAL ══════════
+var revObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('revealed'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
+
+// ══════════ FILTER ══════════
+function filterBlog(cat, btn) {
+  document.querySelectorAll('.blog-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderBlogList(cat);
+}
+
+// ══════════ INIT ══════════
+renderBlogList('all');
+renderSidebarRecent();
+</script>
+</body>
+</html>

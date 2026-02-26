@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  TEMPLATE ARTIKEL BARU — Salin file ini, ganti placeholder-nya  ║
+  ║  Simpan dengan nama: Judul-Artikel-Anda.html (tanpa spasi)      ║
+  ╚══════════════════════════════════════════════════════════════════╝
+
+  LANGKAH SETELAH SELESAI MENGISI FILE INI:
+  1. Simpan file ini di folder yang sama dengan index.html dan blog.html
+  2. Buka posts.js, tambahkan entri baru di bagian ATAS array POSTS
+  3. Deploy ke GitHub → artikel langsung muncul di blog.html & index.html
+
+  PLACEHOLDER yang harus diganti:
+    [JUDUL ARTIKEL]       → Judul lengkap artikel
+    [TANGGAL]             → Contoh: 1 Maret 2026
+    [MENIT BACA]          → Contoh: 5 min read
+    [KATEGORI]            → Healthcare IT / Training / Career / Data & Analytics
+    [EXCERPT / RINGKASAN] → 1-2 kalimat pembuka yang menarik
+    [URL_GAMBAR_HERO]     → URL gambar header artikel
+    [ISI KONTEN]          → Ganti dengan konten artikel Anda
+-->
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[JUDUL ARTIKEL] — M. Arief Fardhiansyah</title>
+<meta name="description" content="[EXCERPT / RINGKASAN]">
+<script>
+(function(){
+  try { var s=sessionStorage.getItem('af-theme'); if(s){document.documentElement.setAttribute('data-theme',s);return;} } catch(e){}
+  document.documentElement.setAttribute('data-theme', window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="dark"]{--bg:#0d0f12;--bg2:#141619;--bg3:#1a1d22;--surface:#1f2228;--border:rgba(255,255,255,0.06);--text:#e6e8ec;--text2:#8c95a6;--text3:#52596a;--gold:#c9a84c;--gold2:#e8c97a;--nav-bg:rgba(13,15,18,0.93);--nav-h:68px;--shadow:0 12px 48px rgba(0,0,0,0.55);--tr:0.3s ease}
+[data-theme="light"]{--bg:#dddad3;--bg2:#d4d0c8;--bg3:#cac6be;--surface:#e2dfd8;--border:rgba(0,0,0,0.12);--text:#1a1714;--text2:#3d372e;--text3:#6b6358;--gold:#7a5a0a;--gold2:#9a7214;--nav-bg:rgba(212,208,200,0.96);--shadow:0 12px 48px rgba(0,0,0,0.14)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.2}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background var(--tr)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 24px;height:100%}
+.nav-logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:36px;height:36px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold)}
+.logo-name{font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem;letter-spacing:0.03em}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{padding:7px 14px;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);transition:color var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:14px;right:14px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform var(--tr)}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.theme-btn{width:38px;height:38px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--tr);border-radius:4px}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all 0.3s}
+.mobile-nav{display:none;position:fixed;inset:0;top:var(--nav-h);background:var(--bg);z-index:999;flex-direction:column;padding:40px 32px;gap:4px;overflow-y:auto}
+.mobile-nav.open{display:flex}
+.mobile-nav a{padding:18px 0;font-size:1.3rem;font-family:'Playfair Display',serif;font-weight:600;color:var(--text2);border-bottom:1px solid var(--border);transition:color var(--tr)}
+.mobile-nav a:hover{color:var(--gold)}
+
+/* ARTICLE LAYOUT */
+.article-wrap{padding:calc(var(--nav-h) + 56px) 0 96px}
+.article-inner{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start}
+.article-main{}
+
+/* BREADCRUMB */
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:28px}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb-sep{color:var(--text3)}
+
+/* ARTICLE HEADER */
+.article-cat{display:inline-block;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 12px;background:var(--gold);color:#fff;margin-bottom:18px}
+[data-theme="dark"] .article-cat{color:var(--bg)}
+.article-title{font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:18px}
+.article-meta{display:flex;align-items:center;gap:16px;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:32px;flex-wrap:wrap}
+.article-meta .date{color:var(--gold)}
+
+/* HERO IMAGE */
+.article-hero{width:100%;max-height:420px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);margin-bottom:40px}
+.article-hero img{width:100%;height:420px;object-fit:cover}
+
+/* ARTICLE BODY */
+.article-body{font-size:0.96rem;line-height:1.85;color:var(--text)}
+.article-body p{margin-bottom:1.4em}
+.article-body h2{font-size:1.4rem;margin:2em 0 0.7em;color:var(--text)}
+.article-body h3{font-size:1.15rem;margin:1.8em 0 0.6em;color:var(--text)}
+.article-body ul,.article-body ol{margin:1em 0 1.4em 1.5em}
+.article-body li{margin-bottom:0.5em}
+.article-body blockquote{border-left:3px solid var(--gold);padding:12px 20px;margin:1.5em 0;background:var(--surface);font-style:italic;color:var(--text2)}
+.article-body strong{color:var(--text);font-weight:700}
+.article-body .divider{width:56px;height:1px;background:var(--gold);margin:2.5em 0}
+
+/* TAGS */
+.article-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px;padding-top:24px;border-top:1px solid var(--border)}
+.atag{padding:4px 12px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3)}
+
+/* NAV BETWEEN POSTS */
+.article-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px;padding-top:32px;border-top:1px solid var(--border)}
+.article-nav-item{background:var(--surface);border:1px solid var(--border);padding:20px;transition:all var(--tr)}
+.article-nav-item:hover{border-color:rgba(201,168,76,0.3);box-shadow:var(--shadow)}
+.article-nav-dir{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.article-nav-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold);line-height:1.3}
+.article-nav-item.next{text-align:right}
+
+/* SIDEBAR — sama seperti blog.html */
+.blog-sidebar{position:sticky;top:calc(var(--nav-h) + 24px);display:flex;flex-direction:column;gap:28px}
+.sidebar-block{background:var(--surface);border:1px solid var(--border);padding:24px}
+.sidebar-title{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.sidebar-title::before{content:'';width:18px;height:1px;background:var(--gold)}
+.sidebar-recent{display:flex;flex-direction:column;gap:14px}
+.sidebar-recent-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border)}
+.sidebar-recent-item:last-child{border-bottom:none;padding-bottom:0}
+.sidebar-recent-img{width:56px;height:56px;flex-shrink:0;overflow:hidden;background:var(--bg2)}
+.sidebar-recent-img img{width:100%;height:100%;object-fit:cover}
+.sidebar-recent-date{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.sidebar-recent-title{font-size:0.82rem;font-weight:700;line-height:1.35;color:var(--text2);transition:color var(--tr)}
+.sidebar-recent-title:hover{color:var(--gold)}
+.sidebar-tags{display:flex;flex-wrap:wrap;gap:7px}
+.sidebar-tag{padding:4px 11px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3);cursor:pointer;transition:all var(--tr)}
+.sidebar-tag:hover{border-color:var(--gold);color:var(--gold)}
+.sidebar-about{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.sidebar-avatar{width:72px;height:72px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0}
+.sidebar-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.sidebar-about-name{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700}
+.sidebar-about-role{font-size:0.75rem;color:var(--text2);line-height:1.6}
+.sidebar-about-link{display:inline-block;margin-top:8px;padding:7px 18px;border:1.5px solid var(--gold);font-size:0.68rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--gold);transition:all var(--tr)}
+.sidebar-about-link:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .sidebar-about-link:hover{color:var(--bg)}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}
+.footer-logo em{color:var(--gold);font-style:normal}
+.footer-sub{font-size:0.75rem;color:var(--text3);letter-spacing:0.07em;text-align:center}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.footer-links a{font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3);transition:color var(--tr)}
+.footer-links a:hover{color:var(--gold)}
+.footer-divider{width:40px;height:1px;background:var(--border)}
+.footer-copy{font-size:0.72rem;color:var(--text3)}
+
+/* BTT */
+.btt{position:fixed;bottom:26px;right:26px;z-index:500;width:42px;height:42px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--tr);opacity:0;transform:translateY(10px)}
+.btt.visible{opacity:1;transform:translateY(0)}
+.btt:hover{border-color:var(--gold);color:var(--gold)}
+
+@media(max-width:900px){
+  .article-inner{grid-template-columns:1fr}
+  .blog-sidebar{position:static}
+  .article-nav{grid-template-columns:1fr}
+}
+@media(max-width:960px){.nav-links{display:none}.hamburger{display:flex}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark">AF</div>
+      <div class="logo-name">Portfolio</div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#certification">Certification</a>
+      <a href="index.html#project">Projects</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" title="Toggle tema">🌙</button>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="index.html#about" onclick="closeMobile()">About</a>
+  <a href="index.html#experience" onclick="closeMobile()">Experience</a>
+  <a href="index.html#certification" onclick="closeMobile()">Certification</a>
+  <a href="index.html#project" onclick="closeMobile()">Projects</a>
+  <a href="index.html#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<div class="article-wrap">
+  <div class="container">
+    <div class="article-inner">
+
+      <!-- ═══════════════════════════════════════════════
+           KONTEN UTAMA ARTIKEL
+      ═══════════════════════════════════════════════ -->
+      <div class="article-main">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">›</span>
+          <a href="blog.html">Blog</a>
+          <span class="breadcrumb-sep">›</span>
+          <span>[JUDUL SINGKAT]</span>
+        </div>
+
+        <!-- Header -->
+        <span class="article-cat">[KATEGORI]</span>
+        <h1 class="article-title">[JUDUL ARTIKEL]</h1>
+        <div class="article-meta">
+          <span class="date">[TANGGAL]</span>
+          <span>· [MENIT BACA]</span>
+          <span>· M. Arief Fardhiansyah</span>
+        </div>
+
+        <!-- Gambar Hero -->
+        <div class="article-hero">
+          <img src="[URL_GAMBAR_HERO]" alt="[JUDUL ARTIKEL]" loading="eager">
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             ISI ARTIKEL — Edit di bawah ini
+        ═══════════════════════════════════════════ -->
+        <div class="article-body">
+
+          <p>[PARAGRAF PEMBUKA — Ceritakan konteks atau hook yang menarik perhatian pembaca.]</p>
+
+          <p>[PARAGRAF KEDUA — Lanjutkan dengan latar belakang atau permasalahan yang dibahas.]</p>
+
+          <div class="divider"></div>
+
+          <h2>[SUBJUDUL 1]</h2>
+          <p>[Isi paragraf untuk bagian pertama...]</p>
+          <p>[Lanjutan...]</p>
+
+          <blockquote>
+            [Kutipan atau highlight yang ingin Anda tonjolkan.]
+          </blockquote>
+
+          <h2>[SUBJUDUL 2]</h2>
+          <p>[Isi paragraf untuk bagian kedua...]</p>
+
+          <ul>
+            <li>[Poin pertama]</li>
+            <li>[Poin kedua]</li>
+            <li>[Poin ketiga]</li>
+          </ul>
+
+          <h2>[SUBJUDUL 3]</h2>
+          <p>[Isi paragraf untuk bagian ketiga...]</p>
+
+          <div class="divider"></div>
+
+          <h2>Penutup</h2>
+          <p>[Paragraf penutup — ringkasan atau kesimpulan dari artikel.]</p>
+
+        </div><!-- /article-body -->
+
+        <!-- Tags -->
+        <div class="article-tags">
+          <span class="atag">[Tag1]</span>
+          <span class="atag">[Tag2]</span>
+          <span class="atag">[Tag3]</span>
+        </div>
+
+        <!-- Navigasi antar artikel — diisi otomatis oleh JS dari posts.js -->
+        <div class="article-nav" id="articleNav">
+          <!-- JS akan mengisi ini -->
+        </div>
+
+      </div><!-- /article-main -->
+
+      <!-- ═══════════════════════════════════════════════
+           SIDEBAR
+      ═══════════════════════════════════════════════ -->
+      <aside class="blog-sidebar">
+
+        <!-- About Author -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">About the Author</div>
+          <div class="sidebar-about">
+            <div class="sidebar-avatar">
+              <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnzbdbjDBENUlM9MdL6MZT-xlMdY0rRZVVtcNJ43zfLr6C4TO8232pBD1hfStp8q9v4UbCA8KIIhlz8tMLOzqNUAKjuMqYf88GQCgGsoGQFQzgM2Z1P2Mr7doJXzt6S6GzqUOtwnC_RjIVjpSV7HiKbHO_nQB527pIIWzzDK6gB6PTnO3__76-2fOmQ2x/s16000/1000111421.jpg" alt="Arief Fardhiansyah">
+            </div>
+            <div class="sidebar-about-name">Ns. M. Arief Fardhiansyah</div>
+            <div class="sidebar-about-role">HIS Officer · Data Analyst · Registered Nurse at Mayapada Hospital Jakarta Selatan</div>
+            <a href="index.html" class="sidebar-about-link">View Portfolio →</a>
+          </div>
+        </div>
+
+        <!-- Recent Posts — dirender dari posts.js -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Recent Posts</div>
+          <div class="sidebar-recent" id="sidebarRecent">
+            <!-- JS akan mengisi ini -->
+          </div>
+        </div>
+
+        <!-- Topics -->
+        <div class="sidebar-block">
+          <div class="sidebar-title">Topics</div>
+          <div class="sidebar-tags">
+            <a href="blog.html" class="sidebar-tag">HIS</a>
+            <a href="blog.html" class="sidebar-tag">EMR</a>
+            <a href="blog.html" class="sidebar-tag">Nursing</a>
+            <a href="blog.html" class="sidebar-tag">Healthcare IT</a>
+            <a href="blog.html" class="sidebar-tag">Training</a>
+            <a href="blog.html" class="sidebar-tag">Data</a>
+            <a href="blog.html" class="sidebar-tag">Career</a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div><!-- /article-inner -->
+  </div><!-- /container -->
+</div><!-- /article-wrap -->
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">M. Arief <em>Fardhiansyah</em></div>
+      <div class="footer-sub">Healthcare IT Officer &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Registered Nurse &nbsp;·&nbsp; Jakarta Selatan</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 M. Arief Fardhiansyah · Crafted for healthcare innovation</div>
+    </div>
+  </div>
+</footer>
+
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="posts.js"></script>
+<script>
+// ═══ THEME ═══
+var themeBtn=document.getElementById('themeBtn'),html=document.documentElement;
+function getCurrentTheme(){return html.getAttribute('data-theme')||'dark'}
+function setTheme(t){html.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'🌙':'☀️';try{sessionStorage.setItem('af-theme',t)}catch(e){}}
+setTheme(getCurrentTheme());
+themeBtn.onclick=function(){setTheme(getCurrentTheme()==='dark'?'light':'dark')};
+
+// ═══ MOBILE NAV ═══
+var hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');
+hamburger.onclick=function(){mobileNav.classList.toggle('open')};
+function closeMobile(){mobileNav.classList.remove('open')}
+
+// ═══ BTT ═══
+window.addEventListener('scroll',function(){document.getElementById('btt').classList.toggle('visible',window.scrollY>400)},{passive:true});
+
+// ═══ RENDER SIDEBAR RECENT POSTS ═══
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+(function(){
+  var container = document.getElementById('sidebarRecent');
+  if(!container||typeof POSTS==='undefined') return;
+  container.innerHTML = POSTS.slice(0,4).map(function(p){
+    return '<a href="'+p.slug+'" style="text-decoration:none;display:block">'+
+      '<div class="sidebar-recent-item">'+
+        '<div class="sidebar-recent-img"><img src="'+p.image+'" alt="'+esc(p.imageAlt)+'" loading="lazy"></div>'+
+        '<div>'+
+          '<div class="sidebar-recent-date">'+p.date+'</div>'+
+          '<div class="sidebar-recent-title">'+esc(p.title)+'</div>'+
+        '</div>'+
+      '</div>'+
+    '</a>';
+  }).join('');
+})();
+
+// ═══ RENDER ARTICLE NAVIGATION (Prev / Next) ═══
+// Deteksi artikel saat ini dari nama file
+(function(){
+  var nav = document.getElementById('articleNav');
+  if(!nav||typeof POSTS==='undefined') return;
+  var currentFile = window.location.pathname.split('/').pop() || window.location.href.split('/').pop().split('?')[0];
+  var idx = POSTS.findIndex(function(p){ return p.slug === currentFile; });
+  if(idx < 0) return;
+
+  var prevPost = idx < POSTS.length-1 ? POSTS[idx+1] : null;
+  var nextPost = idx > 0 ? POSTS[idx-1] : null;
+
+  var prevHtml = prevPost
+    ? '<a href="'+prevPost.slug+'" class="article-nav-item prev">'+
+        '<div class="article-nav-dir">← Artikel Sebelumnya</div>'+
+        '<div class="article-nav-title">'+esc(prevPost.title)+'</div>'+
+      '</a>'
+    : '<div></div>';
+
+  var nextHtml = nextPost
+    ? '<a href="'+nextPost.slug+'" class="article-nav-item next">'+
+        '<div class="article-nav-dir">Artikel Berikutnya →</div>'+
+        '<div class="article-nav-title">'+esc(nextPost.title)+'</div>'+
+      '</a>'
+    : '<div></div>';
+
+  nav.innerHTML = prevHtml + nextHtml;
+})();
+</script>
+</body>
+</html>
