@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dari Perawat ke HIS Officer — Arief Fardhiansyah Blog</title>
+<meta name="description" content="Perjalanan karier dari bangsal anak ke ruang sistem informasi — kisah nyata tentang keberanian, rasa ingin tahu, dan pertumbuhan.">
+<script>
+(function(){try{var s=sessionStorage.getItem('af-theme');if(s){document.documentElement.setAttribute('data-theme',s);return;}}catch(e){}document.documentElement.setAttribute('data-theme',window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="dark"]{--bg:#0d0f12;--bg2:#141619;--bg3:#1a1d22;--surface:#1f2228;--border:rgba(255,255,255,0.06);--text:#e6e8ec;--text2:#8c95a6;--text3:#52596a;--gold:#c9a84c;--gold2:#e8c97a;--nav-bg:rgba(13,15,18,0.93);--nav-h:68px;--shadow:0 12px 48px rgba(0,0,0,0.55);--tr:0.3s ease;}
+[data-theme="light"]{--bg:#dddad3;--bg2:#d4d0c8;--bg3:#cac6be;--surface:#e2dfd8;--border:rgba(0,0,0,0.12);--text:#1a1714;--text2:#3d372e;--text3:#6b6358;--gold:#7a5a0a;--gold2:#9a7214;--nav-bg:rgba(212,208,200,0.96);--shadow:0 12px 48px rgba(0,0,0,0.14);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.2}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background var(--tr)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 24px;height:100%}
+.nav-logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:36px;height:36px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold)}
+.logo-name{font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem;letter-spacing:0.03em}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{padding:7px 14px;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);transition:color var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:14px;right:14px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform var(--tr)}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.theme-btn{width:38px;height:38px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--tr);border-radius:4px}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all 0.3s}
+.mobile-nav{display:none;position:fixed;inset:0;top:var(--nav-h);background:var(--bg);z-index:999;flex-direction:column;padding:40px 32px;gap:4px;overflow-y:auto}
+.mobile-nav.open{display:flex}
+.mobile-nav a{padding:18px 0;font-size:1.3rem;font-family:'Playfair Display',serif;font-weight:600;color:var(--text2);border-bottom:1px solid var(--border);transition:color var(--tr)}
+.mobile-nav a:hover{color:var(--gold)}
+.article-hero{padding-top:var(--nav-h);position:relative;overflow:hidden;min-height:520px;display:flex;align-items:flex-end}
+.article-hero-img{position:absolute;inset:0;z-index:0}
+.article-hero-img img{width:100%;height:100%;object-fit:cover;object-position:center}
+.article-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,15,18,0.97) 0%,rgba(13,15,18,0.6) 50%,rgba(13,15,18,0.2) 100%);z-index:1}
+.article-hero-content{position:relative;z-index:2;padding:56px 0}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:20px}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb-sep{color:rgba(255,255,255,0.3)}
+.article-cat-badge{display:inline-flex;align-items:center;gap:8px;padding:4px 14px;background:var(--gold);font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#fff;margin-bottom:20px}
+[data-theme="dark"] .article-cat-badge{color:var(--bg)}
+.article-hero-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;color:#fff;max-width:780px;line-height:1.2;margin-bottom:20px}
+.article-hero-title em{color:var(--gold2);font-style:normal}
+.article-hero-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.meta-item{display:flex;align-items:center;gap:7px;font-size:0.75rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+.meta-item span{color:var(--gold2)}
+.article-wrap{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start;padding:64px 0 96px}
+.article-lead{font-size:1.12rem;font-weight:300;color:var(--text);line-height:1.85;margin-bottom:36px;border-left:3px solid var(--gold);padding-left:22px;font-style:italic}
+.article-body h2{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;margin:44px 0 16px;color:var(--text)}
+.article-body h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin:32px 0 12px;color:var(--text)}
+.article-body p{font-size:0.96rem;color:var(--text2);line-height:1.9;margin-bottom:20px}
+.article-body p strong{color:var(--text);font-weight:700}
+.article-body ul{margin:0 0 20px;padding-left:0;list-style:none}
+.article-body ul li{font-size:0.95rem;color:var(--text2);line-height:1.85;padding:8px 0 8px 24px;position:relative;border-bottom:1px solid var(--border)}
+.article-body ul li:last-child{border-bottom:none}
+.article-body ul li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:0.65rem;top:12px}
+.pull-quote{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:28px;margin:36px 0;position:relative}
+.pull-quote::before{content:'❝';position:absolute;top:-10px;left:24px;font-size:2.4rem;color:var(--gold);font-family:'Playfair Display',serif;line-height:1}
+.pull-quote p{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.7;margin:0}
+.pull-quote cite{display:block;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-top:12px;font-style:normal}
+.highlight-box{background:var(--bg2);border:1px solid var(--border);padding:24px;margin:32px 0}
+.highlight-box-title{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.highlight-box-title::before{content:'';width:18px;height:1px;background:var(--gold)}
+.highlight-box p{font-size:0.9rem;color:var(--text2);line-height:1.8;margin:0}
+.article-img{margin:36px 0}
+.article-img img{width:100%;border:1px solid var(--border)}
+.article-img figcaption{font-size:0.72rem;color:var(--text3);padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-top:none;font-style:italic}
+.article-divider{display:flex;align-items:center;gap:16px;margin:40px 0}
+.article-divider::before,.article-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.article-divider span{font-size:0.8rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;font-weight:700}
+.conclusion-box{background:linear-gradient(135deg,rgba(201,168,76,0.08) 0%,rgba(201,168,76,0.02) 100%);border:1px solid rgba(201,168,76,0.25);padding:32px;margin:40px 0}
+.conclusion-box h3{font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.conclusion-box h3::before{content:'';width:24px;height:1px;background:var(--gold)}
+.conclusion-box p{font-size:0.95rem;color:var(--text2);line-height:1.85;margin:0}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:36px;margin:36px 0}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:1px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:36px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-32px;top:6px;width:14px;height:14px;background:var(--gold);transform:rotate(45deg)}
+.tl-year{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.tl-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.tl-desc{font-size:0.88rem;color:var(--text2);line-height:1.8}
+
+.article-tags{display:flex;flex-wrap:wrap;gap:8px;margin:36px 0}
+.article-tag{padding:5px 13px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);transition:all var(--tr);cursor:default}
+.article-tag:hover{border-color:var(--gold);color:var(--gold)}
+.author-bio{background:var(--surface);border:1px solid var(--border);padding:28px;display:flex;gap:20px;align-items:flex-start;margin:40px 0}
+.author-avatar{width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);flex-shrink:0}
+.author-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.author-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:4px}
+.author-role{font-size:0.75rem;color:var(--gold);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px}
+.author-desc{font-size:0.86rem;color:var(--text2);line-height:1.75}
+.post-nav{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:48px}
+.post-nav-item{background:var(--surface);padding:22px;transition:background var(--tr)}
+.post-nav-item:hover{background:var(--bg2)}
+.post-nav-item.next{text-align:right}
+.post-nav-label{font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.post-nav-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--text2);transition:color var(--tr);line-height:1.35}
+.post-nav-item:hover .post-nav-title{color:var(--gold)}
+.article-sidebar{position:sticky;top:calc(var(--nav-h)+24px);display:flex;flex-direction:column;gap:24px}
+.sidebar-block{background:var(--surface);border:1px solid var(--border);padding:24px}
+.sidebar-title{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.sidebar-title::before{content:'';width:18px;height:1px;background:var(--gold)}
+.toc-list{list-style:none;display:flex;flex-direction:column}
+.toc-list li{border-bottom:1px solid var(--border)}
+.toc-list li:last-child{border-bottom:none}
+.toc-list a{display:block;padding:10px 0;font-size:0.82rem;color:var(--text2);transition:color var(--tr)}
+.toc-list a:hover{color:var(--gold)}
+footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}
+.footer-logo em{color:var(--gold);font-style:normal}
+.footer-sub{font-size:0.75rem;color:var(--text3);letter-spacing:0.07em;text-align:center}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.footer-links a{font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3);transition:color var(--tr)}
+.footer-links a:hover{color:var(--gold)}
+.footer-divider{width:40px;height:1px;background:var(--border)}
+.footer-copy{font-size:0.72rem;color:var(--text3)}
+.btt{position:fixed;bottom:26px;right:26px;z-index:500;width:42px;height:42px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--tr);opacity:0;transform:translateY(10px)}
+.btt.visible{opacity:1;transform:translateY(0)}
+.btt:hover{border-color:var(--gold);color:var(--gold)}
+.progress-bar-wrap{height:3px;background:var(--border);position:fixed;top:var(--nav-h);left:0;right:0;z-index:999}
+.progress-bar{height:100%;background:var(--gold);width:0%;transition:width 0.1s linear}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.article-wrap{grid-template-columns:1fr}.article-sidebar{position:static}.post-nav{grid-template-columns:1fr}}
+@media(max-width:960px){.nav-links{display:none}.hamburger{display:flex}}
+@media(max-width:600px){.container{padding:0 16px}.article-hero{min-height:420px}}
+</style>
+</head>
+<body>
+<div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><div class="logo-mark">AF</div><div class="logo-name">Portfolio</div></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a><a href="index.html#project">Projects</a>
+      <a href="blog.html" class="active">Blog</a><a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn">🌙</button>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="blog.html" onclick="closeMobile()">Blog</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<header class="article-hero">
+  <div class="article-hero-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg" alt="Dari Perawat ke HIS Officer" loading="eager"></div>
+  <div class="article-hero-overlay"></div>
+  <div class="article-hero-content container">
+    <div class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">›</span><a href="blog.html">Blog</a><span class="breadcrumb-sep">›</span><span>Artikel</span></div>
+    <div class="article-cat-badge">Career</div>
+    <h1 class="article-hero-title">Dari Perawat ke <em>HIS Officer</em>:<br>Perjalanan yang Tidak Pernah Saya Rencanakan</h1>
+    <div class="article-hero-meta">
+      <div class="meta-item"><span>📅</span> 10 November 2025</div>
+      <div class="meta-item"><span>⏱</span> 6 menit baca</div>
+      <div class="meta-item"><span>✍️</span> Arief Fardhiansyah</div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="article-wrap">
+    <article class="article-body reveal">
+
+      <p class="article-lead">Tidak ada yang pernah menyangka — termasuk saya sendiri — bahwa seorang perawat anak akan berakhir di ruang server, mengelola sistem informasi rumah sakit. Tapi inilah yang terjadi. Dan saya tidak pernah merasa lebih hidup dari sebelumnya.</p>
+
+      <h2 id="s1">Awal: Bangsal Anak dan Rasa Ingin Tahu yang Tumbuh Diam-Diam</h2>
+      <p>Selama tiga tahun lebih di Unit Rawat Inap Anak Mayapada Hospital, saya menyaksikan hal yang berulang-ulang: perawat yang harus mengisi dokumen yang sama berkali-kali, data pasien yang terpisah di berbagai formulir kertas, dan waktu yang seharusnya bisa digunakan untuk merawat pasien justru terbuang untuk administrasi.</p>
+      <p>Saya tidak frustrasi dengan situasi itu. Saya justru <strong>penasaran</strong>. Setiap kali melihat kolega saya bergulat dengan tumpukan kertas, pikiran saya melayang: <em>pasti ada cara yang lebih baik dari ini.</em> Rasa ingin tahu itulah yang menjadi benih dari seluruh perjalanan karier saya selanjutnya.</p>
+
+      <div class="pull-quote">
+        <p>"Rasa ingin tahu adalah kompas terbaik dalam perjalanan karier. Ia tidak pernah berbohong tentang ke mana seharusnya kita pergi."</p>
+        <cite>— M. Arief Fardhiansyah</cite>
+      </div>
+
+      <h2 id="s2">Titik Balik: Menjadi Nursing Superuser EMR</h2>
+      <p>Pada Juni 2024, rumah sakit membuka posisi Nursing Superuser EMR — seseorang yang akan menjadi jembatan antara sistem Electronic Medical Record baru dan tim keperawatan. Tanpa berpikir panjang, saya mendaftar.</p>
+      <p>Enam bulan sebagai Nursing Superuser adalah sekolah yang paling intens yang pernah saya ikuti. Setiap hari saya belajar modul baru, melakukan training ke unit-unit, dan — yang paling berharga — saya belajar bahwa <strong>memahami sistem bukan hanya soal teknis, tetapi soal memahami manusia yang menggunakannya.</strong></p>
+
+      <figure class="article-img">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg" alt="HIS Training End User">
+        <figcaption>📸 Salah satu sesi training yang saya fasilitasi — membantu kolega memahami sistem baru bukan hanya sebagai teknologi, tetapi sebagai alat bantu kerja yang nyata.</figcaption>
+      </figure>
+
+      <h2 id="s3">Perjalanan Karier: Dari Bangsal ke Sistem</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2021 – 2024</div>
+          <div class="tl-title">Perawat Rawat Inap — Unit Pediatri</div>
+          <div class="tl-desc">Tiga tahun merawat pasien anak di bangsal. Di sinilah saya membangun fondasi klinis, memahami alur kerja nyata di lapangan, dan mengembangkan empati terhadap kebutuhan tenaga kesehatan sehari-hari.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Jun – Des 2024</div>
+          <div class="tl-title">Nursing Superuser EMR</div>
+          <div class="tl-desc">Jembatan pertama antara dunia klinis dan digital. Saya menguasai modul EMR, memberikan pelatihan, dan mulai memahami bagaimana teknologi bisa menjadi alat pemberdayaan, bukan beban tambahan.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Feb 2025 – Sekarang</div>
+          <div class="tl-title">Hospital Information System (HIS) Officer</div>
+          <div class="tl-desc">Mengelola dan mengoptimalkan seluruh ekosistem HIS di Mayapada Hospital. Berdiri di persimpangan antara kebutuhan klinis dan solusi teknologi — posisi yang paling bermakna dalam perjalanan karier saya.</div>
+        </div>
+      </div>
+
+      <h2 id="s4">Yang Membuat Latar Belakang Keperawatan Jadi Keunggulan</h2>
+      <p>Banyak yang bertanya: "Apa bedanya HIS Officer yang berasal dari klinisi dibanding yang datang langsung dari IT?" Jawaban saya selalu sama: <strong>konteks.</strong></p>
+      <p>Ketika seorang perawat mengeluhkan bahwa alur pendaftaran pasien di sistem terlalu panjang, saya tidak hanya memahaminya secara teknis — saya merasakannya. Saya tahu betapa berharganya setiap menit ketika ada pasien yang sedang membutuhkan perhatian di belakang layar. Pemahaman ini mengubah cara saya merancang solusi, cara saya berkomunikasi dengan tim klinis, dan cara saya memprioritaskan perbaikan sistem.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">Keunggulan Latar Belakang Klinis</div>
+        <p>Seorang HIS Officer yang pernah merawat pasien secara langsung memiliki kemampuan unik: ia bisa "menerjemahkan" kebutuhan klinis ke dalam bahasa teknis, dan "menerjemahkan" solusi teknis ke dalam bahasa yang dipahami oleh klinisi. Kemampuan translasi ini adalah aset yang sangat langka dan sangat berharga.</p>
+      </div>
+
+      <h2 id="s5">Untuk Kamu yang Sedang Mempertimbangkan Langkah Serupa</h2>
+      <p>Jika kamu adalah seorang perawat, bidan, atau tenaga kesehatan lain yang penasaran dengan dunia teknologi informasi kesehatan — saya ingin berbagi tiga hal yang paling membantu saya dalam perjalanan ini:</p>
+      <ul>
+        <li><strong>Manfaatkan setiap peluang belajar yang ada</strong> — Mulai dari workshop internal, webinar online, hingga sertifikasi. Setiap ilmu baru adalah jembatan menuju kemungkinan yang lebih luas</li>
+        <li><strong>Bangun jaringan lintas fungsi</strong> — Berkenalan dengan tim IT, tim manajemen, dan kolega dari divisi lain. Wawasan mereka akan memperluas cara pandang kamu</li>
+        <li><strong>Jangan takut menjadi "orang baru" lagi</strong> — Kembali menjadi pemula di bidang baru bukan kelemahan. Ini adalah tanda keberanian dan keterbukaan pikiran yang sesungguhnya</li>
+        <li><strong>Dokumentasikan perjalananmu</strong> — Setiap langkah, setiap pelajaran, setiap momen "aha!" — tulis dan bagikan. Pengalaman kamu adalah panduan bagi orang lain yang sedang di posisi yang sama seperti kamu dulu</li>
+      </ul>
+
+      <div class="article-divider"><span>✦</span></div>
+
+      <div class="conclusion-box">
+        <h3>Penutup</h3>
+        <p>Perjalanan dari bangsal pediatri ke ruang HIS bukan perjalanan yang pernah saya rencanakan — tetapi justru itulah yang membuatnya begitu berharga. Karier terbaik sering lahir bukan dari rencana yang sempurna, melainkan dari keberanian untuk mengikuti rasa ingin tahu dengan sepenuh hati. Jika ada satu hal yang ingin saya sampaikan kepada kamu yang membaca ini: <em>latar belakang klinismu bukan hambatan menuju dunia teknologi — ia adalah nilai tambah yang tidak ternilai.</em></p>
+      </div>
+
+      <div class="article-tags">
+        <span class="article-tag">Career</span><span class="article-tag">Story</span>
+        <span class="article-tag">HIS Officer</span><span class="article-tag">Nursing</span>
+        <span class="article-tag">Transisi Karier</span><span class="article-tag">Healthcare IT</span>
+      </div>
+
+      <div class="author-bio">
+        <div class="author-avatar"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnzbdbjDBENUlM9MdL6MZT-xlMdY0rRZVVtcNJ43zfLr6C4TO8232pBD1hfStp8q9v4UbCA8KIIhlz8tMLOzqNUAKjuMqYf88GQCgGsoGQFQzgM2Z1P2Mr7doJXzt6S6GzqUOtwnC_RjIVjpSV7HiKbHO_nQB527pIIWzzDK6gB6PTnO3__76-2fOmQ2x/s16000/1000111421.jpg" alt="Arief"></div>
+        <div>
+          <div class="author-name">Ns. M. Arief Fardhiansyah, S.Kep</div>
+          <div class="author-role">HIS Officer · Data Analyst · Registered Nurse</div>
+          <p class="author-desc">Profesional kesehatan yang menjembatani dunia klinis dan teknologi informasi di Mayapada Hospital Jakarta Selatan. Perjalanan kariernya dari bangsal anak ke sistem HIS adalah bukti bahwa latar belakang klinis adalah keunggulan, bukan hambatan.</p>
+        </div>
+      </div>
+
+      <div class="post-nav">
+        <a href="artikel-2.html" class="post-nav-item">
+          <div class="post-nav-label">← Artikel Sebelumnya</div>
+          <div class="post-nav-title">HIS Training untuk New User: Onboarding Efektif</div>
+        </a>
+        <a href="artikel-4.html" class="post-nav-item next">
+          <div class="post-nav-label">Artikel Berikutnya →</div>
+          <div class="post-nav-title">Data-Driven Decision Making di Rumah Sakit</div>
+        </a>
+      </div>
+
+    </article>
+
+    <aside class="article-sidebar">
+      <div class="sidebar-block reveal">
+        <div class="sidebar-title">Daftar Isi</div>
+        <ul class="toc-list">
+          <li><a href="#s1">Awal: Rasa Ingin Tahu yang Tumbuh</a></li>
+          <li><a href="#s2">Titik Balik: Nursing Superuser EMR</a></li>
+          <li><a href="#s3">Perjalanan Karier: Timeline</a></li>
+          <li><a href="#s4">Keunggulan Latar Belakang Klinis</a></li>
+          <li><a href="#s5">Untuk Kamu yang Mempertimbangkan Ini</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-block reveal">
+        <div class="sidebar-title">Tentang Penulis</div>
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px">
+          <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid var(--gold)"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnzbdbjDBENUlM9MdL6MZT-xlMdY0rRZVVtcNJ43zfLr6C4TO8232pBD1hfStp8q9v4UbCA8KIIhlz8tMLOzqNUAKjuMqYf88GQCgGsoGQFQzgM2Z1P2Mr7doJXzt6S6GzqUOtwnC_RjIVjpSV7HiKbHO_nQB527pIIWzzDK6gB6PTnO3__76-2fOmQ2x/s16000/1000111421.jpg" alt="Arief" style="width:100%;height:100%;object-fit:cover;object-position:top center"></div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700">Ns. M. Arief Fardhiansyah</div>
+          <div style="font-size:0.75rem;color:var(--text2);line-height:1.6">HIS Officer · Data Analyst · Registered Nurse</div>
+          <a href="index.html" style="display:inline-block;padding:7px 18px;border:1.5px solid var(--gold);font-size:0.68rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--gold)">View Portfolio →</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">M. Arief <em>Fardhiansyah</em></div>
+      <div class="footer-sub">Healthcare IT Officer · Data Analyst · Registered Nurse</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links"><a href="index.html">Home</a><a href="index.html#about">About</a><a href="blog.html">Blog</a><a href="index.html#contact">Contact</a></div>
+      <div class="footer-copy">© 2026 M. Arief Fardhiansyah · Crafted for healthcare innovation</div>
+    </div>
+  </div>
+</footer>
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+var themeBtn=document.getElementById('themeBtn'),html=document.documentElement;
+function setTheme(t){html.setAttribute('data-theme',t);themeBtn.textContent=t==='dark'?'🌙':'☀️';try{sessionStorage.setItem('af-theme',t)}catch(e){}}
+setTheme(html.getAttribute('data-theme')||'dark');
+themeBtn.onclick=function(){setTheme(html.getAttribute('data-theme')==='dark'?'light':'dark')};
+var hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');
+hamburger.onclick=function(){mobileNav.classList.toggle('open')};
+function closeMobile(){mobileNav.classList.remove('open')}
+window.addEventListener('scroll',function(){
+  var el=document.documentElement;
+  document.getElementById('progressBar').style.width=(window.scrollY/(el.scrollHeight-el.clientHeight)*100)+'%';
+  document.getElementById('btt').classList.toggle('visible',window.scrollY>400);
+},{passive:true});
+var revObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('revealed')})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(function(el){revObs.observe(el)});
+</script>
+</body>
+</html>
