@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M. Arief Fardhiansyah — Healthcare Tech Professional</title>
+<!-- Set theme BEFORE render to avoid flash -->
+<script>
+(function(){
+  try {
+    var saved = sessionStorage.getItem('af-theme');
+    if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  } catch(e){}
+  var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+/* ━━━ DARK THEME (default) ━━━ */
+:root,[data-theme="dark"]{
+  --bg:#0d0f12;--bg2:#141619;--bg3:#1a1d22;--surface:#1f2228;
+  --border:rgba(255,255,255,0.06);--text:#e6e8ec;--text2:#8c95a6;--text3:#52596a;
+  --gold:#c9a84c;--gold2:#e8c97a;
+  --nav-bg:rgba(13,15,18,0.93);
+  --nav-h:68px;--shadow:0 12px 48px rgba(0,0,0,0.55);--tr:0.3s ease;
+}
+
+/* ━━━ LIGHT THEME — warm grey, amber gold ━━━ */
+[data-theme="light"]{
+  --bg:#dddad3;         /* warm medium grey — tidak menyilaukan */
+  --bg2:#d4d0c8;        /* sedikit lebih gelap */
+  --bg3:#cac6be;        /* lebih gelap lagi */
+  --surface:#e2dfd8;    /* card surface, sedikit terang */
+  --border:rgba(0,0,0,0.12);
+  --text:#1a1714;       /* hitam hangat */
+  --text2:#3d372e;      /* coklat tua */
+  --text3:#6b6358;      /* coklat medium */
+  --gold:#7a5a0a;       /* amber tua — kontras di latar terang */
+  --gold2:#9a7214;
+  --nav-bg:rgba(212,208,200,0.96);
+  --shadow:0 12px 48px rgba(0,0,0,0.14);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.15}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+section{padding:96px 0}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:background var(--tr)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 24px;height:100%}
+.nav-logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:36px;height:36px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold)}
+.logo-name{font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem;letter-spacing:0.03em}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{padding:7px 14px;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);transition:color var(--tr);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:2px;left:14px;right:14px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform var(--tr)}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.theme-btn{width:38px;height:38px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--tr);border-radius:4px}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--text);transition:all 0.3s}
+.mobile-nav{display:none;position:fixed;inset:0;top:var(--nav-h);background:var(--bg);z-index:999;flex-direction:column;padding:40px 32px;gap:4px;overflow-y:auto}
+.mobile-nav.open{display:flex}
+.mobile-nav a{padding:18px 0;font-size:1.3rem;font-family:'Playfair Display',serif;font-weight:600;color:var(--text2);border-bottom:1px solid var(--border);transition:color var(--tr)}
+.mobile-nav a:hover{color:var(--gold)}
+
+/* HERO */
+#home{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:0}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 800px 500px at 70% 50%,rgba(201,168,76,0.06) 0%,transparent 70%),var(--bg)}
+[data-theme="light"] .hero-bg{background:radial-gradient(ellipse 800px 500px at 70% 50%,rgba(122,90,10,0.09) 0%,transparent 70%),var(--bg)}
+.hero-wrap{position:relative;z-index:1;width:100%;max-width:1120px;margin:0 auto;padding:calc(var(--nav-h) + 60px) 24px 80px;display:grid;grid-template-columns:1fr 400px;gap:72px;align-items:center}
+.hero-label{display:flex;align-items:center;gap:12px;font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.hero-label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.hero-name{font-size:clamp(2.5rem,4.2vw,3.6rem);font-weight:700;margin-bottom:8px}
+.hero-name em{color:var(--gold);font-style:normal}
+.hero-role{font-size:clamp(0.9rem,1.6vw,1.1rem);font-weight:300;color:var(--text2);letter-spacing:0.03em;margin-bottom:24px}
+.hero-divider{width:48px;height:1px;background:var(--gold);margin-bottom:24px}
+.hero-desc{font-size:0.97rem;color:var(--text2);line-height:1.8;max-width:460px;margin-bottom:36px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-ghost{display:inline-block;padding:13px 28px;border:1px solid var(--border);background:transparent;color:var(--text2);font-family:'Lato',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all var(--tr)}
+.btn-ghost:hover{border-color:var(--text2);color:var(--text)}
+.btn-wa{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border:1.5px solid #25d366;background:#25d366;color:#fff;font-family:'Lato',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all var(--tr)}
+.btn-wa:hover{background:#1ebe5d;border-color:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 24px rgba(37,211,102,0.25)}
+.btn-cv{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border:1.5px solid var(--gold);background:var(--gold);color:#fff;font-family:'Lato',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all var(--tr)}
+.btn-cv:hover{background:var(--gold2);border-color:var(--gold2);transform:translateY(-1px)}
+[data-theme="dark"] .btn-cv{color:var(--bg)}
+
+/* PROFILE CARD */
+.profile-wrap{display:flex;flex-direction:column}
+.insignia-bar{background:var(--gold);color:#fff;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-align:center;padding:8px 12px}
+[data-theme="dark"] .insignia-bar{color:var(--bg)}
+.profile-card{background:var(--surface);border:1px solid var(--border);border-top:none;overflow:hidden}
+.profile-card-photo{width:100%;aspect-ratio:3/4;overflow:hidden;background:var(--bg2);position:relative}
+.profile-card-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform 0.6s ease}
+.profile-card:hover .profile-card-photo img{transform:scale(1.04)}
+.profile-card-body{padding:20px 20px 0}
+.profile-card-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:3px}
+.profile-card-role{font-size:0.78rem;color:var(--text2)}
+.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);margin-top:16px}
+.stat{padding:14px 0;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold)}
+.stat-l{font-size:0.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+
+/* SECTION HEADERS */
+.sec-header{margin-bottom:56px}
+.sec-label{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-label::before{content:'';width:28px;height:1px;background:var(--gold)}
+.sec-title{font-size:clamp(1.7rem,2.8vw,2.4rem);font-weight:700}
+.sec-sub{font-size:0.93rem;color:var(--text2);margin-top:10px;max-width:500px;line-height:1.75}
+
+/* ABOUT */
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:320px 1fr;gap:56px;align-items:start}
+.about-photo-wrap{position:sticky;top:calc(var(--nav-h) + 24px)}
+.about-photo{width:100%;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--border);background:var(--surface)}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.about-photo-caption{padding:16px;border:1px solid var(--border);border-top:none;background:var(--surface)}
+.about-photo-caption h4{font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:700}
+.about-photo-caption p{font-size:0.76rem;color:var(--text2);margin-top:2px}
+.about-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.atag{padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3)}
+.about-blocks{display:flex;flex-direction:column;gap:24px}
+.about-block{background:var(--surface);border:1px solid var(--border);padding:26px;transition:border-color var(--tr)}
+.about-block:hover{border-color:rgba(201,168,76,0.3)}
+.about-block-label{font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.about-block p{font-size:0.9rem;color:var(--text2);line-height:1.8}
+.motto-line{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;line-height:1.65;color:var(--text);border-left:2px solid var(--gold);padding-left:18px}
+.motto-trans{font-size:0.82rem;color:var(--text3);margin-top:10px;font-style:italic}
+.char-list{display:flex;flex-direction:column;gap:9px}
+.char-row{display:flex;align-items:center;gap:14px;padding:9px 12px;background:var(--bg2);border:1px solid var(--border)}
+.char-row-icon{font-size:0.95rem;width:22px;text-align:center}
+.char-row-text{font-size:0.86rem;color:var(--text2)}
+
+/* EXPERIENCE */
+.exp-edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.exp-col-title{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.exp-col-title::before{content:'';width:22px;height:1px;background:var(--gold)}
+.entry{position:relative;padding-left:22px;margin-bottom:32px;border-left:1px solid var(--border);transition:border-color var(--tr)}
+.entry:hover{border-left-color:var(--gold)}
+.entry::before{content:'';position:absolute;left:-4px;top:6px;width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
+.entry-date{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.entry-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:3px}
+.entry-org{font-size:0.81rem;color:var(--text2);margin-bottom:10px}
+.entry-desc{font-size:0.86rem;color:var(--text2);line-height:1.75}
+.entry-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.entry-tag{padding:3px 9px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)}
+
+/* CERTIFICATION */
+#certification{background:var(--bg2)}
+.cert-tabs{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-bottom:36px}
+.cert-tab{padding:8px 22px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr)}
+.cert-tab.active,.cert-tab:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+[data-theme="dark"] .cert-tab.active,[data-theme="dark"] .cert-tab:hover{color:var(--bg)}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.cert-card{background:var(--bg2);transition:background var(--tr);cursor:pointer;overflow:hidden;display:flex;flex-direction:column}
+.cert-card:hover{background:var(--surface)}
+.cert-card-img{width:100%;height:180px;overflow:hidden;background:var(--bg3);display:block}
+.cert-card-img img{width:100%;height:100%;object-fit:fill;display:block;transition:transform 0.5s ease}
+.cert-card:hover .cert-card-img img{transform:scale(1.03)}
+.cert-card-body{padding:20px}
+.cert-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.cert-icon{font-size:1.4rem}
+.cert-status{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--gold);color:var(--gold)}
+.cert-issuer{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.cert-title{font-family:'Playfair Display',serif;font-size:0.92rem;font-weight:700;line-height:1.3;margin-bottom:6px}
+.cert-date{font-size:0.72rem;color:var(--text3);margin-bottom:12px}
+.cert-link{font-size:0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);display:inline-flex;align-items:center;gap:5px;transition:color var(--tr)}
+.cert-link:hover{color:var(--gold)}
+
+/* PROJECT */
+.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+.project-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:all var(--tr)}
+.project-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-4px);box-shadow:var(--shadow)}
+.project-thumb{width:100%;height:170px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative;overflow:hidden}
+.project-thumb-tag{position:absolute;top:14px;left:14px;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);color:var(--gold)}
+.project-body{padding:22px}
+.project-year{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:7px}
+.project-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:9px}
+.project-desc{font-size:0.86rem;color:var(--text2);line-height:1.75;margin-bottom:16px}
+.project-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.tech-tag{padding:3px 9px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)}
+.project-links{display:flex;gap:9px}
+.p-btn-gold{flex:1;padding:9px;text-align:center;font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;border:1.5px solid var(--gold);color:var(--gold);transition:all var(--tr);cursor:pointer;display:block}
+.p-btn-gold:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .p-btn-gold:hover{color:var(--bg)}
+.p-btn-ghost{flex:1;padding:9px;text-align:center;font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;border:1px solid var(--border);color:var(--text3);transition:all var(--tr);cursor:pointer;display:block}
+.p-btn-ghost:hover{border-color:var(--text2);color:var(--text)}
+
+/* SKILLS */
+#skills-section{background:var(--bg2)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.skill-cat{background:var(--surface);border:1px solid var(--border);padding:26px}
+.skill-cat-title{font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.skill-cat-title::before{content:'';width:18px;height:1px;background:var(--gold)}
+.skill-item{margin-bottom:15px}
+.skill-item:last-child{margin-bottom:0}
+.skill-head{display:flex;justify-content:space-between;font-size:0.83rem;margin-bottom:7px;color:var(--text2)}
+.skill-bar{height:2px;background:var(--border)}
+.skill-fill{height:100%;background:var(--gold);width:0%;transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
+
+/* GALLERY */
+.gallery-filter{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-bottom:36px}
+.filter-btn{padding:8px 18px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr)}
+.filter-btn.active,.filter-btn:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+[data-theme="dark"] .filter-btn.active,[data-theme="dark"] .filter-btn:hover{color:var(--bg)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2px;background:var(--border)}
+.gallery-item{aspect-ratio:4/3;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.gallery-item:hover img{transform:scale(1.07)}
+.gallery-overlay{position:absolute;inset:0;background:rgba(13,15,18,0.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;transition:opacity var(--tr)}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay p{font-size:0.85rem;font-weight:700;color:#fff}
+.gallery-overlay span{font-size:0.68rem;color:var(--gold2);letter-spacing:0.09em;text-transform:uppercase}
+
+/* CONTACT */
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact-info-title{font-size:1.5rem;font-weight:700;margin-bottom:14px}
+.contact-info p{font-size:0.9rem;color:var(--text2);line-height:1.8;margin-bottom:32px}
+.contact-items{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
+.contact-item{display:flex;align-items:center;gap:16px;background:var(--bg2);padding:16px 18px;transition:background var(--tr)}
+.contact-item:hover{background:var(--surface)}
+.contact-icon{font-size:1rem;width:34px}
+.contact-label{font-size:0.65rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3)}
+.contact-value{font-size:0.86rem;color:var(--text);margin-top:1px}
+.contact-form{background:var(--surface);border:1px solid var(--border);padding:32px}
+.contact-form h3{font-size:1.15rem;font-weight:700;margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:7px}
+.form-input{width:100%;padding:11px 13px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:'Lato',sans-serif;font-size:0.88rem;transition:border-color var(--tr);outline:none}
+.form-input:focus{border-color:var(--gold)}
+textarea.form-input{resize:vertical;min-height:108px}
+.form-submit{width:100%;padding:13px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);font-family:'Lato',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all var(--tr)}
+.form-submit:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .form-submit:hover{color:var(--bg)}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
+.footer-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}
+.footer-logo em{color:var(--gold);font-style:normal}
+.footer-sub{font-size:0.75rem;color:var(--text3);letter-spacing:0.07em;text-align:center}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.footer-links a{font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3);transition:color var(--tr)}
+.footer-links a:hover{color:var(--gold)}
+.footer-divider{width:40px;height:1px;background:var(--border)}
+.footer-copy{font-size:0.72rem;color:var(--text3)}
+
+/* BACK TO TOP */
+.btt{position:fixed;bottom:26px;right:26px;z-index:500;width:42px;height:42px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--tr);opacity:0;transform:translateY(10px)}
+.btt.visible{opacity:1;transform:translateY(0)}
+.btt:hover{border-color:var(--gold);color:var(--gold)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+
+/* BLOG */
+#blog{background:var(--bg)}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
+.blog-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:all var(--tr);display:flex;flex-direction:column}
+.blog-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-4px);box-shadow:var(--shadow)}
+.blog-card-thumb{width:100%;height:200px;overflow:hidden;background:var(--bg2);position:relative}
+.blog-card-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.blog-card:hover .blog-card-thumb img{transform:scale(1.06)}
+.blog-card-cat{position:absolute;top:14px;left:14px;font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;background:var(--gold);color:#fff}
+[data-theme="dark"] .blog-card-cat{color:var(--bg)}
+.blog-card-body{padding:22px;display:flex;flex-direction:column;flex:1}
+.blog-card-meta{display:flex;align-items:center;gap:12px;font-size:0.68rem;color:var(--text3);font-weight:700;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:12px}
+.blog-card-meta span{color:var(--gold)}
+.blog-card-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;line-height:1.4;margin-bottom:10px}
+.blog-card-excerpt{font-size:0.85rem;color:var(--text2);line-height:1.75;flex:1;margin-bottom:18px}
+.blog-card-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:14px}
+.blog-card-tags{display:flex;gap:6px;flex-wrap:wrap}
+.blog-tag{padding:2px 8px;border:1px solid var(--border);font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)}
+.blog-read-btn{font-size:0.7rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:5px;transition:gap var(--tr);white-space:nowrap;flex-shrink:0}
+.blog-read-btn:hover{gap:9px}
+.blog-view-all{text-align:center;margin-top:40px}
+.btn-outline-gold{display:inline-block;padding:12px 32px;border:1.5px solid var(--gold);color:var(--gold);font-family:'Lato',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;transition:all var(--tr)}
+.btn-outline-gold:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .btn-outline-gold:hover{color:var(--bg)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-wrap{grid-template-columns:1fr;gap:40px;text-align:center;padding-top:calc(var(--nav-h) + 40px);padding-bottom:60px}
+  .hero-label{justify-content:center}
+  .hero-divider{margin:0 auto 24px}
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .profile-wrap{max-width:320px;margin:0 auto}
+  .about-grid{grid-template-columns:1fr}
+  .about-photo-wrap{position:static;max-width:320px;margin:0 auto}
+  .exp-edu-grid{grid-template-columns:1fr;gap:40px}
+  .contact-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+}
+@media(max-width:600px){
+  section{padding:60px 0}
+  .container{padding:0 16px}
+  .hero-wrap{padding-top:calc(var(--nav-h) + 32px);padding-bottom:48px;gap:32px}
+  .hero-name{font-size:2.2rem}
+  .cert-grid{grid-template-columns:1fr}
+  .project-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:380px){
+  .hero-name{font-size:1.9rem}
+  .hero-btns{flex-direction:column;align-items:center}
+  .gallery-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark">AF</div>
+      <div class="logo-name">Portfolio</div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#certification">Certification</a>
+      <a href="#project">Projects</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" title="Toggle tema gelap/terang">🌙</button>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#experience" onclick="closeMobile()">Experience</a>
+  <a href="#certification" onclick="closeMobile()">Certification</a>
+  <a href="#project" onclick="closeMobile()">Projects</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#blog" onclick="closeMobile()">Blog</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-wrap">
+    <div class="hero-text">
+      <div class="hero-label">Welcome</div>
+      <h1 class="hero-name">Arief Fardhiansyah<br><em>Portfolio</em></h1>
+      <div class="hero-role">HIS Officer &nbsp;·&nbsp; Data &amp; BI Analyst &nbsp;·&nbsp; Registered Nurse</div>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Bridging clinical expertise with healthcare information technology at Mayapada Hospital, South Jakarta. Transforming data into decisions and systems into care.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/6282388308450?text=Halo%20Arief%2C%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20sama." target="_blank" class="btn-wa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Hire Me Now
+        </a>
+        <button onclick="downloadCV()" class="btn-cv">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+        </button>
+        <a href="#project" class="btn-ghost">View Projects</a>
+      </div>
+    </div>
+    <div class="profile-wrap">
+      <div class="insignia-bar">✦ Tech - Nurse Pioneer ✦</div>
+      <div class="profile-card">
+        <div class="profile-card-photo">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnzbdbjDBENUlM9MdL6MZT-xlMdY0rRZVVtcNJ43zfLr6C4TO8232pBD1hfStp8q9v4UbCA8KIIhlz8tMLOzqNUAKjuMqYf88GQCgGsoGQFQzgM2Z1P2Mr7doJXzt6S6GzqUOtwnC_RjIVjpSV7HiKbHO_nQB527pIIWzzDK6gB6PTnO3__76-2fOmQ2x/s16000/1000111421.jpg" alt="M. Arief Fardhiansyah" loading="eager">
+        </div>
+        <div class="profile-card-body">
+          <div class="profile-card-name">Ns. M. Arief Fardhiansyah, S.Kep</div>
+          <div class="profile-card-role">South Jakarta, Indonesia 🇮🇩</div>
+          <div class="profile-stats">
+            <div class="stat"><div class="stat-n">5+</div><div class="stat-l">Years</div></div>
+            <div class="stat"><div class="stat-n">12</div><div class="stat-l">Certs</div></div>
+            <div class="stat"><div class="stat-n">5</div><div class="stat-l">Projects</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">About Me</div>
+      <h2 class="sec-title">The Person Behind the Work</h2>
+      <p class="sec-sub">A rare professional who has lived both sides — the ward and the system room.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcauQ1xbZ1m6Fd7r5GiR2tSpOz5gfaxIO3XXTS715uMffkTQWQXgiWiJ3B8ZrMzq7RA0voy_KsdF5n7Ta9vL6LC7p631v9hs9TODWj9GgXWIsVC4MEt8_sMXI_oU3stkIEAcukpJkeC__E1F1bqakwUkkJDNTlULvUs7lwCPv3NeRDOq-qWkgCjd2Iplpy/s16000/IMG_20260221_151405.png-removebg-preview.png" alt="M. Arief Fardhiansyah">
+        </div>
+        <div class="about-photo-caption">
+          <h4>Ns. M. Arief Fardhiansyah, S.Kep</h4>
+          <p>HIS Officer · Data Analyst · Nurse</p>
+          <div class="about-tags">
+            <span class="atag">Healthcare IT</span>
+            <span class="atag">Data</span>
+            <span class="atag">Clinical</span>
+            <span class="atag">Innovation</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-blocks">
+        <div class="about-block reveal">
+          <div class="about-block-label">Biography</div>
+          <p style="font-size:0.97rem;color:var(--text);line-height:1.85;font-weight:400;">Seorang profesional kesehatan yang telah melewati dua dunia — bangsal klinis dan ruang sistem digital. Lebih dari lima tahun di Mayapada Hospital membentuknya menjadi jembatan antara kebutuhan pasien dan solusi teknologi yang nyata.</p>
+          <p style="font-size:0.78rem;color:var(--text3);line-height:1.8;margin-top:14px;font-style:italic;border-top:1px solid var(--border);padding-top:14px;">A healthcare professional who has lived in two worlds — the clinical ward and the digital system room. Over five years at Mayapada Hospital have shaped him into a bridge between patient needs and meaningful technology solutions.</p>
+        </div>
+        <div class="about-block reveal" style="border-left:2px solid var(--gold)">
+          <div class="about-block-label">Personal Motto</div>
+          <div class="motto-line">"Teknologi yang terbaik adalah yang mempererat hubungan antara manusia — bukan yang memisahkannya."</div>
+          <div class="motto-trans">"The best technology is that which strengthens human connections — not the one that separates them."</div>
+        </div>
+        <div class="about-block reveal">
+          <div class="about-block-label">Unique Characteristics</div>
+          <div class="char-list">
+            <div class="char-row"><div class="char-row-icon">🩺</div><div class="char-row-text">Clinical-to-Tech Pioneer — perspektif langka dan bernilai tinggi</div></div>
+            <div class="char-row"><div class="char-row-icon">🧠</div><div class="char-row-text">Systems Thinker — memahami masalah dari akarnya</div></div>
+            <div class="char-row"><div class="char-row-icon">📊</div><div class="char-row-text">Data-Driven Decision Maker — berbasis fakta, bukan asumsi</div></div>
+            <div class="char-row"><div class="char-row-icon">🤝</div><div class="char-row-text">Cross-functional Communicator — efektif di antara tim klinis dan teknis</div></div>
+            <div class="char-row"><div class="char-row-icon">📚</div><div class="char-row-text">Continuous Learner — aktif mengikuti program sertifikasi lanjutan</div></div>
+            <div class="char-row"><div class="char-row-icon">💡</div><div class="char-row-text">Problem Solver — menciptakan solusi nyata dari tantangan operasional</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE & EDUCATION -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Experience &amp; Education</div>
+      <h2 class="sec-title">Professional Journey</h2>
+      <p class="sec-sub">From bedside care to digital infrastructure — a deliberate and purposeful career evolution.</p>
+    </div>
+    <div class="exp-edu-grid">
+      <div>
+        <div class="exp-col-title reveal">Work Experience</div>
+        <div class="entry reveal">
+          <div class="entry-date">Feb 2025 – Present · Full Time</div>
+          <div class="entry-title">Hospital Information System (HIS) Officer</div>
+          <div class="entry-org">🏥 Mayapada Hospital · Jakarta Selatan</div>
+          <div class="entry-desc">Mengelola dan mengoptimalkan sistem informasi rumah sakit, menghubungkan tim teknis dengan tenaga kesehatan. Memastikan kegunaan sistem, kepatuhan, dan keselarasan dengan kebutuhan pasien melalui implementasi solusi digital yang efektif.</div>
+          <div class="entry-tags">
+            <span class="entry-tag">HIS Management</span><span class="entry-tag">Software Implementation</span>
+            <span class="entry-tag">Data Analytics</span><span class="entry-tag">System Compliance</span>
+          </div>
+        </div>
+        <div class="entry reveal">
+          <div class="entry-date">Jun 2024 – Jan 2025 · Full Time</div>
+          <div class="entry-title">Nursing Superuser EMR</div>
+          <div class="entry-org">🏥 Mayapada Hospital · Jakarta Selatan</div>
+          <div class="entry-desc">Mendalami modul nursing pada sistem EMR (Electronic Medical Record) secara komprehensif untuk memberikan edukasi, sharing, serta training ke unit nursing dan bertanggung jawab penuh atas modul yang didapatkan.</div>
+          <div class="entry-tags">
+            <span class="entry-tag">Nursing System</span><span class="entry-tag">Enhancement Workflow</span>
+            <span class="entry-tag">Integrated Communication</span><span class="entry-tag">Efficiency Task and Caring</span>
+          </div>
+        </div>
+        <div class="entry reveal">
+          <div class="entry-date">Feb 2021 – May 2024 · Full Time</div>
+          <div class="entry-title">Nurse Inpatient (Pediatric Ward)</div>
+          <div class="entry-org">🏥 Mayapada Hospital · Jakarta Selatan</div>
+          <div class="entry-desc">Memberikan perawatan langsung kepada pasien anak di unit rawat inap. Mengelola dokumentasi pasien, pendidikan keluarga, dan respons darurat. Tersertifikasi PALS dan BLS.</div>
+          <div class="entry-tags">
+            <span class="entry-tag">Pediatric Care</span><span class="entry-tag">Patient Documentation</span>
+            <span class="entry-tag">PALS</span><span class="entry-tag">BLS</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="exp-col-title reveal">Education</div>
+        <div class="entry reveal">
+          <div class="entry-date">Sep 2025 – Present</div>
+          <div class="entry-title">Universitas Islam Sultan Agung Semarang</div>
+          <div class="entry-org">📚 Business Management · Marketing &amp; Human Resource</div>
+          <div class="entry-desc">Pendidikan dasar manajemen bisnis dengan fokus pada pemasaran dan sumber daya manusia, membangun keterampilan analitis dan interpersonal yang melengkapi karier teknologi kesehatannya.</div>
+          <div class="entry-tags">
+            <span class="entry-tag">Business Management</span><span class="entry-tag">Marketing</span><span class="entry-tag">Communication</span>
+          </div>
+        </div>
+        <div class="entry reveal">
+          <div class="entry-date">Jun 2025 – Present</div>
+          <div class="entry-title">Institute of Management, Technology and Finance Portugal</div>
+          <div class="entry-org">📚 Business Systems · Management &amp; Technology</div>
+          <div class="entry-desc">Program profesional eksekutif berfokus pada manajemen risiko praktis, tata kelola, dan pengambilan keputusan bisnis berbasis data. Memperdalam keahlian dalam Project Management dan inovasi.</div>
+          <div class="entry-tags">
+            <span class="entry-tag">Risk Management</span><span class="entry-tag">Project Management</span><span class="entry-tag">Innovation</span>
+          </div>
+        </div>
+        <div class="entry reveal">
+          <div class="entry-date">Sep 2019 – Aug 2020</div>
+          <div class="entry-title">STIKes Yarsi Sumbar Bukittinggi</div>
+          <div class="entry-org">📚 Profesi Ners - GPA 3.71 / 4.00</div>
+          <div class="entry-desc">Program profesi Keperawatan untuk memberikan pelayanan asuhan keperawatan yang komprehensif.</div>
+          <div class="entry-tags">
+            <span class="entry-tag">Medikal Bedah</span><span class="entry-tag">Gawat Darurat</span><span class="entry-tag">Intensif</span>
+          </div>
+        </div>
+        <div class="entry reveal">
+          <div class="entry-date">Sep 2015 – Aug 2019</div>
+          <div class="entry-title">STIKes Yarsi Sumbar Bukittinggi</div>
+          <div class="entry-org">📚 S1 Keperawatan - GPA 3.00 / 4.00</div>
+          <div class="entry-desc">Sarjana Keperawatan.</div>
+          <div class="entry-tags"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATION -->
+<section id="certification">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Licenses &amp; Certifications</div>
+      <h2 class="sec-title">Credentials &amp; Achievements</h2>
+      <p class="sec-sub">Validated expertise across healthcare and technology domains.</p>
+    </div>
+    <div class="cert-tabs reveal">
+      <button class="cert-tab active" onclick="filterCert('all',this)">All</button>
+      <button class="cert-tab" onclick="filterCert('cert',this)">Certificates</button>
+      <button class="cert-tab" onclick="filterCert('reward',this)">Rewards</button>
+      <button class="cert-tab" onclick="filterCert('org',this)">Organization</button>
+    </div>
+    <div class="cert-grid reveal" id="certGrid">
+
+      <div class="cert-card" data-cat="cert">
+        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyqJrL0aJ2fCjXYPKln-RxyajBRSG0ZkaoQEQNno9749hODYFAGz2fHPgkjm_F3zSFCJX11tk66MaoU_PnhCYm2xWtRGl0A_rcj4O3VuEhmomKnk1i3ErKVRKKPcc9Sb0NjJlH4K2Nq1fRDQb2MbHsVKETkTXI-FlUd_bPc28wng2gioGkKD1PfuQGpHiE/s16000/Data%20Analyst.png" alt="Data Analyst" loading="lazy"></div>
+        <div class="cert-card-body">
+          <div class="cert-card-top"><div class="cert-icon">📊</div><div class="cert-status">Verified</div></div>
+          <div class="cert-issuer">Special Skill Indonesia</div>
+          <div class="cert-title">Data Analyst Certification</div>
+          <div class="cert-date">Issued 2026 · ID: SSB40E018</div>
+          <a class="cert-link" href="https://sertifikat.specialskill.id/sertifikat/view?_token=KL45bDdZyBzSokbv1Cqqdslznlx2rxp2cYhQXGK3&query=SSB40E018" target="_blank">View Credential →</a>
+        </div>
+      </div>
+
+      <div class="cert-card" data-cat="cert">
+        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT8ham7dGk2yUMENA_aPJXbrQPudsi2HEzH5yAKSZeq8dM_HyahEHbruDP8PJGlMzTf3gTWJBwxi05w-o_rUUdrOXOUOp1Pz6uB2H_lMwH2zwCFSJj2_Yk3CXglvzwUz_1ByEBkotqbAPqiHG9dV5mXE3fR9BqkFzUzp1CKSbJZrX4gEWKr2wNcbfd3sAs/s16000/Innovation%20Management.png" alt="Innovation Management" loading="lazy"></div>
+        <div class="cert-card-body">
+          <div class="cert-card-top"><div class="cert-icon">🏢</div><div class="cert-status">Verified</div></div>
+          <div class="cert-issuer">Institute of Management, Technology &amp; Finance Portugal</div>
+          <div class="cert-title">Executive Diploma in Innovation Management</div>
+          <div class="cert-date">Issued Nov 2025 · ID: 9775046689MF</div>
+          <a class="cert-link" href="https://edu.gtf.pt/admin/tool/certificate/index.php?code=9775046689MF" target="_blank">View Credential →</a>
+        </div>
+      </div>
+
+      <div class="cert-card" data-cat="cert">
+        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3Fyf7DEF0llFuzsrdxbX1FElkEHPtJ_J1M5iOXeCsKGC1Hao9Wn_C7hdvspVarL6q6aqU9o4_WuYEHCcmVZj9m4Exl8nBeIrpNH_EQMGlpHJlszAEmAtZxN0XnIcGpuZQB6JEkc9gWCdro9iUOPbB7Lg_MZYNn6SPR-VshKixDcwscssDvYHOPeQ_HTMZ/s16000/ISO%209001%20in%20Food%20Industry.png" alt="ISO 9001" loading="lazy"></div>
+        <div class="cert-card-body">
+          <div class="cert-card-top"><div class="cert-icon">🏢</div><div class="cert-status">Quality</div></div>
+          <div class="cert-issuer">Makin Ahli</div>
+          <div class="cert-title">ISO 9001:2015 in Food Industry</div>
+          <div class="cert-date">Issued Feb 2026 · ID: 099/AP-0P20/MA/II-2026</div>
+        </div>
+      </div>
+
+      <div class="cert-card" data-cat="cert">
+        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhUS3dHYTjkleoleFlJCNdJKT3vc2ggt_awEEelIQEcSzUVrlLbLM1RJzm0F7wKw4NoQ2nmojL1oCWJnAvPyUNsuQN00HmQVylONbrUlTZ2fRTiVU3_W_jkWbPSWYYYS_sOsmxP8SPDc8wNIOzEIZgNxJ0BmnEWn5Jq5VzhyX8j4KNeJJ-oQrZAQqUecQe/s16000/Business%20Intelligence%20Anlyst.png" alt="BI Analyst" loading="lazy"></div>
+        <div class="cert-card-body">
+          <div class="cert-card-top"><div class="cert-icon">📈</div><div class="cert-status">Quality</div></div>
+          <div class="cert-issuer">365 Career</div>
+          <div class="cert-title">The Business Intelligence Analyst Course</div>
+          <div class="cert-date">Issued Aug 2025 · ID: UC-3de6add8-3cf4-4a10-a45b-b23b518d9ddf</div>
+          <a class="cert-link" href="https://www.udemy.com/certificate/UC-3de6add8-3cf4-4a10-a45b-b23b518d9ddf/" target="_blank">View Credential →</a>
+        </div>
+      </div>
+
+      <div class="cert-card" data-cat="reward">
+        <div class="cert-card-img"><img src="https://placehold.co/560x320/1f2228/e8c97a?text=Best+Employee+Award" alt="Best Employee" loading="lazy"></div>
+        <div class="cert-card-body">
+          <div class="cert-card-top"><div class="cert-icon">🏅</div><div class="cert-status">Reward</div></div>
+          <div class="cert-issuer">Mayapada STAR ⭐⭐⭐⭐⭐</div>
+          <div class="cert-title">Best Employee — Nursing Division</div>
+          <div class="cert-date">Tahun 2023 · Internal Recognition</div>
+        </div>
+      </div>
+
+      <div class="cert-card" data-cat="org">
+        <div class="cert-card-img"><img src="https://organisasi.co.id/wp-content/uploads/2021/10/large-goodnewsfromindonesia-gnfi-perawatnasional-cca305aa4e3ad395130b6d2a7597420e-630x380.jpg" alt="PPNI" loading="lazy"></div>
+        <div class="cert-card-body">
+          <div class="cert-card-top"><div class="cert-icon">🏛️</div><div class="cert-status">Member</div></div>
+          <div class="cert-issuer">DPK PPNI RS Mayapada Jakarta Selatan</div>
+          <div class="cert-title">Sektor Informasi dan Komunikasi</div>
+          <div class="cert-date">Since 2022 · Active Member</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section id="project">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Projects</div>
+      <h2 class="sec-title">Built with Purpose</h2>
+      <p class="sec-sub">Turning real clinical problems into digital solutions that matter.</p>
+    </div>
+    <div class="project-grid">
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(160deg,#0f1a14,#1a3020)">
+          <span>📱</span><div class="project-thumb-tag">Active</div>
+        </div>
+        <div class="project-body">
+          <div class="project-year">2024 – Present</div>
+          <div class="project-title">Nurse Sync App</div>
+          <div class="project-desc">Smart workspace yang membantu perawat mengorganisir tugas harian, dokumentasi perawatan pasien, dan komunikasi tim. Dirancang untuk mengurangi beban administratif dan meningkatkan efisiensi bangsal.</div>
+          <div class="project-tech">
+            <span class="tech-tag">Microsoft Excel</span><span class="tech-tag">Information Management</span><span class="tech-tag">Healthcare Workflow</span>
+          </div>
+          <div class="project-links">
+            <a href="https://fardianarief.github.io/My-Portfolio/nurse-sync" class="p-btn-gold">View Project →</a>
+            <a href="https://fardianarief.github.io/My-Portfolio/nurse-sync" class="p-btn-ghost">Details</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-thumb" style="background:linear-gradient(160deg,#0a1a2a,#102040)">
+          <span>🏥</span><div class="project-thumb-tag">Internal</div>
+        </div>
+        <div class="project-body">
+          <div class="project-year">2020 – Present</div>
+          <div class="project-title">HIS Digital Implementation</div>
+          <div class="project-desc">Memimpin implementasi dan optimasi Hospital Information System di Mayapada Hospital — menciptakan alur kerja digital yang menghubungkan tim klinis, administratif, dan data secara seamless.</div>
+          <div class="project-tech">
+            <span class="tech-tag">HIS Platform</span><span class="tech-tag">System Integration</span><span class="tech-tag">Data Analytics</span><span class="tech-tag">BI Reporting</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="p-btn-gold">View Details →</a>
+            <a href="#" class="p-btn-ghost">Case Study</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills-section">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Core Competencies</div>
+      <h2 class="sec-title">Skills &amp; Expertise</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Data &amp; Analytics</div>
+        <div class="skill-item"><div class="skill-head"><span>Data Analysis</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>BI Reporting</span><span>78%</span></div><div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Microsoft Excel</span><span>92%</span></div><div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div></div>
+      </div>
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Healthcare IT</div>
+        <div class="skill-item"><div class="skill-head"><span>HIS Management</span><span>93%</span></div><div class="skill-bar"><div class="skill-fill" data-width="93%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>System Implementation</span><span>83%</span></div><div class="skill-bar"><div class="skill-fill" data-width="83%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Clinical Workflows</span><span>96%</span></div><div class="skill-bar"><div class="skill-fill" data-width="96%"></div></div></div>
+      </div>
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Management</div>
+        <div class="skill-item"><div class="skill-head"><span>Project Management</span><span>80%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Information Management</span><span>88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Communication</span><span>91%</span></div><div class="skill-bar"><div class="skill-fill" data-width="91%"></div></div></div>
+      </div>
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Languages</div>
+        <div class="skill-item"><div class="skill-head"><span>Indonesian</span><span>Native</span></div><div class="skill-bar"><div class="skill-fill" data-width="100%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>English</span><span>Professional</span></div><div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div></div>
+      </div>
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Nursing Skills</div>
+        <div class="skill-item"><div class="skill-head"><span>Patient Assessment</span><span>96%</span></div><div class="skill-bar"><div class="skill-fill" data-width="96%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Pediatric Care</span><span>94%</span></div><div class="skill-bar"><div class="skill-fill" data-width="94%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Emergency Response (PALS/BLS)</span><span>92%</span></div><div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Patient Documentation</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Family Education &amp; Counseling</span><span>88%</span></div><div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div></div>
+      </div>
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Personality</div>
+        <div class="skill-item"><div class="skill-head"><span>Empathy &amp; Compassion</span><span>98%</span></div><div class="skill-bar"><div class="skill-fill" data-width="98%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Critical Thinking</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Adaptability</span><span>92%</span></div><div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Team Collaboration</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div></div>
+        <div class="skill-item"><div class="skill-head"><span>Problem Solving</span><span>89%</span></div><div class="skill-bar"><div class="skill-fill" data-width="89%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Gallery</div>
+      <h2 class="sec-title">Moments &amp; Milestones</h2>
+      <p class="sec-sub">A visual record of work, achievements, and meaningful experiences.</p>
+    </div>
+    <div class="gallery-filter reveal">
+      <button class="filter-btn active" onclick="filterGallery('all',this)">All</button>
+      <button class="filter-btn" onclick="filterGallery('work',this)">Work</button>
+      <button class="filter-btn" onclick="filterGallery('cert',this)">Certificates</button>
+      <button class="filter-btn" onclick="filterGallery('event',this)">Events</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxm8gPKbnLjytmHn4m3wNHwFVWdve-d-pfn_bZsCKloaF5zM_Cgba0OHBq8CPXxCitEylhLNhJsGFdD5My3y8gGFW0Q7Xyi2WlVM8Ip9_KsBidqyhKwsfm27pRd-4fmKVZnrnBb0YT-aQZhNd9Pi6IBCZT0Q0XjsFtAhvN6rqX7XOM32OHK8dS-pyHVM7X/s16000/1000111553.jpg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>Simulation HIS to Nuclear Medicine 2</p><span>Work · 2026</span></div></div>
+	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsPSSbof0vVS_grnWevqGhKx5P2mTrx6TTqZdn6ECO-x9ga21qt4RuIyFm_CS6xt7frQYTAXf0xLrXGnre_QJG4RmZaa2T61z_9D9p5DDYG-q1zP-et5FcllDbiNVTpSB-mbennH2Ff2AuwmtPg0bTnDrzrbXu5IGHq4TbReS3gI6qmHIH35ZSverStz6G/s16000/1000111550.jpg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>Simulation HIS to Nuclear Medicine 1</p><span>Work · 2026</span></div></div>
+	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4M871o8i-0bA9mp1YjzEtt4bEO8E7PVnUrhZFB2DytVwOfdvn5qeMMknpJ5jMyJihKEDG5IqSx8BjXUV9A9zv0XBUnJNF5ijdZKAJCS0jy4JB_uHDSHBD3wY6yem8FGmblQE3apesW5vtrOluEfeJIVGcsgyrj0_7VvbcR4-BcS4wqlEWYquIncb-hmKY/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.05%20(1).jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Jan 2026</p><span>Work · 2026</span></div></div>
+	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New User</p><span>Work · 2025</span></div></div>
+	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicQviH8UjWRSXpXMtIIFJQSqkFdFyX6G9_bYVpvRSLc6QzrggQ3HPW2WUes1ePhxkH6tgq4wYuh7pC5p-bOuZ9CAYj3668PpfVaBjsBpVl1ToshoPEUqHYev59uSUA4jJ9k9vV2oTF9OXErarMJTZboerbeSiwt178om7p5qM7-yr5kJhd6tdIwzn7z9ty/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.30.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Dec 2025</p><span>Work · 2025</span></div></div>
+	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcH6hyePdxVoGylvvSfoGozTN9crgcpr9XIwkvE8Ked02ntI5e0f-Al_-d801qbjEvzdCZWxOSVn33I2vP3_6MqrTsysyovlfezmCWXsBK0gSCWD3i1ltmTaJHgWnLMADGvO99LoJvgiEBLanhHk-Reyhnh0JkaPuNV15v8uums0FYz67hsCvs6DBiyAko/s16000/wegrfngh.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Dec 2025</p><span>Work · 2025</span></div></div><div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvFo6Q9PTVBFkUk5DZz138hIa4MDlCcqyQs0nUNuzEWmYZEfVRdiMk_H2Bm60vZldY_YHuYyIZVXAKElcgxgBAT4hwEaGDKDcmMetxXzTWzLdGRScfbZ8CTvmtCIBlFF2ILBKLlNUVBUlB8qg0omLIXlT0VZeAnW4kUf80tUREFYHe8b4t6Yja-gQBeKzo/s16000/WhatsApp%20Image%202026-02-23%20aawfawft%2019.48.05.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Dec 2025</p><span>Work · 2025</span></div></div>
+      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJvsi0a1Dhyphenhyphen_ej6qxJWyTeCMJpEI3VF7A5tyXEYS043k1EADmox4iv5swQdkuqEEVf1RuN-XM5QRt3vG_9EKC-pE5jJED7LzXo-W28wg8LpIx82NXl8SAUEYBD4V-25ojoktm0kJuLKIJt2UzpA_mhr_tdiKCCEz6gJQ3tLJYWYStJoVT_JFT7ICrcpINf/s16000/Leadership%20round.jpg" alt="Leadership" loading="lazy"><div class="gallery-overlay"><p>Leadership round to Operational</p><span>Work · 2025</span></div></div>
+	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9Sy9Sg0GG28BPoIjnvW8ErCxxATYGspYia9N8aY566OR6ZGz5DMsb_8WkvwvQhF6NrPi_hXDUmYbcbuG2xtUGX9R_rh-d7_XMeH5HgfK7Ba_Qrmh7Z0sz311g_uhcgX3Kh5h-wX84Prmp2ewuxyBGtl4Os-jDHNb3QMbn4O9w_D3EZ9XoEjBs0LfAOHIm/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.31.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Nov 2025</p><span>Work · 2025</span></div></div>
+      <div class="gallery-item" data-cat="event"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbJVLQbGu7A6-F4ut3kCyYJgr88vJ_2JT79lSORspvuQWQ5fun6htrG6_eFkU91RF9g5zpG7mDyNkdpZOS44ZmpVw_yXQrIwcOBoTF0nIL2oc-92RlIczyjnzX6tFVDOEevLkINcA0JkfQMleHThKYLYutRPKGCLRlgj7Ff7x8LC5GyomC9i9bBAs55G52/s16000/JCI%201.jpg" alt="JCI" loading="lazy"><div class="gallery-overlay"><p>Re Acredited Internal JCI International</p><span>Event · 2025</span></div></div>
+      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwPxXlCVnq1rQOkPIvc4Yt6GzyX1siNkmitFcAmFwp2PAOmf0GGYH6nURHWoHBhWC8nyTqfBYvNSJ2rRy_j_mbUet8lojmmh6gj8CKEgsnHWrUSBWuW8FYHMdvNpaxRP-zkHENOJj3eU3UubeTPPGsc9DDWR4l41aJzwCs8t0XcSjPSZbKuVyQsoBV9o27/s16000/training%20HIS%201.jpg" alt="HIS Training 2" loading="lazy"><div class="gallery-overlay"><p>HIS End User Training 2</p><span>Work · 2024</span></div></div>
+      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCZlS8WcJ7mNQ9vEEBPztowhGMTs6ZctT2h2LTe0xejryn6dNnJts_caUiOdVd4e533ml4je-MU8RfPHVazqSFqmPYRbS3fF8gJAQHxCUBOq52fX-5-qFQfJt3sXfkp9BtppEPFXcKtyNj8I6uzhnfVPi3-k-YaFaBGfdB3QuAPa3aCUL0ZEQkHAjoFuwo/s16000/training%20HIS%202.jpg" alt="HIS Training 1" loading="lazy"><div class="gallery-overlay"><p>HIS End User Training 1</p><span>Work · 2024</span></div></div>
+	  <div class="gallery-item" data-cat="event"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdvK7Uru9xpyx7qJk9Pc9oEDFSZdCaxHwilYj7ZMfZodgQDSCsVDHN1YzyjiWxvbdmqAbQO7mq1xNS0vaArM-dxhaGE6smTgaSRNZBTXlCaUIs8OfyUuqTpe9uUm9TFf3j61KZ9ejuw_VL-Nv6pgxkg-biwoAprs0M2uBNBcVx6GwZwHQrC8U9gxVLb6Mm/s16000/Amazing%20race.jpeg" alt="HIS Implementation" loading="lazy"><div class="gallery-overlay"><p>Amazing Race Mayapada Hospital</p><span>Event · 2024</span></div></div>
+	  <div class="gallery-item" data-cat="event"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilOARnhADuB2LKj00kY1etPZZvfQasgkyfwCPADoT8hKn44cu9mml-tbjgflYETDzGp_cDKUn72JgHhm9bKrYuALqN4AyLlmlpCxLJhAeSyDSKeZM4OlaCt4IjuPFlL0Lo_tDjvLmF-UVX7DNOcjKpd547YEZTEeiuwfVJzS8MCQpm1IrSN-nY31qoEHyD/s16000/DPK%20ppni.jpeg" alt="HIS Implementation" loading="lazy"><div class="gallery-overlay"><p>DPK PPNI Mayapada Hospital Jakarta Selatan</p><span>Event · 2024</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Blog & Insights</div>
+      <h2 class="sec-title">Thoughts & Writings</h2>
+      <p class="sec-sub">Perspektif dari persimpangan antara dunia klinis dan teknologi kesehatan — catatan nyata dari lapangan.</p>
+    </div>
+    <div class="blog-grid" id="blogGrid">
+      <!-- POST 1 — terbaru -->
+      <div class="blog-card reveal">
+        <div class="blog-card-thumb">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxm8gPKbnLjytmHn4m3wNHwFVWdve-d-pfn_bZsCKloaF5zM_Cgba0OHBq8CPXxCitEylhLNhJsGFdD5My3y8gGFW0Q7Xyi2WlVM8Ip9_KsBidqyhKwsfm27pRd-4fmKVZnrnBb0YT-aQZhNd9Pi6IBCZT0Q0XjsFtAhvN6rqX7XOM32OHK8dS-pyHVM7X/s16000/1000111553.jpg" alt="HIS Nuclear Medicine" loading="lazy">
+          <span class="blog-card-cat">Healthcare IT</span>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta"><span>26 Feb 2026</span> · 5 min read</div>
+          <div class="blog-card-title">Simulasi HIS di Unit Nuclear Medicine: Tantangan & Pelajaran Nyata</div>
+          <p class="blog-card-excerpt">Bagaimana proses simulasi sistem informasi rumah sakit di unit yang paling kompleks mengajarkan lebih dari sekadar teknis — ini tentang komunikasi antar tim dan adaptasi workflow klinis.</p>
+          <div class="blog-card-footer">
+            <div class="blog-card-tags"><span class="blog-tag">HIS</span><span class="blog-tag">Nuclear Medicine</span></div>
+            <a href="blog.html?id=1" class="blog-read-btn">Read More →</a>
+          </div>
+        </div>
+      </div>
+      <!-- POST 2 -->
+      <div class="blog-card reveal">
+        <div class="blog-card-thumb">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsPSSbof0vVS_grnWevqGhKx5P2mTrx6TTqZdn6ECO-x9ga21qt4RuIyFm_CS6xt7frQYTAXf0xLrXGnre_QJG4RmZaa2T61z_9D9p5DDYG-q1zP-et5FcllDbiNVTpSB-mbennH2Ff2AuwmtPg0bTnDrzrbXu5IGHq4TbReS3gI6qmHIH35ZSverStz6G/s16000/1000111550.jpg" alt="HIS Training New User" loading="lazy">
+          <span class="blog-card-cat">Training</span>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta"><span>23 Jan 2026</span> · 4 min read</div>
+          <div class="blog-card-title">HIS Training untuk New User: Strategi Efektif Onboarding Tenaga Kesehatan</div>
+          <p class="blog-card-excerpt">Mendidik tenaga kesehatan menggunakan sistem baru bukan sekadar soal demo fitur. Ini tentang membangun kepercayaan, menjawab ketakutan, dan menciptakan pengalaman belajar yang relevan dengan pekerjaan sehari-hari mereka.</p>
+          <div class="blog-card-footer">
+            <div class="blog-card-tags"><span class="blog-tag">Training</span><span class="blog-tag">Onboarding</span></div>
+            <a href="blog.html?id=2" class="blog-read-btn">Read More →</a>
+          </div>
+        </div>
+      </div>
+      <!-- POST 3 -->
+      <div class="blog-card reveal">
+        <div class="blog-card-thumb">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg" alt="From Nurse to HIS Officer" loading="lazy">
+          <span class="blog-card-cat">Career</span>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta"><span>10 Nov 2025</span> · 6 min read</div>
+          <div class="blog-card-title">Dari Perawat ke HIS Officer: Perjalanan yang Tidak Pernah Saya Rencanakan</div>
+          <p class="blog-card-excerpt">Transisi karier dari bangsal anak ke ruang sistem informasi bukan sebuah rencana matang — itu adalah serangkaian keputusan kecil yang didorong oleh rasa ingin tahu dan keberanian untuk mencoba hal baru di luar zona nyaman.</p>
+          <div class="blog-card-footer">
+            <div class="blog-card-tags"><span class="blog-tag">Career</span><span class="blog-tag">Story</span></div>
+            <a href="blog.html?id=3" class="blog-read-btn">Read More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="blog-view-all reveal">
+      <a href="blog.html" class="btn-outline-gold">Lihat Semua Postingan →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Contact</div>
+      <h2 class="sec-title">Let's Connect</h2>
+      <p class="sec-sub">Open to collaborations, consulting, and conversations about healthcare technology.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <h3 class="contact-info-title">Ready to build something meaningful?</h3>
+        <p style="font-size:0.9rem;color:var(--text2);line-height:1.8;margin-bottom:32px;">Whether it's a healthcare IT initiative, a data project, or a conversation at the intersection of clinical and digital — reach out.</p>
+        <div class="contact-items">
+          <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-value">South Jakarta, Indonesia</div></div></div>
+          <div class="contact-item"><div class="contact-icon">🏥</div><div><div class="contact-label">Current Employer</div><div class="contact-value">Mayapada Hospital Jakarta Selatan</div></div></div>
+          <div class="contact-item"><div class="contact-icon">💼</div><div><div class="contact-label">LinkedIn</div><div class="contact-value"><a href="https://linkedin.com/in/fardianarief" target="_blank" style="color:var(--gold)">linkedin.com/in/fardianarief ↗</a></div></div></div>
+          <div class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">WhatsApp</div><div class="contact-value">+62 823-8830-8450</div></div></div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <h3>Send a Message</h3>
+        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Your name"></div>
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+        <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="What is this about?"></div>
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" placeholder="Tell me more..."></textarea></div>
+        <button class="form-submit" onclick="submitForm()">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">M. Arief <em>Fardhiansyah</em></div>
+      <div class="footer-sub">Healthcare IT Officer &nbsp;·&nbsp; Data Analyst &nbsp;·&nbsp; Registered Nurse &nbsp;·&nbsp; Jakarta Selatan</div>
+      <div class="footer-divider"></div>
+      <div class="footer-links">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#experience">Experience</a>
+        <a href="#certification">Certification</a><a href="#project">Projects</a>
+        <a href="#gallery">Gallery</a><a href="#blog">Blog</a><a href="#contact">Contact</a>
+      </div>
+      <div class="footer-copy">© 2025 M. Arief Fardhiansyah · Crafted for healthcare innovation</div>
+    </div>
+  </div>
+</footer>
+
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ══════════════════════════════════════════
+// THEME — auto-detect sistem + toggle manual
+// ══════════════════════════════════════════
+var themeBtn = document.getElementById('themeBtn');
+var html = document.documentElement;
+
+function getCurrentTheme() {
+  return html.getAttribute('data-theme') || 'dark';
+}
+
+function setTheme(t) {
+  html.setAttribute('data-theme', t);
+  themeBtn.textContent = (t === 'dark') ? '🌙' : '☀️';
+  try { sessionStorage.setItem('af-theme', t); } catch(e) {}
+}
+
+// Sinkronisasi ikon dengan tema saat ini
+setTheme(getCurrentTheme());
+
+// Toggle manual saat diklik
+themeBtn.onclick = function() {
+  var next = (getCurrentTheme() === 'dark') ? 'light' : 'dark';
+  setTheme(next);
+};
+
+// Dengarkan perubahan sistem (hanya jika belum ada preferensi tersimpan)
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    try {
+      var saved = sessionStorage.getItem('af-theme');
+      if (!saved) setTheme(e.matches ? 'dark' : 'light');
+    } catch(err) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+}
+
+// ══════════════════
+// MOBILE NAV
+// ══════════════════
+var hamburger = document.getElementById('hamburger');
+var mobileNav = document.getElementById('mobileNav');
+hamburger.onclick = function() { mobileNav.classList.toggle('open'); };
+function closeMobile() { mobileNav.classList.remove('open'); }
+
+// ══════════════════
+// ACTIVE NAV + BACK TO TOP
+// ══════════════════
+var sections = document.querySelectorAll('section[id]');
+var navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', function() {
+  var cur = '';
+  sections.forEach(function(s) { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+  navAs.forEach(function(a) { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+  document.getElementById('btt').classList.toggle('visible', window.scrollY > 500);
+}, {passive: true});
+
+// ══════════════════
+// SCROLL REVEAL
+// ══════════════════
+var revObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('revealed'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
+
+// ══════════════════
+// SKILL BARS
+// ══════════════════
+var skillObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { e.target.style.width = e.isIntersecting ? e.target.dataset.width : '0%'; });
+}, {threshold: 0.5});
+document.querySelectorAll('.skill-fill').forEach(function(f) { f.style.width = '0%'; skillObs.observe(f); });
+
+// ══════════════════
+// CERT FILTER
+// ══════════════════
+function filterCert(cat, btn) {
+  document.querySelectorAll('.cert-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('#certGrid .cert-card[data-cat]').forEach(function(item) {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+// ══════════════════
+// GALLERY FILTER
+// ══════════════════
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item[data-cat]').forEach(function(item) {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+// ══════════════════
+// FORM
+// ══════════════════
+function submitForm() { alert('✅ Pesan terkirim! Arief akan segera menghubungi Anda.'); }
+
+// ══════════════════════════════════════════
+// DOWNLOAD CV
+// ══════════════════════════════════════════
+function downloadCV() {
+  var btn = document.querySelector('.btn-cv');
+  var origHTML = btn.innerHTML;
+  btn.innerHTML = '⏳ Generating...';
+  btn.disabled = true;
+
+  function loadScript(src, cb) {
+    if (document.querySelector('script[src="' + src + '"]')) { cb(); return; }
+    var s = document.createElement('script');
+    s.src = src; s.onload = cb;
+    document.head.appendChild(s);
+  }
+
+  loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', function() {
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    var W = doc.internal.pageSize.getWidth();
+    var m = 18, col = W - m * 2;
+    var y = 0;
+    var C = {
+      gold:[201,168,76], dark:[13,15,18], mid:[80,90,105],
+      light:[220,222,226], white:[255,255,255], panel:[25,28,34], line:[38,42,50]
+    };
+
+    doc.setFillColor.apply(doc,C.dark); doc.rect(0,0,W,54,'F');
+    doc.setFillColor.apply(doc,C.gold); doc.rect(0,54,W,1.8,'F');
+    doc.setFont('helvetica','bold'); doc.setFontSize(21); doc.setTextColor.apply(doc,C.white);
+    doc.text('Ns. M. Arief Fardhiansyah, S.Kep', m, 20);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor.apply(doc,C.gold);
+    doc.text('HIS Officer  ·  Data & BI Analyst  ·  Registered Nurse', m, 29);
+    doc.setFontSize(7.8); doc.setTextColor(170,175,185);
+    doc.text('Mayapada Hospital · South Jakarta, Indonesia', m, 38);
+    doc.text('+62 823-8830-8450   ·   linkedin.com/in/fardianarief', m, 45);
+    y = 64;
+
+    function newPage(){ doc.addPage(); y=18; doc.setFillColor.apply(doc,C.gold); doc.rect(0,0,W,1.5,'F'); }
+    function check(h){ if(y+h>280) newPage(); }
+
+    function secTitle(t){
+      check(16);
+      doc.setFillColor.apply(doc,C.gold); doc.rect(m,y,3,5,'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor.apply(doc,C.gold);
+      doc.text(t.toUpperCase(), m+7, y+4);
+      doc.setDrawColor.apply(doc,C.line); doc.setLineWidth(0.25);
+      doc.line(m,y+8,W-m,y+8);
+      y += 14;
+    }
+
+    function entry(date,title,org,desc){
+      check(36);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor.apply(doc,C.gold);
+      doc.text(date,m,y); y+=5;
+      doc.setFont('helvetica','bold'); doc.setFontSize(9.5); doc.setTextColor.apply(doc,C.dark);
+      doc.text(title,m,y); y+=5;
+      doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(130,140,155);
+      doc.text(org,m,y); y+=5;
+      var lines = doc.splitTextToSize(desc,col);
+      doc.setFontSize(8.5); doc.setTextColor.apply(doc,C.mid);
+      doc.text(lines,m,y); y+=lines.length*4.3+7;
+    }
+
+    secTitle('Professional Summary');
+    var sumLines = doc.splitTextToSize('Seorang profesional kesehatan yang telah melewati dua dunia — bangsal klinis dan ruang sistem digital. Lebih dari lima tahun di Mayapada Hospital membentuknya menjadi jembatan antara kebutuhan pasien dan solusi teknologi yang nyata.',col);
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor.apply(doc,C.mid);
+    doc.text(sumLines,m,y); y+=sumLines.length*4.5+2;
+    doc.setFont('helvetica','italic'); doc.setFontSize(8.5); doc.setTextColor.apply(doc,C.gold);
+    doc.text('"Teknologi yang terbaik adalah yang mempererat hubungan antara manusia."',m,y);
+    y+=8;
+
+    secTitle('Work Experience');
+    entry('Feb 2025 – Present  ·  Full Time','Hospital Information System (HIS) Officer','Mayapada Hospital · Jakarta Selatan','Mengelola dan mengoptimalkan sistem informasi rumah sakit, menghubungkan tim teknis dengan tenaga kesehatan.');
+    entry('Jun 2024 – Jan 2025  ·  Full Time','Nursing Superuser EMR','Mayapada Hospital · Jakarta Selatan','Mendalami modul nursing pada EMR secara komprehensif, edukasi dan training ke unit nursing.');
+    entry('Feb 2021 – May 2024  ·  Full Time','Nurse Inpatient — Pediatric Ward','Mayapada Hospital · Jakarta Selatan','Memberikan perawatan langsung kepada pasien anak. Tersertifikasi PALS dan BLS.');
+
+    secTitle('Education');
+    entry('Sep 2025 – Present','Universitas Islam Sultan Agung Semarang','Business Management · Marketing & Human Resource','Pendidikan manajemen bisnis dengan fokus pada pemasaran dan sumber daya manusia.');
+    entry('Jun 2025 – Present','Institute of Management, Technology and Finance Portugal','Business Systems · Management & Technology','Program eksekutif — manajemen risiko, tata kelola, dan pengambilan keputusan bisnis berbasis data.');
+    entry('Sep 2019 – Aug 2020','STIKes Yarsi Sumbar Bukittinggi','Profesi Ners · GPA 3.71 / 4.00','Program profesi Keperawatan: Medikal Bedah, Gawat Darurat, dan Intensif.');
+    entry('Sep 2015 – Aug 2019','STIKes Yarsi Sumbar Bukittinggi','S1 Keperawatan · GPA 3.00 / 4.00','Sarjana Keperawatan.');
+
+    secTitle('Licenses & Certifications');
+    var certs = [
+      ['Data Analyst Certification','Special Skill Indonesia','2026 · ID: SSB40E018'],
+      ['Executive Diploma in Innovation Management','Inst. of Management, Technology & Finance','Nov 2025 · ID: 9775046689MF'],
+      ['The Business Intelligence Analyst Course','365 Career / Udemy','Aug 2025 · ID: UC-3de6add8'],
+      ['ISO 9001:2015 in Food Industry','Makin Ahli','Feb 2026'],
+    ];
+    certs.forEach(function(c){
+      check(15);
+      doc.setFillColor.apply(doc,C.panel); doc.roundedRect(m,y-1,col,12,1,1,'F');
+      doc.setFont('helvetica','bold'); doc.setFontSize(8.5); doc.setTextColor.apply(doc,C.light);
+      doc.text(c[0],m+5,y+4.5);
+      doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor.apply(doc,C.gold);
+      doc.text(c[1],m+5,y+9.5);
+      doc.setTextColor(110,120,135);
+      doc.text(c[2],W-m,y+9.5,{align:'right'});
+      y+=15;
+    });
+
+    var total = doc.internal.getNumberOfPages();
+    for(var i=1;i<=total;i++){
+      doc.setPage(i);
+      doc.setFillColor.apply(doc,C.dark); doc.rect(0,291,W,9,'F');
+      doc.setFont('helvetica','normal'); doc.setFontSize(7); doc.setTextColor(90,100,115);
+      doc.text('Ns. M. Arief Fardhiansyah, S.Kep  ·  +62 823-8830-8450  ·  linkedin.com/in/fardianarief', m, 297);
+      doc.text(i+' / '+total, W-m, 297, {align:'right'});
+    }
+
+    doc.save('CV_Arief_Fardhiansyah.pdf');
+    btn.innerHTML = origHTML;
+    btn.disabled = false;
+  });
+}
+</script>
+</body>
+</html>
