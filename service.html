@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M. Arief Fardhiansyah — Service</title>
+<script>
+(function(){
+  try {
+    var saved = localStorage.getItem('af-link-theme');
+    if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  } catch(e){}
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+})();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="dark"] {
+  --bg:      #0d0f12;
+  --bg2:     #141619;
+  --bg3:     #1a1d22;
+  --surface: #1f2228;
+  --border:  rgba(255,255,255,0.07);
+  --text:    #e6e8ec;
+  --text2:   #8c95a6;
+  --text3:   #52596a;
+  --gold:    #c9a84c;
+  --gold2:   #e8c97a;
+  --green:   #25d366;
+  --shadow:  0 10px 40px rgba(0,0,0,0.55);
+  --tr:      0.3s ease;
+  --toggle-bg:    #1f2228;
+  --toggle-bd:    rgba(255,255,255,0.10);
+  --toggle-color: #8c95a6;
+}
+
+[data-theme="light"] {
+  --bg:      #dddad3;
+  --bg2:     #d4d0c8;
+  --bg3:     #cac6be;
+  --surface: #e2dfd8;
+  --border:  rgba(0,0,0,0.10);
+  --text:    #1a1714;
+  --text2:   #3d372e;
+  --text3:   #6b6358;
+  --gold:    #7a5a0a;
+  --gold2:   #9a7214;
+  --green:   #1a9e50;
+  --shadow:  0 10px 40px rgba(0,0,0,0.14);
+  --tr:      0.3s ease;
+  --toggle-bg:    #cac6be;
+  --toggle-bd:    rgba(0,0,0,0.12);
+  --toggle-color: #3d372e;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background var(--tr), color var(--tr);
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 450px at 80% 10%, rgba(201,168,76,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 10% 90%, rgba(201,168,76,0.04) 0%, transparent 70%);
+}
+
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 100vh; z-index: 0; pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, rgba(201,168,76,0.10) 15%, rgba(201,168,76,0.10) 85%, transparent 100%);
+}
+
+.theme-btn {
+  position: fixed; top: 16px; right: 16px; z-index: 500;
+  width: 40px; height: 40px;
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-bd);
+  color: var(--toggle-color);
+  font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 4px;
+  transition: all var(--tr);
+  box-shadow: var(--shadow);
+}
+.theme-btn:hover { border-color: var(--gold); color: var(--gold); transform: scale(1.06); }
+
+.page {
+  position: relative; z-index: 1;
+  max-width: 460px; margin: 0 auto;
+  padding: 3rem 1.25rem 5rem;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.profile {
+  width: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; margin-bottom: 2rem;
+  animation: fadeUp 0.5s ease both;
+}
+
+.avatar-ring {
+  width: 108px; height: 108px; border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  padding: 4px; position: relative; margin-bottom: 1rem;
+  transition: border-color var(--tr);
+}
+.avatar-ring::before {
+  content: '';
+  position: absolute; inset: -8px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.15);
+}
+.avatar-img {
+  width: 100%; height: 100%; border-radius: 50%;
+  object-fit: cover; object-position: top center;
+  display: block; background: var(--surface);
+}
+
+.badge {
+  display: inline-block;
+  background: var(--gold); color: var(--bg);
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 14px; margin-bottom: 0.9rem;
+  transition: background var(--tr), color var(--tr);
+}
+
+.profile-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem; font-weight: 700;
+  color: var(--text); line-height: 1.2; margin-bottom: 0.3rem;
+  transition: color var(--tr);
+}
+.profile-name em { color: var(--gold); font-style: normal; }
+
+.profile-role {
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 0.75rem;
+  transition: color var(--tr);
+}
+
+.profile-divider {
+  width: 40px; height: 1px; background: var(--gold);
+  margin: 0 auto 0.85rem; transition: background var(--tr);
+}
+
+.profile-desc {
+  font-size: 0.84rem; color: var(--text2);
+  line-height: 1.8; max-width: 360px; transition: color var(--tr);
+}
+
+.stats-row {
+  display: flex; border: 1px solid var(--border);
+  margin-top: 1.25rem; width: 100%; max-width: 320px;
+  background: var(--surface);
+  transition: background var(--tr), border-color var(--tr);
+}
+.stat {
+  flex: 1; padding: 12px 0; text-align: center;
+  border-right: 1px solid var(--border); transition: border-color var(--tr);
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700; color: var(--gold);
+  transition: color var(--tr);
+}
+.stat-l {
+  font-size: 0.6rem; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;
+  transition: color var(--tr);
+}
+
+.chip {
+  width: 100%;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); margin: 1.6rem 0 0.75rem;
+  transition: color var(--tr);
+}
+.chip::before, .chip::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border); transition: background var(--tr);
+}
+
+.links { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+
+.card {
+  width: 100%;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 14px 16px;
+  display: flex; align-items: center; gap: 13px;
+  text-decoration: none; color: var(--text); cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: border-color var(--tr), transform var(--tr), box-shadow var(--tr), background var(--tr);
+  animation: fadeUp 0.5s ease both;
+}
+
+.card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--gold);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.25s ease, background var(--tr);
+}
+.card:hover::before { transform: scaleY(1); }
+.card:hover {
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.card-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem;
+  transition: background var(--tr), border-color var(--tr);
+}
+
+.card-body { flex: 1; min-width: 0; }
+.card-label {
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2px; transition: color var(--tr);
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.97rem; font-weight: 700;
+  color: var(--text); line-height: 1.3; transition: color var(--tr);
+}
+.card-sub {
+  font-size: 0.74rem; color: var(--text3);
+  margin-top: 2px; transition: color var(--tr);
+}
+
+.card-right {
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 3px; flex-shrink: 0;
+}
+.card-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.88rem; font-weight: 700;
+  color: var(--gold2); white-space: nowrap; transition: color var(--tr);
+}
+.card-arrow {
+  font-size: 0.85rem; color: var(--text3);
+  transition: transform 0.2s, color 0.2s;
+}
+.card:hover .card-arrow { transform: translateX(3px); color: var(--gold); }
+
+.card.wa-card { border-color: rgba(37,211,102,0.15); }
+.card.wa-card:hover { border-color: rgba(37,211,102,0.45); }
+.card.wa-card .card-label { color: var(--green); }
+.card.wa-card::before { background: var(--green); }
+
+.links .card:nth-child(1){animation-delay:.06s}
+.links .card:nth-child(2){animation-delay:.12s}
+.links .card:nth-child(3){animation-delay:.18s}
+.links .card:nth-child(4){animation-delay:.25s}
+.links .card:nth-child(5){animation-delay:.32s}
+.links .card:nth-child(6){animation-delay:.39s}
+.links .card:nth-child(7){animation-delay:.46s}
+
+.overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(13,15,18,0.80);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+[data-theme="light"] .overlay { background: rgba(60,50,40,0.65); }
+.overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  width: 100%; max-width: 460px;
+  background: var(--bg2); border: 1px solid var(--border); border-bottom: none;
+  border-radius: 14px 14px 0 0;
+  padding: 1.5rem 1.6rem 3rem;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.34,1.25,0.64,1), background var(--tr), border-color var(--tr);
+  max-height: 88vh; overflow-y: auto; position: relative;
+}
+.overlay.open .modal { transform: translateY(0); }
+
+.modal-drag {
+  width: 36px; height: 3px; border-radius: 2px;
+  background: var(--border); margin: 0 auto 1.4rem;
+  transition: background var(--tr);
+}
+.modal-close {
+  position: absolute; top: 1rem; right: 1.1rem;
+  background: var(--bg3); border: 1px solid var(--border);
+  cursor: pointer; width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; color: var(--text3);
+  transition: all var(--tr); border-radius: 2px;
+}
+.modal-close:hover { border-color: var(--gold); color: var(--gold); }
+
+.modal-badge {
+  display: inline-block;
+  font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid var(--gold); color: var(--gold);
+  margin-bottom: 1rem; transition: border-color var(--tr), color var(--tr);
+}
+.modal-icon { font-size: 2.2rem; margin-bottom: 0.6rem; }
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700; color: var(--text);
+  margin-bottom: 0.4rem; line-height: 1.2; transition: color var(--tr);
+}
+.modal-tagline {
+  font-size: 0.84rem; color: var(--text2);
+  line-height: 1.75; margin-bottom: 0.8rem; transition: color var(--tr);
+}
+.modal-sep {
+  width: 40px; height: 1px; background: var(--gold);
+  margin: 0.8rem 0; transition: background var(--tr);
+}
+
+.modal-features { list-style: none; margin-bottom: 1.4rem; }
+.modal-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.84rem; color: var(--text2); padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--tr), border-color var(--tr);
+}
+.modal-features li:last-child { border-bottom: none; }
+.feat-dot {
+  width: 6px; height: 6px; flex-shrink: 0;
+  background: var(--gold); transform: rotate(45deg); margin-top: 5px;
+  transition: background var(--tr);
+}
+
+.price-box {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1rem 1.2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.2rem;
+  transition: background var(--tr), border-color var(--tr);
+}
+.price-left-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 4px; transition: color var(--tr);
+}
+.price-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem; font-weight: 700; color: var(--gold2);
+  line-height: 1; transition: color var(--tr);
+}
+.price-note {
+  font-size: 0.7rem; color: var(--text3); margin-top: 4px; transition: color var(--tr);
+}
+
+.btn-order {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 13px; border: 1.5px solid var(--green); background: var(--green);
+  color: #fff; font-family: 'Lato', sans-serif;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.25s;
+}
+.btn-order:hover {
+  filter: brightness(1.08); transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(37,211,102,0.22);
+}
+
+.page-footer {
+  width: 100%; margin-top: 2.5rem;
+  padding-top: 1.8rem; border-top: 1px solid var(--border);
+  text-align: center;
+  animation: fadeUp 0.5s 0.6s ease both;
+  transition: border-color var(--tr);
+}
+.footer-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 700; color: var(--text2);
+  margin-bottom: 0.3rem; transition: color var(--tr);
+}
+.footer-name em { color: var(--gold); font-style: normal; }
+.footer-copy {
+  font-size: 0.68rem; color: var(--text3);
+  letter-spacing: 0.05em; transition: color var(--tr);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 2.5rem 1rem 5rem; }
+  .profile-name { font-size: 1.35rem; }
+}
+</style>
+</head>
+<body>
+
+<button class="theme-btn" id="themeBtn" title="Ganti tema gelap/terang">🌙</button>
+
+<div class="page">
+
+  <div class="profile">
+    <div class="avatar-ring">
+      <img class="avatar-img"
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnzbdbjDBENUlM9MdL6MZT-xlMdY0rRZVVtcNJ43zfLr6C4TO8232pBD1hfStp8q9v4UbCA8KIIhlz8tMLOzqNUAKjuMqYf88GQCgGsoGQFQzgM2Z1P2Mr7doJXzt6S6GzqUOtwnC_RjIVjpSV7HiKbHO_nQB527pIIWzzDK6gB6PTnO3__76-2fOmQ2x/s16000/1000111421.jpg"
+        alt="M. Arief Fardhiansyah">
+    </div>
+    <div class="badge">✦ Tech - Nurse Pioneer ✦</div>
+    <div class="profile-name">M. Arief <em>Fardhiansyah</em></div>
+    <div class="profile-role">HIS Officer · Data & BI Analyst · Registered Nurse</div>
+    <div class="profile-divider"></div>
+    <p class="profile-desc">Bridging clinical expertise with healthcare IT at Mayapada Hospital, South Jakarta. Transforming data into decisions and systems into care.</p>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-n">5+</div><div class="stat-l">Years</div></div>
+      <div class="stat"><div class="stat-n">12</div><div class="stat-l">Certs</div></div>
+      <div class="stat"><div class="stat-n">5</div><div class="stat-l">Projects</div></div>
+    </div>
+  </div>
+
+  <div class="links">
+
+    <div class="chip">Temukan Saya</div>
+
+    <a href="https://fardianarief.github.io/me" target="_blank" class="card">
+      <div class="card-icon">🌐</div>
+      <div class="card-body">
+        <div class="card-label">Website</div>
+        <div class="card-title">My Personal Portfolio</div>
+        <div class="card-sub">fardianarief.site</div>
+      </div>
+      <div class="card-right"><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="https://www.linkedin.com/fardianarief" target="_blank" class="card">
+      <div class="card-icon">
+	   <svg xmlns="http://www.w3.org/2000/svg" 
+       width="24" height="24" 
+       fill="#0A66C2" 
+       viewBox="0 0 24 24">
+		<path d="M20.451 20.451h-3.554v-5.568c0-1.328-.025-3.037-1.851-3.037-1.852 0-2.135 1.445-2.135 2.939v5.666h-3.554v-11.5h3.414v1.571h.049c.476-.9 1.637-1.851 3.367-1.851 3.6 0 4.267 2.369 4.267 5.455v6.325zM5.337 7.433c-1.144 0-2.068-.925-2.068-2.068 0-1.144.924-2.068 2.068-2.068 1.143 0 2.068.924 2.068 2.068 0 1.143-.925 2.068-2.068 2.068zM7.114 20.451h-3.554v-11.5h3.554v11.5zM22.225 0h-20.451c-.979 0-1.774.795-1.774 1.774v20.451c0 .979.795 1.774 1.774 1.774h20.451c.979 0 1.774-.795 1.774-1.774v-20.451c0-.979-.795-1.774-1.774-1.774z"/>
+		</svg>
+		</div>
+      <div class="card-body">
+        <div class="card-label">LinkedIn</div>
+        <div class="card-title">My LinkedIn Profile</div>
+        <div class="card-sub">linkedin.com/fardianarief</div>
+      </div>
+      <div class="card-right"><span class="card-arrow">→</span></div>
+    </a>
+
+    <a href="https://instagram.com/fardianarief" target="_blank" class="card">
+      <div class="card-icon">
+	   <svg width="24" height="24" viewBox="0 0 24 24">
+		<defs>
+      <linearGradient id="ig-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#feda75"/>
+        <stop offset="25%" stop-color="#fa7e1e"/>
+        <stop offset="50%" stop-color="#d62976"/>
+        <stop offset="75%" stop-color="#962fbf"/>
+        <stop offset="100%" stop-color="#4f5bd5"/>
+      </linearGradient>
+		</defs>
+    <path fill="url(#ig-gradient)" d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5z"/>
+    <circle cx="12" cy="12" r="3.2" fill="white"/>
+    <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+	</svg>
+	  </div>
+      <div class="card-body">
+        <div class="card-label">Instagram</div>
+        <div class="card-title">@fardianarief</div>
+        <div class="card-sub">Life · Healthcare · Tech</div>
+      </div>
+      <div class="card-right"><span class="card-arrow">→</span></div>
+    </a>
+
+    <div class="chip">Layanan & Konsultasi</div>
+
+    <div class="card" onclick="openModal('hit')">
+      <div class="card-icon">🏥</div>
+      <div class="card-body">
+        <div class="card-label">Konsultasi</div>
+        <div class="card-title">Healthcare IT Consulting</div>
+        <div class="card-sub">HIS, EMR, SIMRS & digitalisasi RS</div>
+      </div>
+      <div class="card-right">
+        <span class="card-price">Rp 500rb/sesi</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('bi')">
+      <div class="card-icon">📊</div>
+      <div class="card-body">
+        <div class="card-label">Jasa</div>
+        <div class="card-title">Data & BI Analysis</div>
+        <div class="card-sub">Dashboard, laporan & visualisasi data</div>
+      </div>
+      <div class="card-right">
+        <span class="card-price">Mulai 750rb</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="card" onclick="openModal('training')">
+      <div class="card-icon">🎓</div>
+      <div class="card-body">
+        <div class="card-label">Pelatihan</div>
+        <div class="card-title">Workshop Healthcare Tech</div>
+        <div class="card-sub">Untuk tenaga medis & staf RS</div>
+      </div>
+      <div class="card-right">
+        <span class="card-price">Mulai 1,5jt</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="card wa-card" onclick="openModal('hire')">
+      <div class="card-icon">🤝</div>
+      <div class="card-body">
+        <div class="card-label">Kolaborasi</div>
+        <div class="card-title">Hire Me / Project Bersama</div>
+        <div class="card-sub">Freelance · Remote work · Kolaborasi</div>
+      </div>
+      <div class="card-right">
+        <span class="card-price">Diskusi dulu</span>
+        <span class="card-arrow">→</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-name">M. Arief <em>Fardhiansyah</em></div>
+    <div class="footer-copy">Ns. S.Kep · South Jakarta, Indonesia 🇮🇩</div>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="handleBg(event)">
+  <div class="modal" id="modal">
+    <div class="modal-drag"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-badge"   id="mBadge"></div>
+    <div class="modal-icon"    id="mIcon"></div>
+    <div class="modal-title"   id="mTitle"></div>
+    <div class="modal-tagline" id="mTagline"></div>
+    <div class="modal-sep"></div>
+    <ul class="modal-features" id="mFeatures"></ul>
+    <div class="price-box">
+      <div>
+        <div class="price-left-label">Harga Mulai</div>
+        <div class="price-amount" id="mPrice"></div>
+        <div class="price-note"   id="mPriceNote"></div>
+      </div>
+      <div style="font-size:1.9rem" id="mPriceIcon"></div>
+    </div>
+    <button class="btn-order" onclick="orderNow()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Hubungi via WhatsApp
+    </button>
+  </div>
+</div>
+
+<script>
+var WA_NUMBER = '6282388308450';
+
+var PRODUCTS = {
+  hit: {
+    badge: 'Konsultasi',
+    icon: '🏥',
+    title: 'Healthcare IT Consulting',
+    tagline: 'Konsultasi strategis untuk implementasi sistem informasi RS — pemilihan HIS/EMR, analisis kebutuhan, hingga evaluasi SIMRS yang sudah berjalan.',
+    features: [
+      'Analisis kebutuhan sistem HIS / SIMRS / EMR',
+      'Rekomendasi vendor & solusi teknologi kesehatan',
+      'Review alur kerja klinis dan non-klinis',
+      'Panduan implementasi & go-live support',
+      'Evaluasi interoperabilitas & kepatuhan regulasi',
+      'Sesi konsultasi 60-90 menit via Zoom / on-site',
+      'Laporan ringkasan hasil konsultasi (PDF)',
+    ],
+    price: 'Rp 500.000',
+    priceNote: 'per sesi - paket tersedia',
+    priceIcon: '🏥',
+    waMessage: 'Halo Arief! \n\nSaya tertarik dengan layanan *Healthcare IT Consulting* (Rp500.000/sesi).\n\nBoleh saya konsultasikan:\n1. Kebutuhan sistem yang saya hadapi\n2. Ketersediaan jadwal Anda\n3. Metode konsultasi (online/on-site)\n\nTerima kasih!',
+  },
+  bi: {
+    badge: 'Jasa Analisis',
+    icon: '📊',
+    title: 'Data & BI Analysis',
+    tagline: 'Ubah data mentah RS Anda menjadi dashboard interaktif dan laporan actionable untuk mendukung pengambilan keputusan.',
+    features: [
+      'Pengolahan & pembersihan data (data cleaning)',
+      'Pembuatan dashboard interaktif (Power BI / Looker)',
+      'Analisis tren, performa & KPI layanan kesehatan',
+      'Laporan eksekutif siap presentasi',
+      'Visualisasi rawat inap, rawat jalan & keuangan',
+      'Konsultasi kebutuhan data & mapping sumber data',
+      'Revisi hingga 2x per deliverable',
+    ],
+    price: 'Mulai Rp 750.000',
+    priceNote: 'tergantung kompleksitas project',
+    priceIcon: '📈',
+    waMessage: 'Halo Arief! \n\nSaya tertarik dengan layanan *Data & BI Analysis*.\n\nBoleh diskusi mengenai:\n1. Jenis data & kebutuhan analisis saya\n2. Platform yang diinginkan\n3. Estimasi timeline & biaya\n\nTerima kasih!',
+  },
+  training: {
+    badge: 'Pelatihan',
+    icon: '🎓',
+    title: 'Workshop Healthcare Tech',
+    tagline: 'Program pelatihan untuk tenaga medis, staf IT RS, dan manajemen agar siap menghadapi transformasi digital di fasilitas kesehatan.',
+    features: [
+      'Pengenalan & operasional HIS / SIMRS untuk staf klinis',
+      'Literasi data & pelaporan untuk manajemen RS',
+      'Workshop penggunaan tools BI (Power BI dasar)',
+      'Materi disesuaikan level peserta (basic-intermediate)',
+      'Modul & slide dapat dibawa pulang',
+      'Sertifikat keikutsertaan (opsional)',
+      'Tersedia online (Zoom) maupun on-site',
+    ],
+    price: 'Mulai Rp 1.500.000',
+    priceNote: 'per batch - tergantung jumlah peserta',
+    priceIcon: '🎓',
+    waMessage: 'Halo Arief! \n\nSaya tertarik dengan *Workshop Healthcare Tech*.\n\nBoleh info lebih lanjut:\n1. Topik / modul yang tersedia\n2. Jumlah peserta & format (online/on-site)\n3. Jadwal & estimasi biaya\n\nTerima kasih!',
+  },
+  hire: {
+    badge: 'Kolaborasi & Hire',
+    icon: '🤝',
+    title: 'Hire Me / Project Bersama',
+    tagline: 'Terbuka untuk freelance, remote work, dan kolaborasi di bidang Healthcare IT, Data, maupun Keperawatan.',
+    features: [
+      'Freelance project (HIS, data, dashboard, dokumen)',
+      'Remote consultant / part-time engagement',
+      'Kolaborasi riset & penulisan ilmiah healthcare',
+      'Pengembangan SOP / panduan teknis sistem kesehatan',
+      'Pengisian posisi kontrak / project-based',
+      'Tersedia untuk startup & enterprise',
+      'Diskusi kebutuhan & budget tanpa komitmen',
+    ],
+    price: 'Diskusikan Bersama',
+    priceNote: 'menyesuaikan scope project',
+    priceIcon: '🤝',
+    waMessage: 'Halo Arief! \n\nSaya ingin mengajak kolaborasi / hiring.\n\nDetail singkat:\n- Jenis project / posisi : ...\n- Durasi             : ...\n- On-site / Remote   : ...\n\nBoleh diskusi? Terima kasih!',
+  },
+};
+
+var ICON = { dark: '☀️', light: '🌙' };
+
+function getTheme() { return document.documentElement.getAttribute('data-theme') || 'dark'; }
+
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('themeBtn').textContent = ICON[t];
+  try { localStorage.setItem('af-link-theme', t); } catch(e){}
+}
+
+setTheme(getTheme());
+
+document.getElementById('themeBtn').addEventListener('click', function() {
+  setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+});
+
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+    try {
+      if (!localStorage.getItem('af-link-theme')) setTheme(e.matches ? 'dark' : 'light');
+    } catch(err) { setTheme(e.matches ? 'dark' : 'light'); }
+  });
+}
+
+var currentProduct = null;
+
+function openModal(key) {
+  var p = PRODUCTS[key];
+  if (!p) return;
+  currentProduct = p;
+  document.getElementById('mBadge').textContent     = p.badge;
+  document.getElementById('mIcon').textContent      = p.icon;
+  document.getElementById('mTitle').textContent     = p.title;
+  document.getElementById('mTagline').textContent   = p.tagline;
+  document.getElementById('mPrice').textContent     = p.price;
+  document.getElementById('mPriceNote').textContent = p.priceNote;
+  document.getElementById('mPriceIcon').textContent = p.priceIcon;
+  document.getElementById('mFeatures').innerHTML    =
+    p.features.map(function(f){ return '<li><span class="feat-dot"></span>' + f + '</li>'; }).join('');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentProduct = null;
+}
+
+function handleBg(e) { if (e.target === document.getElementById('overlay')) closeModal(); }
+
+function orderNow() {
+  if (!currentProduct) return;
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(currentProduct.waMessage), '_blank');
+}
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
