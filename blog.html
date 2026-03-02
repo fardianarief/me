@@ -394,7 +394,7 @@ function renderBlogList(filter) {
           '<p class="blog-post-subtitle">'+p.excerpt+'</p>',
           '<div class="blog-post-footer">',
             '<div class="blog-post-tags">'+tagsHtml+'</div>',
-            '<a href="'+p.slug+'" class="blog-view-btn">View More →</a>',
+            '<a href="Blog/'+p.slug+'" class="blog-view-btn">View More →</a>',
           '</div>',
         '</div>',
       '</article>'
@@ -411,7 +411,7 @@ function renderSidebarRecent() {
   var recent = POSTS.slice(0, 4);
   container.innerHTML = recent.map(function(p) {
     return [
-      '<a href="'+p.slug+'" class="sidebar-recent-item" style="text-decoration:none">',
+      '<a href="Blog/'+p.slug+'" class="sidebar-recent-item" style="text-decoration:none">',
         '<div class="sidebar-recent-img">',
           '<img src="'+p.image+'" alt="'+escapedTitle(p.imageAlt)+'" loading="lazy">',
         '</div>',
