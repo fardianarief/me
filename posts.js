@@ -1,25 +1,52 @@
 /**
- * ============================================================
- *  posts.js — DATA ARTIKEL BLOG TERPUSAT
+ * ════════════════════════════════════════════════════════════════
+ *  posts.js — CENTRAL BLOG POSTS DATA
  *  Digunakan oleh: index.html, blog.html
- * ============================================================
+ * ════════════════════════════════════════════════════════════════
  *
- *  CARA MENAMBAH ARTIKEL BARU:
- *  1. Buat file HTML artikel (copy dari template artikel yang ada)
- *  2. Tambahkan objek baru di array POSTS di bawah (urutan TERBARU di ATAS)
+ *  📖 CARA KERJA SISTEM:
+ *  ─────────────────────
+ *  Sistem ini menggunakan metadata yang tertanam di file HTML artikel.
+ *  Script 'blog-loader.js' membaca metadata tersebut dan menghasilkan
+ *  array POSTS secara otomatis.
+ *
+ *  ATAU untuk menambah manual (tanpa blog-loader):
+ *  1. Buat file HTML artikel di folder Blog/
+ *  2. Tambahkan objek baru di array POSTS di bawah (terbaru DI ATAS)
  *  3. Simpan — artikel langsung muncul di blog.html & index.html
  *
- *  FIELD WAJIB   : id, title, slug, date, dateISO, category, catSlug,
- *                  excerpt, image, imageAlt, readTime, tags
- *  FIELD OPSIONAL: featured (true/false) — hanya satu artikel yang featured
- * ============================================================
+ *  FIELD WAJIB:
+ *    id              → Nomor unik (increment)
+ *    title           → Judul artikel
+ *    slug            → Nama file HTML artikel (contoh: "artikel-1.html")
+ *    date            → Tanggal tampil (contoh: "26 Februari 2026")
+ *    dateISO         → Format ISO (YYYY-MM-DD) untuk sorting
+ *    category        → Kategori artikel
+ *    catSlug         → URL-safe slug kategori (lihat daftar valid di bawah)
+ *    excerpt         → Deskripsi singkat (1-2 kalimat)
+ *    image           → URL gambar thumbnail (minimal 600x400px)
+ *    imageAlt        → Deskripsi gambar untuk accessibility
+ *    readTime        → Estimasi waktu baca (contoh: "5 min read")
+ *    tags            → Array tag (max 5, paling penting 2-3)
+ *
+ *  FIELD OPSIONAL:
+ *    featured        → true/false (hanya SATU artikel boleh featured)
+ *    author          → Nama penulis (jika berbeda dengan profil utama)
+ *    views           → Jumlah views (untuk sorting future use)
+ *
+ *  KATEGORI VALID (catSlug):
+ *    "healthcare-it"  → Healthcare IT
+ *    "training"       → Training
+ *    "career"         → Career
+ *    "data"           → Data & Analytics
+ * ════════════════════════════════════════════════════════════════
  */
 
 const POSTS = [
 
-  /* ──────────────────────────────────────────────────────────
-     POST 1 — TERBARU & FEATURED
-  ────────────────────────────────────────────────────────── */
+  /* ─────────────────────────────────────────────────────────────
+     POST 1 — TERBARU & FEATURED (⭐)
+  ───────────────────────────────────────────────────────────── */
   {
     id: 1,
     title: "Simulasi HIS di Unit Nuclear Medicine: Tantangan & Pelajaran Nyata dari Lapangan",
@@ -36,9 +63,9 @@ const POSTS = [
     featured: true
   },
 
-  /* ──────────────────────────────────────────────────────────
+  /* ─────────────────────────────────────────────────────────────
      POST 2
-  ────────────────────────────────────────────────────────── */
+  ───────────────────────────────────────────────────────────── */
   {
     id: 2,
     title: "HIS Training untuk New User: Strategi Efektif Onboarding Tenaga Kesehatan",
@@ -55,9 +82,9 @@ const POSTS = [
     featured: false
   },
 
-  /* ──────────────────────────────────────────────────────────
+  /* ─────────────────────────────────────────────────────────────
      POST 3
-  ────────────────────────────────────────────────────────── */
+  ───────────────────────────────────────────────────────────── */
   {
     id: 3,
     title: "Dari Perawat ke HIS Officer: Perjalanan yang Tidak Pernah Saya Rencanakan",
@@ -74,9 +101,9 @@ const POSTS = [
     featured: false
   },
 
-  /* ──────────────────────────────────────────────────────────
+  /* ─────────────────────────────────────────────────────────────
      POST 4
-  ────────────────────────────────────────────────────────── */
+  ───────────────────────────────────────────────────────────── */
   {
     id: 4,
     title: "Data-Driven Decision Making di Rumah Sakit: Bukan Hanya Urusan IT",
@@ -93,9 +120,9 @@ const POSTS = [
     featured: false
   },
 
-  /* ──────────────────────────────────────────────────────────
+  /* ─────────────────────────────────────────────────────────────
      POST 5
-  ────────────────────────────────────────────────────────── */
+  ───────────────────────────────────────────────────────────── */
   {
     id: 5,
     title: "EMR untuk Nursing: Mengapa Implementasi Sering Gagal dan Cara Memperbaikinya",
@@ -112,32 +139,28 @@ const POSTS = [
     featured: false
   }
 
-  /* ──────────────────────────────────────────────────────────
-     ✦  TAMBAHKAN ARTIKEL BARU DI SINI (di atas POST sebelumnya)
-     ✦  Salin blok di bawah ini, isi datanya, dan tambahkan koma
-     ✦  setelah penutup brace "}"
+];
+
+/**
+ * ════════════════════════════════════════════════════════════════
+ * TEMPLATE UNTUK ARTIKEL BARU (Copy dan edit)
+ * ════════════════════════════════════════════════════════════════
 
   ,{
-    id: 6,                                          // Naikkan ID
-    title: "Judul Artikel Baru Anda",
-    slug: "Nama-File-Artikel.html",                 // nama file HTML artikel
-    date: "1 Maret 2026",                           // Tanggal tampil
-    dateISO: "2026-03-01",                          // Format YYYY-MM-DD
-    category: "Healthcare IT",                      // Kategori
-    catSlug: "healthcare-it",                       // Slug kategori (lihat daftar di bawah)
-    excerpt: "Deskripsi singkat artikel...",
-    image: "URL_GAMBAR",
-    imageAlt: "Deskripsi gambar",
+    id: 6,
+    title: "Judul Artikel Anda di Sini",
+    slug: "Nama-File-Artikel.html",
+    date: "1 Maret 2026",
+    dateISO: "2026-03-01",
+    category: "Healthcare IT",
+    catSlug: "healthcare-it",
+    excerpt: "Deskripsi singkat artikel (1-2 kalimat yang menarik pembaca)...",
+    image: "https://link-gambar-anda.com/image.jpg",
+    imageAlt: "Deskripsi singkat untuk gambar",
     readTime: "5 min read",
-    tags: ["Tag1", "Tag2"],
-    featured: false                                 // Hanya satu artikel yang true
+    tags: ["Tag1", "Tag2", "Tag3"],
+    featured: false
   }
 
-     DAFTAR catSlug YANG VALID:
-       "healthcare-it"  → Healthcare IT
-       "training"       → Training
-       "career"         → Career
-       "data"           → Data & Analytics
-  ────────────────────────────────────────────────────────── */
-
-];
+ * ════════════════════════════════════════════════════════════════
+ */
