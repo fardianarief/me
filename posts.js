@@ -1,7 +1,7 @@
 /**
  * ════════════════════════════════════════════════════════════════
  *  posts.js — AUTO-GENERATED DARI ARTIKEL DI FOLDER /Blog/
- *  Generated: 2/3/2026, 17.51.24
+ *  Generated: 2/3/2026, 22.29.16
  * ════════════════════════════════════════════════════════════════
  *
  *  ⚠️  FILE INI OTOMATIS DIHASILKAN
@@ -32,23 +32,6 @@ const POSTS = [
 
   /* Post 2 */
   {
-    id: 7,
-    title: "Judul Artikel Baru Anda",
-    slug: "TEMPLATE_ARTIKEL.html",
-    date: "1 Maret 2026",
-    dateISO: "2026-03-01",
-    category: "Healthcare IT",
-    catSlug: "healthcare-it",
-    excerpt: "Deskripsi singkat artikel yang akan tampil di halaman blog (1-2 kalimat)...",
-    image: "#",
-    imageAlt: "Deskripsi singkat gambar thumbnail",
-    readTime: "5 min read",
-    tags: ["Tag1","Tag2","Tag3"],
-    featured: false
-  },
-
-  /* Post 3 */
-  {
     id: 5,
     title: "Simulasi HIS di Unit Nuclear Medicine: Tantangan & Pelajaran Nyata dari Lapangan",
     slug: "Simulasi-HIS-di-Unit-Nuclear-Medicine.html",
@@ -64,7 +47,7 @@ const POSTS = [
     featured: false
   },
 
-  /* Post 4 */
+  /* Post 3 */
   {
     id: 8,
     title: "Nursing in the Age of AI: What to Learn, What to Use, and What to Guard Against",
@@ -81,7 +64,7 @@ const POSTS = [
     featured: true
   },
 
-  /* Post 5 */
+  /* Post 4 */
   {
     id: 4,
     title: "HIS Training untuk New User: Strategi Efektif Onboarding Tenaga Kesehatan",
@@ -98,7 +81,7 @@ const POSTS = [
     featured: false
   },
 
-  /* Post 6 */
+  /* Post 5 */
   {
     id: 3,
     title: "Dari Perawat ke HIS Officer: Perjalanan yang Tidak Pernah Saya Rencanakan",
@@ -115,7 +98,7 @@ const POSTS = [
     featured: false
   },
 
-  /* Post 7 */
+  /* Post 6 */
   {
     id: 2,
     title: "Data-Driven Decision Making di Rumah Sakit: Bukan Hanya Urusan IT",
@@ -132,7 +115,7 @@ const POSTS = [
     featured: false
   },
 
-  /* Post 8 */
+  /* Post 7 */
   {
     id: 1,
     title: "EMR untuk Nursing: Mengapa Implementasi Sering Gagal dan Cara Memperbaikinya",
