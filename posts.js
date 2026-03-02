@@ -1,7 +1,7 @@
 /**
  * ════════════════════════════════════════════════════════════════
  *  posts.js — AUTO-GENERATED DARI ARTIKEL DI FOLDER /Blog/
- *  Generated: 2/3/2026, 09.30.20
+ *  Generated: 2/3/2026, 09.33.48
  * ════════════════════════════════════════════════════════════════
  *
  *  ⚠️  FILE INI OTOMATIS DIHASILKAN
@@ -32,7 +32,7 @@ const POSTS = [
 
   /* Post 2 */
   {
-    id: 6,
+    id: 7,
     title: "Judul Artikel Baru Anda",
     slug: "TEMPLATE_ARTIKEL.html",
     date: "1 Maret 2026",
@@ -40,7 +40,7 @@ const POSTS = [
     category: "Healthcare IT",
     catSlug: "healthcare-it",
     excerpt: "Deskripsi singkat artikel yang akan tampil di halaman blog (1-2 kalimat)...",
-    image: "https://link-ke-gambar-anda.com/gambar.jpg",
+    image: "#",
     imageAlt: "Deskripsi singkat gambar thumbnail",
     readTime: "5 min read",
     tags: ["Tag1","Tag2","Tag3"],
