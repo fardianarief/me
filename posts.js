@@ -1,7 +1,7 @@
 /**
  * ════════════════════════════════════════════════════════════════
  *  posts.js — AUTO-GENERATED DARI ARTIKEL DI FOLDER /Blog/
- *  Generated: 2/3/2026, 17.36.26
+ *  Generated: 2/3/2026, 17.45.38
  * ════════════════════════════════════════════════════════════════
  *
  *  ⚠️  FILE INI OTOMATIS DIHASILKAN
@@ -23,7 +23,7 @@ const POSTS = [
     category: "Career",
     catSlug: "career",
     excerpt: "Sebuah kajian mendalam tentang konflik peran pada perawat — ketika tuntutan klinis dan administratif saling bertarik dalam satu waktu, dan dampaknya terhadap kesejahteraan profesional.",
-    image: "https://images.unsplash.com/photo-1576091160399-1c3c2d4c5c0a?w=800&h=400&fit=crop",
+    image: "https://www.nursingworld.org/globalassets/content-hub/uat/hub-resources/conflict-resolution-strategies-for-nurse-leaders/2-for-113n-conflict-resolution_gettyimages-1439816247-copy_featured_thumbnail.jpg",
     imageAlt: "Perawat menghadapi konflik peran di rumah sakit",
     readTime: "12 min read",
     tags: ["Role Conflict","Nursing","Psychology","Healthcare System"],
