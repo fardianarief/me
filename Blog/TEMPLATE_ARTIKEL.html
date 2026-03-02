@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- 📝 META BLOG — HARUS DIISI! Digunakan oleh blog-loader.js untuk generate posts.js -->
+  <meta name="blog-id" content="6">
+  <meta name="blog-title" content="Judul Artikel Baru Anda">
+  <meta name="blog-category" content="Healthcare IT">
+  <meta name="blog-catslug" content="healthcare-it">
+  <meta name="blog-excerpt" content="Deskripsi singkat artikel yang akan tampil di halaman blog (1-2 kalimat)...">
+  <meta name="blog-image" content="https://link-ke-gambar-anda.com/gambar.jpg">
+  <meta name="blog-imagealt" content="Deskripsi singkat gambar thumbnail">
+  <meta name="blog-date" content="1 Maret 2026">
+  <meta name="blog-dateiso" content="2026-03-01">
+  <meta name="blog-readtime" content="5 min read">
+  <meta name="blog-tags" content="Tag1, Tag2, Tag3">
+  <meta name="blog-featured" content="false">
+  
+  <!-- Standard Meta -->
+  <meta name="description" content="Deskripsi artikel untuk SEO">
+  <title>Judul Artikel | Blog — M. Arief Fardhiansyah</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ══════════════════════════════════════════════════════════ */
+    /* THEME SETUP */
+    /* ══════════════════════════════════════════════════════════ */
+    :root, [data-theme="dark"] {
+      --bg: #0d0f12;
+      --bg2: #141619;
+      --bg3: #1a1d22;
+      --surface: #1f2228;
+      --border: rgba(255,255,255,0.06);
+      --text: #e6e8ec;
+      --text2: #8c95a6;
+      --text3: #52596a;
+      --gold: #c9a84c;
+      --gold2: #e8c97a;
+      --nav-bg: rgba(13,15,18,0.93);
+      --nav-h: 68px;
+      --shadow: 0 12px 48px rgba(0,0,0,0.55);
+      --tr: 0.3s ease;
+    }
+
+    [data-theme="light"] {
+      --bg: #dddad3;
+      --bg2: #d4d0c8;
+      --bg3: #cac6be;
+      --surface: #e2dfd8;
+      --border: rgba(0,0,0,0.12);
+      --text: #1a1714;
+      --text2: #3d372e;
+      --text3: #6b6358;
+      --gold: #7a5a0a;
+      --gold2: #9a7214;
+      --nav-bg: rgba(212,208,200,0.96);
+      --shadow: 0 12px 48px rgba(0,0,0,0.14);
+    }
+
+    /* ══════════════════════════════════════════════════════════ */
+    /* RESET & BASE */
+    /* ══════════════════════════════════════════════════════════ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+      transition: background var(--tr), color var(--tr);
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Playfair Display', serif;
+      line-height: 1.15;
+      margin-top: 32px;
+      margin-bottom: 16px;
+    }
+
+    h1 { font-size: clamp(2rem, 4vw, 3rem); }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    h3 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); }
+    h4 { font-size: 1.3rem; }
+
+    p {
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color var(--tr);
+    }
+
+    a:hover {
+      color: var(--gold2);
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 24px 0;
+    }
+
+    blockquote {
+      border-left: 4px solid var(--gold);
+      padding-left: 24px;
+      margin: 24px 0;
+      font-style: italic;
+      color: var(--text2);
+    }
+
+    code {
+      background: var(--bg2);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.9em;
+      font-family: 'Courier New', monospace;
+    }
+
+    pre {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 24px 0;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ══════════════════════════════════════════════════════════ */
+    /* NAV */
+    /* ══════════════════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      padding: 7px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+      position: relative;
+      transition: color var(--tr);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 14px;
+      right: 14px;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--tr);
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after, .nav-links a.active::after {
+      transform: scaleX(1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--tr);
+      border-radius: 4px;
+    }
+
+    .theme-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════════════════════════════════ */
+    /* ARTICLE PAGE */
+    /* ══════════════════════════════════════════════════════════ */
+    .article-hero {
+      padding: calc(var(--nav-h) + 48px) 0 48px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.75rem;
+      color: var(--text3);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .article-meta .date {
+      color: var(--gold);
+    }
+
+    .article-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .article-excerpt {
+      font-size: 1.05rem;
+      color: var(--text2);
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    .article-content {
+      padding: 64px 0;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .article-image {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin: 48px 0;
+    }
+
+    .article-image img {
+      width: 100%;
+      display: block;
+      margin: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════════ */
+    /* FOOTER */
+    /* ══════════════════════════════════════════════════════════ */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 56px 0;
+      text-align: center;
+      color: var(--text2);
+    }
+
+    .footer-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .footer-logo em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .footer-sub {
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 24px 0;
+      font-size: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text2);
+      transition: color var(--tr);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text3);
+      margin-top: 24px;
+    }
+
+    /* ══════════════════════════════════════════════════════════ */
+    /* UTILITIES */
+    /* ══════════════════════════════════════════════════════════ */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--tr);
+      border-radius: 3px;
+    }
+
+    .back-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .article-title {
+        font-size: 1.6rem;
+      }
+
+      .article-content {
+        padding: 40px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .article-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+  </style>
+
+  <!-- Theme Script (no flash) -->
+  <script>
+    (function() {
+      try {
+        var saved = sessionStorage.getItem('af-theme');
+        if (saved) {
+          document.documentElement.setAttribute('data-theme', saved);
+          return;
+        }
+      } catch(e) {}
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    })();
+  </script>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark">A</div>
+      <span>Arief</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html" class="active">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ARTICLE HERO -->
+<section class="article-hero">
+  <div class="container">
+    <button class="back-btn" onclick="window.history.back()">← Kembali</button>
+
+    <div style="margin-top: 28px;">
+      <div class="article-meta">
+        <span class="date">26 Februari 2026</span>
+        <span>·</span>
+        <span>5 min read</span>
+        <span>·</span>
+        <span style="color: var(--gold);">Healthcare IT</span>
+      </div>
+
+      <h1 class="article-title">Judul Artikel Anda di Sini</h1>
+
+      <p class="article-excerpt">
+        Deskripsi singkat atau excerpt artikel yang akan menarik pembaca untuk membaca lebih lanjut...
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE CONTENT -->
+<section class="article-content">
+  <div class="container">
+
+    <!-- Gambar Featured -->
+    <div class="article-image">
+      <img src="https://link-ke-gambar-anda.com/gambar.jpg" alt="Gambar artikel">
+    </div>
+
+    <!-- MULAI KONTEN ARTIKEL DI SINI -->
+
+    <h2>Pengenalan</h2>
+    <p>
+      Ini adalah template artikel blog. Mulai menulis konten Anda di sini. Anda bisa menggunakan heading, paragraf, link, dan elemen lainnya.
+    </p>
+
+    <h2>Bagian Pertama</h2>
+    <p>
+      Paragraf pertama konten Anda. Jelaskan topik dengan detail dan berikan nilai kepada pembaca.
+    </p>
+
+    <blockquote>
+      "Ini adalah kutipan penting yang ingin Anda highlight dalam artikel. Gunakan blockquote untuk kutipan atau pernyataan kunci."
+    </blockquote>
+
+    <h3>Sub-section</h3>
+    <p>
+      Anda bisa menggunakan heading h3 untuk sub-bagian dalam artikel. Ini membantu pembaca memahami struktur artikel dengan lebih baik.
+    </p>
+
+    <h2>Kesimpulan</h2>
+    <p>
+      Tutup artikel Anda dengan kesimpulan yang kuat dan call-to-action. Ajak pembaca untuk berbagi, berkomentar, atau membaca artikel lainnya.
+    </p>
+
+    <!-- AKHIR KONTEN ARTIKEL -->
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">M. Arief <em>Fardhiansyah</em></div>
+    <div class="footer-sub">Healthcare IT Officer · Data Analyst · Registered Nurse · Jakarta Selatan</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 M. Arief Fardhiansyah · Crafted for healthcare innovation</div>
+  </div>
+</footer>
+
+<script>
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var html = document.documentElement;
+
+  function getCurrentTheme() {
+    return html.getAttribute('data-theme') || 'dark';
+  }
+
+  function setTheme(t) {
+    html.setAttribute('data-theme', t);
+    themeBtn.textContent = (t === 'dark') ? '🌙' : '☀️';
+    try {
+      sessionStorage.setItem('af-theme', t);
+    } catch(e) {}
+  }
+
+  setTheme(getCurrentTheme());
+  themeBtn.onclick = function() {
+    setTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
+  };
+</script>
+
+</body>
+</html>
