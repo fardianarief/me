@@ -1,7 +1,7 @@
 /**
  * ════════════════════════════════════════════════════════════════
  *  posts.js — AUTO-GENERATED DARI ARTIKEL DI FOLDER /Blog/
- *  Generated: 2/3/2026, 09.33.48
+ *  Generated: 2/3/2026, 17.13.54
  * ════════════════════════════════════════════════════════════════
  *
  *  ⚠️  FILE INI OTOMATIS DIHASILKAN
@@ -17,7 +17,7 @@ const POSTS = [
   {
     id: 6,
     title: "Role Conflict dalam Keperawatan: Ketika Dua Panggilan Bertemu dalam Satu Momen",
-    slug: "Blog/role-conflict-in-nursing.html",
+    slug: "role-conflict-in-nursing.html",
     date: "15 Maret 2026",
     dateISO: "2026-03-15",
     category: "Career",
@@ -34,7 +34,7 @@ const POSTS = [
   {
     id: 7,
     title: "Judul Artikel Baru Anda",
-    slug: "Blog/TEMPLATE_ARTIKEL.html",
+    slug: "TEMPLATE_ARTIKEL.html",
     date: "1 Maret 2026",
     dateISO: "2026-03-01",
     category: "Healthcare IT",
@@ -51,7 +51,7 @@ const POSTS = [
   {
     id: 5,
     title: "Simulasi HIS di Unit Nuclear Medicine: Tantangan & Pelajaran Nyata dari Lapangan",
-    slug: "Blog/Simulasi-HIS-di-Unit-Nuclear-Medicine.html",
+    slug: "Simulasi-HIS-di-Unit-Nuclear-Medicine.html",
     date: "26 Februari 2026",
     dateISO: "2026-02-26",
     category: "Healthcare IT",
@@ -66,9 +66,26 @@ const POSTS = [
 
   /* Post 4 */
   {
+    id: 8,
+    title: "Nursing in the Age of AI: What to Learn, What to Use, and What to Guard Against",
+    slug: "Nurse-Age-of-AI.html",
+    date: "14 Februari 2026",
+    dateISO: "2026-02-14",
+    category: "Artificial Intelligence",
+    catSlug: "artificial-intelligence",
+    excerpt: "Pemeriksaan mendalam dan jujur tentang kecerdasan buatan untuk perawat — keterampilan yang perlu dikembangkan, alat yang perlu digunakan, risiko yang perlu dipahami, dan cara tetap tak tergantikan dalam dunia mesin yang cerdas.",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop",
+    imageAlt: "Nursing in the Age of AI",
+    readTime: "8 min read",
+    tags: ["AI","Nursing","Digital Health","Clinical Skills"],
+    featured: true
+  },
+
+  /* Post 5 */
+  {
     id: 4,
     title: "HIS Training untuk New User: Strategi Efektif Onboarding Tenaga Kesehatan",
-    slug: "Blog/HIS-Training-untuk-New-User.html",
+    slug: "HIS-Training-untuk-New-User.html",
     date: "23 Januari 2026",
     dateISO: "2026-01-23",
     category: "Training",
@@ -81,11 +98,11 @@ const POSTS = [
     featured: false
   },
 
-  /* Post 5 */
+  /* Post 6 */
   {
     id: 3,
     title: "Dari Perawat ke HIS Officer: Perjalanan yang Tidak Pernah Saya Rencanakan",
-    slug: "Blog/Dari-Perawat-ke-HIS-Officer.html",
+    slug: "Dari-Perawat-ke-HIS-Officer.html",
     date: "10 November 2025",
     dateISO: "2025-11-10",
     category: "Career",
@@ -98,11 +115,11 @@ const POSTS = [
     featured: false
   },
 
-  /* Post 6 */
+  /* Post 7 */
   {
     id: 2,
     title: "Data-Driven Decision Making di Rumah Sakit: Bukan Hanya Urusan IT",
-    slug: "Blog/Data-Driven-Decision-di-Rumah-Sakit.html",
+    slug: "Data-Driven-Decision-di-Rumah-Sakit.html",
     date: "15 September 2025",
     dateISO: "2025-09-15",
     category: "Data & Analytics",
@@ -115,11 +132,11 @@ const POSTS = [
     featured: false
   },
 
-  /* Post 7 */
+  /* Post 8 */
   {
     id: 1,
     title: "EMR untuk Nursing: Mengapa Implementasi Sering Gagal dan Cara Memperbaikinya",
-    slug: "Blog/EMR-untuk-Nursing.html",
+    slug: "EMR-untuk-Nursing.html",
     date: "8 Juli 2025",
     dateISO: "2025-07-08",
     category: "Healthcare IT",
