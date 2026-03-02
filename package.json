@@ -1,0 +1,24 @@
+{
+  "name": "arief-blog-loader",
+  "version": "1.0.0",
+  "description": "Auto-generate posts.js dari metadata artikel HTML",
+  "main": "blog-loader.js",
+  "scripts": {
+    "generate": "node blog-loader.js",
+    "watch": "nodemon blog-loader.js"
+  },
+  "keywords": [
+    "blog",
+    "static-site",
+    "metadata",
+    "generator"
+  ],
+  "author": "M. Arief Fardhiansyah",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
