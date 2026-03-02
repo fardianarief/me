@@ -1,7 +1,7 @@
 /**
  * ════════════════════════════════════════════════════════════════
  *  posts.js — AUTO-GENERATED DARI ARTIKEL DI FOLDER /Blog/
- *  Generated: 2/3/2026, 17.45.38
+ *  Generated: 2/3/2026, 17.51.24
  * ════════════════════════════════════════════════════════════════
  *
  *  ⚠️  FILE INI OTOMATIS DIHASILKAN
@@ -108,7 +108,7 @@ const POSTS = [
     category: "Career",
     catSlug: "career",
     excerpt: "Transisi karier dari bangsal anak ke ruang sistem informasi bukan sebuah rencana matang — itu adalah serangkaian keputusan kecil yang didorong rasa ingin tahu. Apa yang membuat seorang perawat memilih jalan ini? Dan apa yang perlu disiapkan oleh siapapun yang ingin melakukan hal serupa?",
-    image: "https://images.unsplash.com/photo-1631217588267-bb3e0e266147?w=800&h=400&fit=crop",
+    image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg",
     imageAlt: "Dari Perawat ke HIS Officer",
     readTime: "6 min read",
     tags: ["Career","Story","Nursing"],
