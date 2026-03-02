@@ -17,7 +17,7 @@ const POSTS = [
   {
     id: 6,
     title: "Role Conflict dalam Keperawatan: Ketika Dua Panggilan Bertemu dalam Satu Momen",
-    slug: "role-conflict-in-nursing.html",
+    slug: "Blog/role-conflict-in-nursing.html",
     date: "15 Maret 2026",
     dateISO: "2026-03-15",
     category: "Career",
@@ -34,7 +34,7 @@ const POSTS = [
   {
     id: 7,
     title: "Judul Artikel Baru Anda",
-    slug: "TEMPLATE_ARTIKEL.html",
+    slug: "Blog/TEMPLATE_ARTIKEL.html",
     date: "1 Maret 2026",
     dateISO: "2026-03-01",
     category: "Healthcare IT",
@@ -51,7 +51,7 @@ const POSTS = [
   {
     id: 5,
     title: "Simulasi HIS di Unit Nuclear Medicine: Tantangan & Pelajaran Nyata dari Lapangan",
-    slug: "Simulasi-HIS-di-Unit-Nuclear-Medicine.html",
+    slug: "Blog/Simulasi-HIS-di-Unit-Nuclear-Medicine.html",
     date: "26 Februari 2026",
     dateISO: "2026-02-26",
     category: "Healthcare IT",
@@ -68,7 +68,7 @@ const POSTS = [
   {
     id: 4,
     title: "HIS Training untuk New User: Strategi Efektif Onboarding Tenaga Kesehatan",
-    slug: "HIS-Training-untuk-New-User.html",
+    slug: "Blog/HIS-Training-untuk-New-User.html",
     date: "23 Januari 2026",
     dateISO: "2026-01-23",
     category: "Training",
@@ -85,7 +85,7 @@ const POSTS = [
   {
     id: 3,
     title: "Dari Perawat ke HIS Officer: Perjalanan yang Tidak Pernah Saya Rencanakan",
-    slug: "Dari-Perawat-ke-HIS-Officer.html",
+    slug: "Blog/Dari-Perawat-ke-HIS-Officer.html",
     date: "10 November 2025",
     dateISO: "2025-11-10",
     category: "Career",
@@ -102,7 +102,7 @@ const POSTS = [
   {
     id: 2,
     title: "Data-Driven Decision Making di Rumah Sakit: Bukan Hanya Urusan IT",
-    slug: "Data-Driven-Decision-di-Rumah-Sakit.html",
+    slug: "Blog/Data-Driven-Decision-di-Rumah-Sakit.html",
     date: "15 September 2025",
     dateISO: "2025-09-15",
     category: "Data & Analytics",
@@ -119,7 +119,7 @@ const POSTS = [
   {
     id: 1,
     title: "EMR untuk Nursing: Mengapa Implementasi Sering Gagal dan Cara Memperbaikinya",
-    slug: "EMR-untuk-Nursing.html",
+    slug: "Blog/EMR-untuk-Nursing.html",
     date: "8 Juli 2025",
     dateISO: "2025-07-08",
     category: "Healthcare IT",
