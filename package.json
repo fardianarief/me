@@ -16,7 +16,8 @@
   "author": "M. Arief Fardhiansyah",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "firebase": "^12.10.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
