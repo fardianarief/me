@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M. Arief Fardhiansyah — Healthcare Tech Professional</title>
-<!-- Set theme BEFORE render to avoid flash -->
 <script>
 (function(){
   try {
@@ -17,7 +16,6 @@
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-/* ━━━ DARK THEME (default) ━━━ */
 :root,[data-theme="dark"]{
   --bg:#0d0f12;--bg2:#141619;--bg3:#1a1d22;--surface:#1f2228;
   --border:rgba(255,255,255,0.06);--text:#e6e8ec;--text2:#8c95a6;--text3:#52596a;
@@ -25,23 +23,12 @@
   --nav-bg:rgba(13,15,18,0.93);
   --nav-h:68px;--shadow:0 12px 48px rgba(0,0,0,0.55);--tr:0.3s ease;
 }
-
-/* ━━━ LIGHT THEME — warm grey, amber gold ━━━ */
 [data-theme="light"]{
-  --bg:#dddad3;         /* warm medium grey — tidak menyilaukan */
-  --bg2:#d4d0c8;        /* sedikit lebih gelap */
-  --bg3:#cac6be;        /* lebih gelap lagi */
-  --surface:#e2dfd8;    /* card surface, sedikit terang */
-  --border:rgba(0,0,0,0.12);
-  --text:#1a1714;       /* hitam hangat */
-  --text2:#3d372e;      /* coklat tua */
-  --text3:#6b6358;      /* coklat medium */
-  --gold:#7a5a0a;       /* amber tua — kontras di latar terang */
-  --gold2:#9a7214;
-  --nav-bg:rgba(212,208,200,0.96);
+  --bg:#dddad3;--bg2:#d4d0c8;--bg3:#cac6be;--surface:#e2dfd8;
+  --border:rgba(0,0,0,0.12);--text:#1a1714;--text2:#3d372e;--text3:#6b6358;
+  --gold:#7a5a0a;--gold2:#9a7214;--nav-bg:rgba(212,208,200,0.96);
   --shadow:0 12px 48px rgba(0,0,0,0.14);
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Lato',sans-serif;font-weight:400;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
@@ -176,6 +163,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .cert-link{font-size:0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);display:inline-flex;align-items:center;gap:5px;transition:color var(--tr)}
 .cert-link:hover{color:var(--gold)}
 
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:32px;flex-wrap:wrap}
+.page-info{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin:0 12px}
+.page-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:transparent;color:var(--text3);font-family:'Lato',sans-serif;font-size:0.78rem;font-weight:700;cursor:pointer;transition:all var(--tr);letter-spacing:0.05em}
+.page-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.page-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+[data-theme="dark"] .page-btn.active{color:var(--bg)}
+.page-btn:disabled{opacity:0.3;cursor:not-allowed}
+.page-arrow{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr);font-size:0.85rem}
+.page-arrow:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.page-arrow:disabled{opacity:0.3;cursor:not-allowed}
+.page-counter{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);padding:0 8px}
+
 /* PROJECT */
 .project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px}
 .project-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;transition:all var(--tr)}
@@ -212,7 +212,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .filter-btn{padding:8px 18px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr)}
 .filter-btn.active,.filter-btn:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
 [data-theme="dark"] .filter-btn.active,[data-theme="dark"] .filter-btn:hover{color:var(--bg)}
-.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2px;background:var(--border)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border)}
 .gallery-item{aspect-ratio:4/3;background:var(--surface);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer}
 .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
 .gallery-item:hover img{transform:scale(1.07)}
@@ -338,7 +338,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
       <a href="#gallery">Gallery</a>
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
-      <a href="service.html">Contact</a>
     </div>
     <div class="nav-actions">
       <button class="theme-btn" id="themeBtn" title="Toggle tema gelap/terang">🌙</button>
@@ -498,7 +497,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
         <div class="entry reveal">
           <div class="entry-date">Sep 2025 – Present</div>
           <div class="entry-title">Universitas Islam Sultan Agung Semarang</div>
-          <div class="entry-org">📚 Magister Management ·Faculty of Economics and Business</div>
+          <div class="entry-org">📚 Magister Management · Faculty of Economics and Business</div>
           <div class="entry-desc">Pendidikan dasar manajemen bisnis dengan fokus pada pemasaran dan sumber daya manusia, membangun keterampilan analitis dan interpersonal yang melengkapi karier teknologi kesehatannya.</div>
           <div class="entry-tags">
             <span class="entry-tag">Business Management</span><span class="entry-tag">Marketing</span><span class="entry-tag">Communication</span>
@@ -548,72 +547,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
       <button class="cert-tab" onclick="filterCert('reward',this)">Rewards</button>
       <button class="cert-tab" onclick="filterCert('org',this)">Organization</button>
     </div>
-    <div class="cert-grid reveal" id="certGrid">
-
-      <div class="cert-card" data-cat="cert">
-        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyqJrL0aJ2fCjXYPKln-RxyajBRSG0ZkaoQEQNno9749hODYFAGz2fHPgkjm_F3zSFCJX11tk66MaoU_PnhCYm2xWtRGl0A_rcj4O3VuEhmomKnk1i3ErKVRKKPcc9Sb0NjJlH4K2Nq1fRDQb2MbHsVKETkTXI-FlUd_bPc28wng2gioGkKD1PfuQGpHiE/s16000/Data%20Analyst.png" alt="Data Analyst" loading="lazy"></div>
-        <div class="cert-card-body">
-          <div class="cert-card-top"><div class="cert-icon">📊</div><div class="cert-status">Verified</div></div>
-          <div class="cert-issuer">Special Skill Indonesia</div>
-          <div class="cert-title">Data Analyst Certification</div>
-          <div class="cert-date">Issued 2026 · ID: SSB40E018</div>
-          <a class="cert-link" href="https://sertifikat.specialskill.id/sertifikat/view?_token=KL45bDdZyBzSokbv1Cqqdslznlx2rxp2cYhQXGK3&query=SSB40E018" target="_blank">View Credential →</a>
-        </div>
-      </div>
-
-      <div class="cert-card" data-cat="cert">
-        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikdwy0sePd3oQ1wJSJ4YIepmkOGupDq4mHIWRoJ_jahLeiM2Qx2k8lgvNA7o8HAHPbUgTqRMz7tcKhN0Ooum3f-SNSmHWXMEpFy0rHRmRJRaUvUMcGWOP_iKFjxXxqji7Mq7Ckk3j2FFWt12vCE8IvKqHhOsi3s0zw75hG5O_i-ndDmdSowZ4cj290JT_J/s16000/WhatsApp%20Image%202026-03-02%20at%2014.17.36.jpeg" alt="ISO 9001:2015" loading="lazy"></div>
-        <div class="cert-card-body">
-          <div class="cert-card-top"><div class="cert-icon">🏢</div><div class="cert-status">Quality</div></div>
-          <div class="cert-issuer">Makin Ahli</div>
-          <div class="cert-title">Sistem Manajemen Mutu (ISO 9001:2015)</div>
-          <div class="cert-date">Issued Feb 2026 · ID: 194/AQ-0Q1/MA/III-2026</div>
-        </div>
-      </div>
-
-      <div class="cert-card" data-cat="cert">
-        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT8ham7dGk2yUMENA_aPJXbrQPudsi2HEzH5yAKSZeq8dM_HyahEHbruDP8PJGlMzTf3gTWJBwxi05w-o_rUUdrOXOUOp1Pz6uB2H_lMwH2zwCFSJj2_Yk3CXglvzwUz_1ByEBkotqbAPqiHG9dV5mXE3fR9BqkFzUzp1CKSbJZrX4gEWKr2wNcbfd3sAs/s16000/Innovation%20Management.png" alt="Innovation Management" loading="lazy"></div>
-        <div class="cert-card-body">
-          <div class="cert-card-top"><div class="cert-icon">🏢</div><div class="cert-status">Verified</div></div>
-          <div class="cert-issuer">Institute of Management, Technology &amp; Finance Portugal</div>
-          <div class="cert-title">Executive Diploma in Innovation Management</div>
-          <div class="cert-date">Issued Nov 2025 · ID: 9775046689MF</div>
-          <a class="cert-link" href="https://edu.gtf.pt/admin/tool/certificate/index.php?code=9775046689MF" target="_blank">View Credential →</a>
-        </div>
-      </div>
-
-      <div class="cert-card" data-cat="cert">
-        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhUS3dHYTjkleoleFlJCNdJKT3vc2ggt_awEEelIQEcSzUVrlLbLM1RJzm0F7wKw4NoQ2nmojL1oCWJnAvPyUNsuQN00HmQVylONbrUlTZ2fRTiVU3_W_jkWbPSWYYYS_sOsmxP8SPDc8wNIOzEIZgNxJ0BmnEWn5Jq5VzhyX8j4KNeJJ-oQrZAQqUecQe/s16000/Business%20Intelligence%20Anlyst.png" alt="BI Analyst" loading="lazy"></div>
-        <div class="cert-card-body">
-          <div class="cert-card-top"><div class="cert-icon">📈</div><div class="cert-status">Quality</div></div>
-          <div class="cert-issuer">365 Career</div>
-          <div class="cert-title">The Business Intelligence Analyst Course</div>
-          <div class="cert-date">Issued Aug 2025 · ID: UC-3de6add8-3cf4-4a10-a45b-b23b518d9ddf</div>
-          <a class="cert-link" href="https://www.udemy.com/certificate/UC-3de6add8-3cf4-4a10-a45b-b23b518d9ddf/" target="_blank">View Credential →</a>
-        </div>
-      </div>
-
-      <div class="cert-card" data-cat="reward">
-        <div class="cert-card-img"><img src="https://placehold.co/560x320/1f2228/e8c97a?text=Best+Employee+Award" alt="Best Employee" loading="lazy"></div>
-        <div class="cert-card-body">
-          <div class="cert-card-top"><div class="cert-icon">🏅</div><div class="cert-status">Reward</div></div>
-          <div class="cert-issuer">Mayapada STAR ⭐</div>
-          <div class="cert-title">Best Employee — Nursing Division</div>
-          <div class="cert-date">Tahun 2023 · Internal Recognition</div>
-        </div>
-      </div>
-
-      <div class="cert-card" data-cat="org">
-        <div class="cert-card-img"><img src="https://blogger.googleusercontent.com/img/a/AVvXsEi0FyyzogKwyD_fg-HaXAGj4WppqYsXRP2IaGYi1Uldeh0tJ4sXSHvgjKXjDDwfIRmtRXmxH-rnPtrWJ3_62T4HdFn1Mijxo4DzmX0fNdhAEQp98PQthdfZbP2zNLO7S6TaTlYpyEsAts8zsg7DxlL6oeu8NXhRWBLdw-eZANk01lXekKFF4iQYMjJeHsNJ=s16000" alt="PPNI" loading="lazy"></div>
-        <div class="cert-card-body">
-          <div class="cert-card-top"><div class="cert-icon">🏛️</div><div class="cert-status">Member</div></div>
-          <div class="cert-issuer">DPK PPNI RS Mayapada Jakarta Selatan</div>
-          <div class="cert-title">Sektor Informasi dan Komunikasi</div>
-          <div class="cert-date">Since 2022 · Active Member</div>
-        </div>
-      </div>
-
-    </div>
+    <div class="cert-grid reveal" id="certGrid"></div>
+    <!-- Pagination Certification -->
+    <div class="pagination reveal" id="certPagination"></div>
   </div>
 </section>
 
@@ -660,8 +596,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
           </div>
         </div>
       </div>
-
-      <!-- NEW PROJECT 1: Audit Tools PCI Committee -->
       <div class="project-card reveal">
         <div class="project-thumb" style="background:linear-gradient(160deg,#1a0f00,#3a2000)">
           <span>🔍</span><div class="project-thumb-tag">PCI Committee</div>
@@ -679,8 +613,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
           </div>
         </div>
       </div>
-
-      <!-- NEW PROJECT 2: Surveilance Bundle HAIs -->
       <div class="project-card reveal">
         <div class="project-thumb" style="background:linear-gradient(160deg,#001a1a,#003a30)">
           <span>🦠</span><div class="project-thumb-tag">PCI Committee</div>
@@ -698,8 +630,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
           </div>
         </div>
       </div>
-
-      <!-- NEW PROJECT 3: Risk Register, FMEA & Monitoring Quality -->
       <div class="project-card reveal">
         <div class="project-thumb" style="background:linear-gradient(160deg,#0d0020,#1a0040)">
           <span>📋</span><div class="project-thumb-tag">Quality Committee</div>
@@ -717,7 +647,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -787,21 +716,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
       <button class="filter-btn" onclick="filterGallery('cert',this)">Certificates</button>
       <button class="filter-btn" onclick="filterGallery('event',this)">Events</button>
     </div>
-    <div class="gallery-grid" id="galleryGrid">
-      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxm8gPKbnLjytmHn4m3wNHwFVWdve-d-pfn_bZsCKloaF5zM_Cgba0OHBq8CPXxCitEylhLNhJsGFdD5My3y8gGFW0Q7Xyi2WlVM8Ip9_KsBidqyhKwsfm27pRd-4fmKVZnrnBb0YT-aQZhNd9Pi6IBCZT0Q0XjsFtAhvN6rqX7XOM32OHK8dS-pyHVM7X/s16000/1000111553.jpg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>Simulation HIS to Nuclear Medicine 2</p><span>Work · 2026</span></div></div>
-	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsPSSbof0vVS_grnWevqGhKx5P2mTrx6TTqZdn6ECO-x9ga21qt4RuIyFm_CS6xt7frQYTAXf0xLrXGnre_QJG4RmZaa2T61z_9D9p5DDYG-q1zP-et5FcllDbiNVTpSB-mbennH2Ff2AuwmtPg0bTnDrzrbXu5IGHq4TbReS3gI6qmHIH35ZSverStz6G/s16000/1000111550.jpg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>Simulation HIS to Nuclear Medicine 1</p><span>Work · 2026</span></div></div>
-	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4M871o8i-0bA9mp1YjzEtt4bEO8E7PVnUrhZFB2DytVwOfdvn5qeMMknpJ5jMyJihKEDG5IqSx8BjXUV9A9zv0XBUnJNF5ijdZKAJCS0jy4JB_uHDSHBD3wY6yem8FGmblQE3apesW5vtrOluEfeJIVGcsgyrj0_7VvbcR4-BcS4wqlEWYquIncb-hmKY/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.05%20(1).jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Jan 2026</p><span>Work · 2026</span></div></div>
-	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New User</p><span>Work · 2025</span></div></div>
-	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicQviH8UjWRSXpXMtIIFJQSqkFdFyX6G9_bYVpvRSLc6QzrggQ3HPW2WUes1ePhxkH6tgq4wYuh7pC5p-bOuZ9CAYj3668PpfVaBjsBpVl1ToshoPEUqHYev59uSUA4jJ9k9vV2oTF9OXErarMJTZboerbeSiwt178om7p5qM7-yr5kJhd6tdIwzn7z9ty/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.30.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Dec 2025</p><span>Work · 2025</span></div></div>
-	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcH6hyePdxVoGylvvSfoGozTN9crgcpr9XIwkvE8Ked02ntI5e0f-Al_-d801qbjEvzdCZWxOSVn33I2vP3_6MqrTsysyovlfezmCWXsBK0gSCWD3i1ltmTaJHgWnLMADGvO99LoJvgiEBLanhHk-Reyhnh0JkaPuNV15v8uums0FYz67hsCvs6DBiyAko/s16000/wegrfngh.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Dec 2025</p><span>Work · 2025</span></div></div><div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvFo6Q9PTVBFkUk5DZz138hIa4MDlCcqyQs0nUNuzEWmYZEfVRdiMk_H2Bm60vZldY_YHuYyIZVXAKElcgxgBAT4hwEaGDKDcmMetxXzTWzLdGRScfbZ8CTvmtCIBlFF2ILBKLlNUVBUlB8qg0omLIXlT0VZeAnW4kUf80tUREFYHe8b4t6Yja-gQBeKzo/s16000/WhatsApp%20Image%202026-02-23%20aawfawft%2019.48.05.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Dec 2025</p><span>Work · 2025</span></div></div>
-      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJvsi0a1Dhyphenhyphen_ej6qxJWyTeCMJpEI3VF7A5tyXEYS043k1EADmox4iv5swQdkuqEEVf1RuN-XM5QRt3vG_9EKC-pE5jJED7LzXo-W28wg8LpIx82NXl8SAUEYBD4V-25ojoktm0kJuLKIJt2UzpA_mhr_tdiKCCEz6gJQ3tLJYWYStJoVT_JFT7ICrcpINf/s16000/Leadership%20round.jpg" alt="Leadership" loading="lazy"><div class="gallery-overlay"><p>Leadership round to Operational</p><span>Work · 2025</span></div></div>
-	  <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9Sy9Sg0GG28BPoIjnvW8ErCxxATYGspYia9N8aY566OR6ZGz5DMsb_8WkvwvQhF6NrPi_hXDUmYbcbuG2xtUGX9R_rh-d7_XMeH5HgfK7Ba_Qrmh7Z0sz311g_uhcgX3Kh5h-wX84Prmp2ewuxyBGtl4Os-jDHNb3QMbn4O9w_D3EZ9XoEjBs0LfAOHIm/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.31.jpeg" alt="HIS Training" loading="lazy"><div class="gallery-overlay"><p>HIS Training New user Nov 2025</p><span>Work · 2025</span></div></div>
-      <div class="gallery-item" data-cat="event"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbJVLQbGu7A6-F4ut3kCyYJgr88vJ_2JT79lSORspvuQWQ5fun6htrG6_eFkU91RF9g5zpG7mDyNkdpZOS44ZmpVw_yXQrIwcOBoTF0nIL2oc-92RlIczyjnzX6tFVDOEevLkINcA0JkfQMleHThKYLYutRPKGCLRlgj7Ff7x8LC5GyomC9i9bBAs55G52/s16000/JCI%201.jpg" alt="JCI" loading="lazy"><div class="gallery-overlay"><p>Re Acredited Internal JCI International</p><span>Event · 2025</span></div></div>
-      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwPxXlCVnq1rQOkPIvc4Yt6GzyX1siNkmitFcAmFwp2PAOmf0GGYH6nURHWoHBhWC8nyTqfBYvNSJ2rRy_j_mbUet8lojmmh6gj8CKEgsnHWrUSBWuW8FYHMdvNpaxRP-zkHENOJj3eU3UubeTPPGsc9DDWR4l41aJzwCs8t0XcSjPSZbKuVyQsoBV9o27/s16000/training%20HIS%201.jpg" alt="HIS Training 2" loading="lazy"><div class="gallery-overlay"><p>HIS End User Training 2</p><span>Work · 2024</span></div></div>
-      <div class="gallery-item" data-cat="work"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCZlS8WcJ7mNQ9vEEBPztowhGMTs6ZctT2h2LTe0xejryn6dNnJts_caUiOdVd4e533ml4je-MU8RfPHVazqSFqmPYRbS3fF8gJAQHxCUBOq52fX-5-qFQfJt3sXfkp9BtppEPFXcKtyNj8I6uzhnfVPi3-k-YaFaBGfdB3QuAPa3aCUL0ZEQkHAjoFuwo/s16000/training%20HIS%202.jpg" alt="HIS Training 1" loading="lazy"><div class="gallery-overlay"><p>HIS End User Training 1</p><span>Work · 2024</span></div></div>
-	  <div class="gallery-item" data-cat="event"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdvK7Uru9xpyx7qJk9Pc9oEDFSZdCaxHwilYj7ZMfZodgQDSCsVDHN1YzyjiWxvbdmqAbQO7mq1xNS0vaArM-dxhaGE6smTgaSRNZBTXlCaUIs8OfyUuqTpe9uUm9TFf3j61KZ9ejuw_VL-Nv6pgxkg-biwoAprs0M2uBNBcVx6GwZwHQrC8U9gxVLb6Mm/s16000/Amazing%20race.jpeg" alt="HIS Implementation" loading="lazy"><div class="gallery-overlay"><p>Amazing Race Mayapada Hospital</p><span>Event · 2024</span></div></div>
-	  <div class="gallery-item" data-cat="event"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilOARnhADuB2LKj00kY1etPZZvfQasgkyfwCPADoT8hKn44cu9mml-tbjgflYETDzGp_cDKUn72JgHhm9bKrYuALqN4AyLlmlpCxLJhAeSyDSKeZM4OlaCt4IjuPFlL0Lo_tDjvLmF-UVX7DNOcjKpd547YEZTEeiuwfVJzS8MCQpm1IrSN-nY31qoEHyD/s16000/DPK%20ppni.jpeg" alt="HIS Implementation" loading="lazy"><div class="gallery-overlay"><p>DPK PPNI Mayapada Hospital Jakarta Selatan</p><span>Event · 2024</span></div></div>
-    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <!-- Pagination Gallery -->
+    <div class="pagination reveal" id="galleryPagination"></div>
   </div>
 </section>
 
@@ -809,13 +726,11 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
 <section id="blog">
   <div class="container">
     <div class="sec-header reveal">
-      <div class="sec-label">Blog & Insights</div>
-      <h2 class="sec-title">Thoughts & Writings</h2>
+      <div class="sec-label">Blog &amp; Insights</div>
+      <h2 class="sec-title">Thoughts &amp; Writings</h2>
       <p class="sec-sub">Perspektif dari persimpangan antara dunia klinis dan teknologi kesehatan — catatan nyata dari lapangan.</p>
     </div>
-    <div class="blog-grid" id="blogGrid">
-      <!-- 3 artikel terbaru dirender otomatis dari posts.js -->
-    </div>
+    <div class="blog-grid" id="blogGrid"></div>
     <div class="blog-view-all reveal">
       <a href="blog.html" class="btn-outline-gold">Lihat Semua Postingan →</a>
     </div>
@@ -838,7 +753,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
           <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-value">South Jakarta, Indonesia</div></div></div>
           <div class="contact-item"><div class="contact-icon">🏥</div><div><div class="contact-label">Current Employer</div><div class="contact-value">Mayapada Hospital Jakarta Selatan</div></div></div>
           <div class="contact-item"><div class="contact-icon">💼</div><div><div class="contact-label">LinkedIn</div><div class="contact-value"><a href="https://linkedin.com/in/fardianarief" target="_blank" style="color:var(--gold)">linkedin.com/in/fardianarief ↗</a></div></div></div>
-          <div class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">WhatsApp</div><div class="contact-value">+62 823-8830-8450</div></div></div>
+          <div class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/6282388308450?text=Halo%20Arief%2C%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20sama." target="_blank" style="color:var(--gold)">+62 8238830 8450 ↗</a></div></div></div>
         </div>
       </div>
       <div class="contact-form reveal">
@@ -873,170 +788,288 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
 
 <script>
 // ══════════════════════════════════════════
-// THEME — auto-detect sistem + toggle manual
+// THEME
 // ══════════════════════════════════════════
 var themeBtn = document.getElementById('themeBtn');
 var html = document.documentElement;
-
-function getCurrentTheme() {
-  return html.getAttribute('data-theme') || 'dark';
-}
-
-function setTheme(t) {
-  html.setAttribute('data-theme', t);
-  themeBtn.textContent = (t === 'dark') ? '🌙' : '☀️';
-  try { sessionStorage.setItem('af-theme', t); } catch(e) {}
-}
-
-// Sinkronisasi ikon dengan tema saat ini
+function getCurrentTheme(){return html.getAttribute('data-theme')||'dark';}
+function setTheme(t){html.setAttribute('data-theme',t);themeBtn.textContent=(t==='dark')?'🌙':'☀️';try{sessionStorage.setItem('af-theme',t);}catch(e){}}
 setTheme(getCurrentTheme());
-
-// Toggle manual saat diklik
-themeBtn.onclick = function() {
-  var next = (getCurrentTheme() === 'dark') ? 'light' : 'dark';
-  setTheme(next);
-};
-
-// Dengarkan perubahan sistem (hanya jika belum ada preferensi tersimpan)
-if (window.matchMedia) {
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-    try {
-      var saved = sessionStorage.getItem('af-theme');
-      if (!saved) setTheme(e.matches ? 'dark' : 'light');
-    } catch(err) {
-      setTheme(e.matches ? 'dark' : 'light');
-    }
-  });
-}
+themeBtn.onclick=function(){setTheme(getCurrentTheme()==='dark'?'light':'dark');};
+if(window.matchMedia){window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(e){try{var s=sessionStorage.getItem('af-theme');if(!s)setTheme(e.matches?'dark':'light');}catch(err){setTheme(e.matches?'dark':'light');}});}
 
 // ══════════════════
 // MOBILE NAV
 // ══════════════════
-var hamburger = document.getElementById('hamburger');
-var mobileNav = document.getElementById('mobileNav');
-hamburger.onclick = function() { mobileNav.classList.toggle('open'); };
-function closeMobile() { mobileNav.classList.remove('open'); }
+var hamburger=document.getElementById('hamburger');
+var mobileNav=document.getElementById('mobileNav');
+hamburger.onclick=function(){mobileNav.classList.toggle('open');};
+function closeMobile(){mobileNav.classList.remove('open');}
 
 // ══════════════════
 // ACTIVE NAV + BACK TO TOP
 // ══════════════════
-var sections = document.querySelectorAll('section[id]');
-var navAs = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', function() {
-  var cur = '';
-  sections.forEach(function(s) { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
-  navAs.forEach(function(a) { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
-  document.getElementById('btt').classList.toggle('visible', window.scrollY > 500);
-}, {passive: true});
+var sections=document.querySelectorAll('section[id]');
+var navAs=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',function(){
+  var cur='';
+  sections.forEach(function(s){if(window.scrollY>=s.offsetTop-90)cur=s.id;});
+  navAs.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
+  document.getElementById('btt').classList.toggle('visible',window.scrollY>500);
+},{passive:true});
 
 // ══════════════════
 // SCROLL REVEAL
 // ══════════════════
-var revObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('revealed'); });
-}, {threshold: 0.1});
-window._revObsIndex = revObs;
-document.querySelectorAll('.reveal').forEach(function(el) { revObs.observe(el); });
+var revObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('revealed');});},{threshold:0.1});
+window._revObsIndex=revObs;
+document.querySelectorAll('.reveal').forEach(function(el){revObs.observe(el);});
 
 // ══════════════════
 // SKILL BARS
 // ══════════════════
-var skillObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) { e.target.style.width = e.isIntersecting ? e.target.dataset.width : '0%'; });
-}, {threshold: 0.5});
-document.querySelectorAll('.skill-fill').forEach(function(f) { f.style.width = '0%'; skillObs.observe(f); });
-
-// ══════════════════
-// CERT FILTER
-// ══════════════════
-function filterCert(cat, btn) {
-  document.querySelectorAll('.cert-tab').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('#certGrid .cert-card[data-cat]').forEach(function(item) {
-    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
-  });
-}
-
-// ══════════════════
-// GALLERY FILTER
-// ══════════════════
-function filterGallery(cat, btn) {
-  document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('.gallery-item[data-cat]').forEach(function(item) {
-    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
-  });
-}
-
-// ══════════════════
-// FORM
-// ══════════════════
-function submitForm() { alert('✅ Pesan terkirim! Arief akan segera menghubungi Anda.'); }
+var skillObs=new IntersectionObserver(function(entries){entries.forEach(function(e){e.target.style.width=e.isIntersecting?e.target.dataset.width:'0%';});},{threshold:0.5});
+document.querySelectorAll('.skill-fill').forEach(function(f){f.style.width='0%';skillObs.observe(f);});
 
 // ══════════════════════════════════════════
-// DOWNLOAD CV
+// CERTIFICATION DATA & PAGINATION
 // ══════════════════════════════════════════
-function downloadCV() {
-  var btn = document.querySelector('.btn-cv');
-  var origHTML = btn.innerHTML;
-  btn.innerHTML = '⏳ Downloading...';
-  btn.disabled = true;
-
-  // Download langsung dari GitHub raw file
-  var url = 'https://raw.githubusercontent.com/fardianarief/me/main/CV_Arief_Fardhiansyah.pdf';
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = 'CV_Arief_Fardhiansyah.pdf';
-  a.target = '_blank';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-
-  setTimeout(function() {
-    btn.innerHTML = origHTML;
-    btn.disabled = false;
-  }, 2000);
-}
-</script>
-
-<!-- Blog Section — dynamic render dari posts.js -->
-<script src="posts.js"></script>
-<script>
-(function(){
-  var grid = document.getElementById('blogGrid');
-  if (!grid || typeof POSTS === 'undefined') return;
-
-  function esc(t) {
-    return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+var CERTS = [
+  {
+    cat:'cert', icon:'📊', status:'Verified', issuer:'Special Skill Indonesia',
+    title:'Data Analyst Certification', date:'Issued 2026 · ID: SSB40E018',
+    link:'https://sertifikat.specialskill.id/sertifikat/view?_token=KL45bDdZyBzSokbv1Cqqdslznlx2rxp2cYhQXGK3&query=SSB40E018',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgyqJrL0aJ2fCjXYPKln-RxyajBRSG0ZkaoQEQNno9749hODYFAGz2fHPgkjm_F3zSFCJX11tk66MaoU_PnhCYm2xWtRGl0A_rcj4O3VuEhmomKnk1i3ErKVRKKPcc9Sb0NjJlH4K2Nq1fRDQb2MbHsVKETkTXI-FlUd_bPc28wng2gioGkKD1PfuQGpHiE/s16000/Data%20Analyst.png',
+    alt:'Data Analyst'
+  },
+  {
+    cat:'cert', icon:'🏢', status:'Quality', issuer:'Makin Ahli',
+    title:'Sistem Manajemen Mutu (ISO 9001:2015)', date:'Issued Feb 2026 · ID: 194/AQ-0Q1/MA/III-2026',
+    link:'', img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikdwy0sePd3oQ1wJSJ4YIepmkOGupDq4mHIWRoJ_jahLeiM2Qx2k8lgvNA7o8HAHPbUgTqRMz7tcKhN0Ooum3f-SNSmHWXMEpFy0rHRmRJRaUvUMcGWOP_iKFjxXxqji7Mq7Ckk3j2FFWt12vCE8IvKqHhOsi3s0zw75hG5O_i-ndDmdSowZ4cj290JT_J/s16000/WhatsApp%20Image%202026-03-02%20at%2014.17.36.jpeg', alt:'ISO 9001:2015'
+  },
+  {
+    cat:'cert', icon:'🏢', status:'Verified', issuer:'Institute of Management, Technology &amp; Finance Portugal',
+    title:'Microsoft Office Specialist : Microsoft Excel Advanced Expert', date:'Issued Nov 2025 · ID: 2660764129MF',
+    link:'https://edu.gtf.pt/admin/tool/certificate/index.php?code=2660764129MF',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHQWcYzgYZZg611yQZC-4XBOPSHGJV0Y4O1XeIFXUIYa10sGDRr_Pl8Wm53hsjgj64yEFjK9APYRIeOGPg18g7JjLZ5vGS29O2jzMuIpSNHFrsc38-sx1I3qllb9jXpX_4enPuqZPCLQzzIJL7LAxHT8PnDVLIA0XN9boA6SaUNyYkOrNDy3bUArif9-39/s16000/Microsoft%20Office%20Specialist.png', alt:'Microsoft Office Specialist'
+  },
+  {
+    cat:'cert', icon:'🏢', status:'Verified', issuer:'Institute of Management, Technology &amp; Finance Portugal',
+    title:'Executive Diploma in Innovation Management', date:'Issued Nov 2025 · ID: 9775046689MF',
+    link:'https://edu.gtf.pt/admin/tool/certificate/index.php?code=9775046689MF',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjT8ham7dGk2yUMENA_aPJXbrQPudsi2HEzH5yAKSZeq8dM_HyahEHbruDP8PJGlMzTf3gTWJBwxi05w-o_rUUdrOXOUOp1Pz6uB2H_lMwH2zwCFSJj2_Yk3CXglvzwUz_1ByEBkotqbAPqiHG9dV5mXE3fR9BqkFzUzp1CKSbJZrX4gEWKr2wNcbfd3sAs/s16000/Innovation%20Management.png', alt:'Innovation Management'
+  },
+  {
+    cat:'cert', icon:'🏢', status:'English', issuer:'GoFLUENT B1',
+    title:'Test Kecakapan Bahasa Inggris', date:'Issued Sep 2025',
+    link:'', img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-VA10ZR8QK1qFFdJkh2dsy2_8-hVPxRPq3qNFAVFIftJrJirDq1_4CSWTfB0mSIaMS6MDDzYsNsrka6F9025n-m3S4xS2AjX5QIBQ2xeBcFLbZfC9Z2sh2im_l60r8G65ag66rbwx_inBKFcciKx_jY66-jRNzVe7MezAdh7HWgj91nap8cB-tjl-e4iM/s16000/GoFluent.png', alt:'GoFluent'
+  },
+  {
+    cat:'cert', icon:'🏢', status:'Risk', issuer:'Institute of Management, Technology &amp; Finance Portugal',
+    title:'Professional Certificate in Risk Management', date:'ID: 4711978814MF',
+    link:'https://edu.gtf.pt/admin/tool/certificate/index.php?code=4711978814MF',
+    img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOVl2d-uOMQzdv_qxcIvmHa7AF0gX7gQYgNPoKKzzBYu2-TDmypy8mg_FueLFElgd03ciPcrM78ZRwF47lSzAQapKFcZF7OHOOhFFF0QC-g2atJ64Y7tmhYIhfs1uTTl_KzvDvV6c5hM_rE_kYdfFiFeDdFvxybit1v-Y0FxBstXSp9CSzWlFZthSR3d0p/s16000/Risk%20Management.png', alt:'Risk Management'
+  },
+  {
+    cat:'cert', icon:'🏢', status:'Nursing', issuer:'KemenKes - Manajemen Luka',
+    title:'PT Solusi Transformasi Persada', date:'Issued Jun 2024',
+    link:'', img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiN7nGc1JHQPdYlSb2SKHrTvj0zrdQPiDAoASvTK0f2biVOs5I58A2_VXb_J8iMQFmkqYXuLGSSDlZRj4hIqM-rIwMtzyqj3NXL1ITz9tN2M1WAmf3iC6YWLSJD9iIFcL6C-eCHmRdyAtpvjMjUqkg0uwUiUP11iT_WfexkcsRqr8p21-wlgyRQpu6bp3Bp/s16000/Manajemen%20Luka.png', alt:'Manajemen Luka'
+  },
+  {
+    cat:'reward', icon:'🏅', status:'Reward', issuer:'Mayapada STAR ⭐',
+    title:'Best Employee — Nursing Division', date:'Tahun 2023 · Internal Recognition',
+    link:'', img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVPDJ1FHuqTnRRF-Bfwo9xFYoKnHkq8Ei2IepQ9qa_d4XdzwrmvcOLWnw4SC8JLGsknqpP9xEZVs2NYnWjigFpBGGgW90HBXGydtdraw9u_MG9IgjZdF81tNkk-rka2nLGeNaYHSzpui23K_tyQFQ970va6zk_TzMYg08NzxFEbcQxqN0hNea8AjWJAaFJ/s16000/mayapada%20star.png', alt:'Best Employee'
+  },
+  {
+    cat:'org', icon:'🏛️', status:'Member', issuer:'DPK PPNI RS Mayapada Jakarta Selatan',
+    title:'Sektor Informasi dan Komunikasi', date:'Since 2022 · Active Member',
+    link:'', img:'https://blogger.googleusercontent.com/img/a/AVvXsEi0FyyzogKwyD_fg-HaXAGj4WppqYsXRP2IaGYi1Uldeh0tJ4sXSHvgjKXjDDwfIRmtRXmxH-rnPtrWJ3_62T4HdFn1Mijxo4DzmX0fNdhAEQp98PQthdfZbP2zNLO7S6TaTlYpyEsAts8zsg7DxlL6oeu8NXhRWBLdw-eZANk01lXekKFF4iQYMjJeHsNJ=s16000', alt:'PPNI'
   }
+];
 
-  // Tampilkan 3 artikel terbaru
-  var latest = POSTS.slice(0, 3);
-  grid.innerHTML = latest.map(function(p) {
-    var tagsHtml = p.tags.slice(0,2).map(function(t){ return '<span class="blog-tag">'+t+'</span>'; }).join('');
+// Certification Pagination
+var certCurrentPage = 1;
+var certPerPage = 3;
+var certCurrentFilter = 'all';
+
+function getCertFiltered() {
+  if (certCurrentFilter === 'all') return CERTS;
+  return CERTS.filter(function(c){ return c.cat === certCurrentFilter; });
+}
+
+function renderCertGrid() {
+  var filtered = getCertFiltered();
+  var totalPages = Math.ceil(filtered.length / certPerPage);
+  if (certCurrentPage > totalPages) certCurrentPage = 1;
+  var start = (certCurrentPage - 1) * certPerPage;
+  var pageItems = filtered.slice(start, start + certPerPage);
+  var grid = document.getElementById('certGrid');
+  grid.innerHTML = pageItems.map(function(c){
     return [
-      '<div class="blog-card reveal">',
-        '<div class="blog-card-thumb">',
-          '<img src="'+p.image+'" alt="'+esc(p.imageAlt)+'" loading="lazy">',
-          '<span class="blog-card-cat">'+p.category+'</span>',
-        '</div>',
-        '<div class="blog-card-body">',
-          '<div class="blog-card-meta"><span>'+p.date+'</span> · '+p.readTime+'</div>',
-          '<div class="blog-card-title">'+esc(p.title)+'</div>',
-          '<p class="blog-card-excerpt">'+p.excerpt+'</p>',
-          '<div class="blog-card-footer">',
-            '<div class="blog-card-tags">'+tagsHtml+'</div>',
-            '<a href="'+p.slug+'" class="blog-read-btn">Read More →</a>',
-          '</div>',
+      '<div class="cert-card" data-cat="'+c.cat+'">',
+        '<div class="cert-card-img"><img src="'+c.img+'" alt="'+c.alt+'" loading="lazy"></div>',
+        '<div class="cert-card-body">',
+          '<div class="cert-card-top"><div class="cert-icon">'+c.icon+'</div><div class="cert-status">'+c.status+'</div></div>',
+          '<div class="cert-issuer">'+c.issuer+'</div>',
+          '<div class="cert-title">'+c.title+'</div>',
+          '<div class="cert-date">'+c.date+'</div>',
+          c.link ? '<a class="cert-link" href="'+c.link+'" target="_blank">View Credential →</a>' : '',
         '</div>',
       '</div>'
     ].join('');
   }).join('');
+  renderCertPagination(filtered.length, totalPages);
+}
 
-  // Re-observe new reveal elements
-  document.querySelectorAll('#blogGrid .reveal').forEach(function(el){
-    if (window._revObsIndex) window._revObsIndex.observe(el);
-  });
+function renderCertPagination(total, totalPages) {
+  var pg = document.getElementById('certPagination');
+  if (totalPages <= 1) { pg.innerHTML = ''; return; }
+  var html = '';
+  // Prev
+  html += '<button class="page-arrow" '+(certCurrentPage===1?'disabled':'')+' onclick="certGoPage('+(certCurrentPage-1)+')">&#8592;</button>';
+  // Page numbers
+  for (var i = 1; i <= totalPages; i++) {
+    html += '<button class="page-btn'+(certCurrentPage===i?' active':'')+'" onclick="certGoPage('+i+')">'+i+'</button>';
+  }
+  // Next
+  html += '<button class="page-arrow" '+(certCurrentPage===totalPages?'disabled':'')+' onclick="certGoPage('+(certCurrentPage+1)+')">&#8594;</button>';
+  // Counter
+  var start = (certCurrentPage-1)*certPerPage+1;
+  var end = Math.min(certCurrentPage*certPerPage, total);
+  html += '<span class="page-counter">'+start+'–'+end+' / '+total+'</span>';
+  pg.innerHTML = html;
+}
+
+function certGoPage(p) {
+  certCurrentPage = p;
+  renderCertGrid();
+  document.getElementById('certification').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function filterCert(cat, btn) {
+  document.querySelectorAll('.cert-tab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  certCurrentFilter = cat;
+  certCurrentPage = 1;
+  renderCertGrid();
+}
+
+// Init certs
+renderCertGrid();
+
+// ══════════════════════════════════════════
+// GALLERY DATA & PAGINATION
+// ══════════════════════════════════════════
+var GALLERY = [
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxm8gPKbnLjytmHn4m3wNHwFVWdve-d-pfn_bZsCKloaF5zM_Cgba0OHBq8CPXxCitEylhLNhJsGFdD5My3y8gGFW0Q7Xyi2WlVM8Ip9_KsBidqyhKwsfm27pRd-4fmKVZnrnBb0YT-aQZhNd9Pi6IBCZT0Q0XjsFtAhvN6rqX7XOM32OHK8dS-pyHVM7X/s16000/1000111553.jpg', title:'Simulation HIS to Nuclear Medicine 2', year:'Work · 2026' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsPSSbof0vVS_grnWevqGhKx5P2mTrx6TTqZdn6ECO-x9ga21qt4RuIyFm_CS6QJG4RmZaa2T61z_9D9p5DDYG-q1zP-et5FcllDbiNVTpSB-mbennH2Ff2AuwmtPg0bTnDrzrbXu5IGHq4TbReS3gI6qmHIH35ZSverStz6G/s16000/1000111550.jpg', title:'Simulation HIS to Nuclear Medicine 1', year:'Work · 2026' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4M871o8i-0bA9mp1YjzEtt4bEO8E7PVnUrhZFB2DytVwOfdvn5qeMMknpJ5jMyJihKEDG5IqSx8BjXUV9A9zv0XBUnJNF5ijdZKAJCS0jy4JB_uHDSHBD3wY6yem8FGmblQE3apesW5vtrOluEfeJIVGcsgyrj0_7VvbcR4-BcS4wqlEWYquIncb-hmKY/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.05%20(1).jpeg', title:'HIS Training New user Jan 2026', year:'Work · 2026' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg', title:'HIS Training New User', year:'Work · 2025' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicQviH8UjWRSXpXMtIIFJQSqkFdFyX6G9_bYVpvRSLc6QzrggQ3HPW2WUes1ePhxkH6tgq4wYuh7pC5p-bOuZ9CAYj3668PpfVaBjsBpVl1ToshoPEUqHYev59uSUA4jJ9k9vV2oTF9OXErarMJTZboerbeSiwt178om7p5qM7-yr5kJhd6tdIwzn7z9ty/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.30.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcH6hyePdxVoGylvvSfoGozTN9crgcpr9XIwkvE8Ked02ntI5e0f-Al_-d801qbjEvzdCZWxOSVn33I2vP3_6MqrTsysyovlfezmCWXsBK0gSCWD3i1ltmTaJHgWnLMADGvO99LoJvgiEBLanhHk-Reyhnh0JkaPuNV15v8uums0FYz67hsCvs6DBiyAko/s16000/wegrfngh.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvFo6Q9PTVBFkUk5DZz138hIa4MDlCcqyQs0nUNuzEWmYZEfVRdiMk_H2Bm60vZldY_YHuYyIZVXAKElcgxgBAT4hwEaGDKDcmMetxXzTWzLdGRScfbZ8CTvmtCIBlFF2ILBKLlNUVBUlB8qg0omLIXlT0VZeAnW4kUf80tUREFYHe8b4t6Yja-gQBeKzo/s16000/WhatsApp%20Image%202026-02-23%20aawfawft%2019.48.05.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJvsi0a1Dhyphenhyphen_ej6qxJWyTeCMJpEI3VF7A5tyXEYS043k1EADmox4iv5swQdkuqEEVf1RuN-XM5QRt3vG_9EKC-pE5jJED7LzXo-W28wg8LpIx82NXl8SAUEYBD4V-25ojoktm0kJuLKIJt2UzpA_mhr_tdiKCCEz6gJQ3tLJYWYStJoVT_JFT7ICrcpINf/s16000/Leadership%20round.jpg', title:'Leadership round to Operational', year:'Work · 2025' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9Sy9Sg0GG28BPoIjnvW8ErCxxATYGspYia9N8aY566OR6ZGz5DMsb_8WkvwvQhF6NrPi_hXDUmYbcbuG2xtUGX9R_rh-d7_XMeH5HgfK7Ba_Qrmh7Z0sz311g_uhcgX3Kh5h-wX84Prmp2ewuxyBGtl4Os-jDHNb3QMbn4O9w_D3EZ9XoEjBs0LfAOHIm/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.31.jpeg', title:'HIS Training New user Nov 2025', year:'Work · 2025' },
+  { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbJVLQbGu7A6-F4ut3kCyYJgr88vJ_2JT79lSORspvuQWQ5fun6htrG6_eFkU91RF9g5zpG7mDyNkdpZOS44ZmpVw_yXQrIwcOBoTF0nIL2oc-92RlIczyjnzX6tFVDOEevLkINcA0JkfQMleHThKYLYutRPKGCLRlgj7Ff7x8LC5GyomC9i9bBAs55G52/s16000/JCI%201.jpg', title:'Re Acredited Internal JCI International', year:'Event · 2025' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwPxXlCVnq1rQOkPIvc4Yt6GzyX1siNkmitFcAmFwp2PAOmf0GGYH6nURHWoHBhWC8nyTqfBYvNSJ2rRy_j_mbUet8lojmmh6gj8CKEgsnHWrUSBWuW8FYHMdvNpaxRP-zkHENOJj3eU3UubeTPPGsc9DDWR4l41aJzwCs8t0XcSjPSZbKuVyQsoBV9o27/s16000/training%20HIS%201.jpg', title:'HIS End User Training 2', year:'Work · 2024' },
+  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCZlS8WcJ7mNQ9vEEBPztowhGMTs6ZctT2h2LTe0xejryn6dNnJts_caUiOdVd4e533ml4je-MU8RfPHVazqSFqmPYRbS3fF8gJAQHxCUBOq52fX-5-qFQfJt3sXfkp9BtppEPFXcKtyNj8I6uzhnfVPi3-k-YaFaBGfdB3QuAPa3aCUL0ZEQkHAjoFuwo/s16000/training%20HIS%202.jpg', title:'HIS End User Training 1', year:'Work · 2024' },
+  { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdvK7Uru9xpyx7qJk9Pc9oEDFSZdCaxHwilYj7ZMfZodgQDSCsVDHN1YzyjiWxvbdmqAbQO7mq1xNS0vaArM-dxhaGE6smTgaSRNZBTXlCaUIs8OfyUuqTpe9uUm9TFf3j61KZ9ejuw_VL-Nv6pgxkg-biwoAprs0M2uBNBcVx6GwZwHQrC8U9gxVLb6Mm/s16000/Amazing%20race.jpeg', title:'Amazing Race Mayapada Hospital', year:'Event · 2024' },
+  { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilOARnhADuB2LKj00kY1etPZZvfQasgkyfwCPADoT8hKn44cu9mml-tbjgflYETDzGp_cDKUn72JgHhm9bKrYuALqN4AyLlmlpCxLJhAeSyDSKeZM4OlaCt4IjuPFlL0Lo_tDjvLmF-UVX7DNOcjKpd547YEZTEeiuwfVJzS8MCQpm1IrSN-nY31qoEHyD/s16000/DPK%20ppni.jpeg', title:'DPK PPNI Mayapada Hospital Jakarta Selatan', year:'Event · 2024' }
+];
+
+var galleryCurrentPage = 1;
+var galleryPerPage = 12;
+var galleryCurrentFilter = 'all';
+
+function getGalleryFiltered() {
+  if (galleryCurrentFilter === 'all') return GALLERY;
+  return GALLERY.filter(function(g){ return g.cat === galleryCurrentFilter; });
+}
+
+function renderGalleryGrid() {
+  var filtered = getGalleryFiltered();
+  var totalPages = Math.ceil(filtered.length / galleryPerPage);
+  if (galleryCurrentPage > totalPages) galleryCurrentPage = 1;
+  var start = (galleryCurrentPage - 1) * galleryPerPage;
+  var pageItems = filtered.slice(start, start + galleryPerPage);
+  var grid = document.getElementById('galleryGrid');
+  grid.innerHTML = pageItems.map(function(g){
+    return [
+      '<div class="gallery-item" data-cat="'+g.cat+'">',
+        '<img src="'+g.src+'" alt="'+g.title+'" loading="lazy">',
+        '<div class="gallery-overlay"><p>'+g.title+'</p><span>'+g.year+'</span></div>',
+      '</div>'
+    ].join('');
+  }).join('');
+  renderGalleryPagination(filtered.length, totalPages);
+}
+
+function renderGalleryPagination(total, totalPages) {
+  var pg = document.getElementById('galleryPagination');
+  if (totalPages <= 1) { pg.innerHTML = ''; return; }
+  var html = '';
+  html += '<button class="page-arrow" '+(galleryCurrentPage===1?'disabled':'')+' onclick="galleryGoPage('+(galleryCurrentPage-1)+')">&#8592;</button>';
+  for (var i = 1; i <= totalPages; i++) {
+    html += '<button class="page-btn'+(galleryCurrentPage===i?' active':'')+'" onclick="galleryGoPage('+i+')">'+i+'</button>';
+  }
+  html += '<button class="page-arrow" '+(galleryCurrentPage===totalPages?'disabled':'')+' onclick="galleryGoPage('+(galleryCurrentPage+1)+')">&#8594;</button>';
+  var start = (galleryCurrentPage-1)*galleryPerPage+1;
+  var end = Math.min(galleryCurrentPage*galleryPerPage, total);
+  html += '<span class="page-counter">'+start+'–'+end+' / '+total+'</span>';
+  pg.innerHTML = html;
+}
+
+function galleryGoPage(p) {
+  galleryCurrentPage = p;
+  renderGalleryGrid();
+  document.getElementById('gallery').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function filterGallery(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  galleryCurrentFilter = cat;
+  galleryCurrentPage = 1;
+  renderGalleryGrid();
+}
+
+// Init gallery
+renderGalleryGrid();
+
+// ══════════════════
+// FORM
+// ══════════════════
+function submitForm(){alert('✅ Pesan terkirim! Arief akan segera menghubungi Anda.');}
+
+// ══════════════════════════════════════════
+// DOWNLOAD CV
+// ══════════════════════════════════════════
+function downloadCV(){
+  var btn=document.querySelector('.btn-cv');
+  var origHTML=btn.innerHTML;
+  btn.innerHTML='⏳ Downloading...';
+  btn.disabled=true;
+  var url='https://raw.githubusercontent.com/fardianarief/me/main/CV_Arief_Fardhiansyah.pdf';
+  var a=document.createElement('a');
+  a.href=url;a.download='CV_Arief_Fardhiansyah.pdf';a.target='_blank';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){btn.innerHTML=origHTML;btn.disabled=false;},2000);
+}
+</script>
+
+<!-- Blog Section -->
+<script src="posts.js"></script>
+<script>
+(function(){
+  var grid=document.getElementById('blogGrid');
+  if(!grid||typeof POSTS==='undefined')return;
+  function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  var latest=POSTS.slice(0,3);
+  grid.innerHTML=latest.map(function(p){
+    var tagsHtml=p.tags.slice(0,2).map(function(t){return '<span class="blog-tag">'+t+'</span>';}).join('');
+    return ['<div class="blog-card reveal">','<div class="blog-card-thumb">','<img src="'+p.image+'" alt="'+esc(p.imageAlt)+'" loading="lazy">','<span class="blog-card-cat">'+p.category+'</span>','</div>','<div class="blog-card-body">','<div class="blog-card-meta"><span>'+p.date+'</span> · '+p.readTime+'</div>','<div class="blog-card-title">'+esc(p.title)+'</div>','<p class="blog-card-excerpt">'+p.excerpt+'</p>','<div class="blog-card-footer">','<div class="blog-card-tags">'+tagsHtml+'</div>','<a href="'+p.slug+'" class="blog-read-btn">Read More →</a>','</div>','</div>','</div>'].join('');
+  }).join('');
+  document.querySelectorAll('#blogGrid .reveal').forEach(function(el){if(window._revObsIndex)window._revObsIndex.observe(el);});
 })();
 </script>
 </body>
