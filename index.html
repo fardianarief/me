@@ -232,7 +232,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 
 /* CONTACT */
 #contact{background:var(--bg2)}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:56px;align-items:start;max-width:640px}
 .contact-info-title{font-size:1.5rem;font-weight:700;margin-bottom:14px}
 .contact-info p{font-size:0.9rem;color:var(--text2);line-height:1.8;margin-bottom:32px}
 .contact-items{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
@@ -298,8 +298,77 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
 .btn-outline-gold:hover{background:var(--gold);color:#fff}
 [data-theme="dark"] .btn-outline-gold:hover{color:var(--bg)}
 
+/* TESTIMONIAL */
+#testimonial{background:var(--bg2)}
+.testi-display{}
+.testi-display-title{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.testi-display-title::before{content:'';width:28px;height:1px;background:var(--gold)}
+.testi-list{display:flex;flex-direction:column;gap:16px}
+.testi-card{background:var(--surface);border:1px solid var(--border);padding:24px;transition:border-color var(--tr);position:relative}
+.testi-card:hover{border-color:rgba(201,168,76,0.3)}
+.testi-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:3rem;color:var(--gold);opacity:0.25;position:absolute;top:8px;left:16px;line-height:1}
+.testi-card-text{font-size:0.88rem;color:var(--text2);line-height:1.8;margin-bottom:14px;padding-top:12px}
+.testi-card-footer{display:flex;align-items:center;justify-content:space-between}
+.testi-card-author{display:flex;flex-direction:column;gap:2px}
+.testi-card-name{font-size:0.82rem;font-weight:700;color:var(--text)}
+.testi-card-instansi{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em}
+.testi-stars{color:gold;font-size:0.88rem;letter-spacing:2px}
+.testi-loading{font-size:0.82rem;color:var(--text3);text-align:center;padding:32px 0}
+.testi-empty{font-size:0.82rem;color:var(--text3);text-align:center;padding:32px 0;border:1px dashed var(--border)}
+
+/* Testimonial Form */
+.testimonial-form{background:var(--surface);border:1px solid var(--border);padding:32px}
+.testimonial-form h2{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;margin-bottom:24px}
+.testimonial-form label{display:block;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:7px;margin-top:14px}
+.testimonial-form label:first-of-type{margin-top:0}
+.testimonial-form input[type="text"],.testimonial-form textarea{width:100%;padding:11px 13px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:'Lato',sans-serif;font-size:0.88rem;transition:border-color var(--tr);outline:none}
+.testimonial-form input[type="text"]:focus,.testimonial-form textarea:focus{border-color:var(--gold)}
+.testimonial-form textarea{resize:vertical;min-height:100px}
+.rating{display:flex;flex-direction:row-reverse;justify-content:flex-end;margin-bottom:4px}
+.rating input{display:none}
+.rating label{font-size:28px;color:var(--text3);cursor:pointer;padding:5px;transition:color var(--tr)}
+.rating input:checked ~ label{color:gold}
+.rating label:hover,.rating label:hover ~ label{color:gold}
+.testi-display{width:100%}
+.testi-list-wrap{width:100%}
+.btn-testi-open{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);font-family:'Lato',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all var(--tr)}
+.btn-testi-open:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .btn-testi-open:hover{color:var(--bg)}
+
+/* MODAL */
+.testi-modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.testi-modal-overlay.open{opacity:1;pointer-events:all}
+.testi-modal-box{background:var(--surface);border:1px solid var(--border);width:100%;max-width:520px;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;transform:translateY(24px);transition:transform 0.3s ease}
+.testi-modal-overlay.open .testi-modal-box{transform:translateY(0)}
+.testi-modal-close{position:absolute;top:16px;right:16px;background:none;border:1px solid var(--border);color:var(--text2);width:32px;height:32px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.testi-modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.testi-modal-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.testi-modal-sub{font-size:0.82rem;color:var(--text2);margin-bottom:24px}
+.testi-modal-label{display:block;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:7px;margin-top:16px}
+.testi-modal-input{width:100%;padding:11px 13px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:'Lato',sans-serif;font-size:0.88rem;outline:none;transition:border-color var(--tr)}
+.testi-modal-input:focus{border-color:var(--gold)}
+.testi-modal-textarea{width:100%;padding:11px 13px;background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:'Lato',sans-serif;font-size:0.88rem;outline:none;resize:vertical;min-height:110px;transition:border-color var(--tr)}
+.testi-modal-textarea:focus{border-color:var(--gold)}
+
+/* RATING SVG */
+.rating{display:flex;flex-direction:row;gap:6px;margin-top:8px;margin-bottom:4px;align-items:center}
+.rating input{display:none}
+.star-btn{background:none;border:none;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center;width:36px;height:36px}
+.star-btn svg{display:block;width:26px;height:26px;transition:fill 0.2s,stroke 0.2s}
+.star-btn svg .star-path{fill:none;stroke:var(--text3);stroke-width:1.5}
+.star-btn.on svg .star-path{fill:gold;stroke:gold}
+
+.testi-submit-btn{width:100%;padding:13px;border:1.5px solid var(--gold);background:transparent;color:var(--gold);font-family:'Lato',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all var(--tr);margin-top:20px}
+.testi-submit-btn:hover{background:var(--gold);color:#fff}
+[data-theme="dark"] .testi-submit-btn:hover{color:var(--bg)}
+.testi-submit-btn:disabled{opacity:0.5;cursor:not-allowed}
+.testi-msg{font-size:0.82rem;text-align:center;margin-top:12px;padding:10px;border:1px solid var(--border)}
+.testi-msg.success{border-color:rgba(37,211,102,0.4);color:#25d366;background:rgba(37,211,102,0.06)}
+.testi-msg.error{border-color:rgba(220,50,50,0.4);color:#e05555;background:rgba(220,50,50,0.06)}
+
 /* RESPONSIVE */
 @media(max-width:960px){
+  .testi-layout{grid-template-columns:1fr}
   .hero-wrap{grid-template-columns:1fr;gap:40px;text-align:center;padding-top:calc(var(--nav-h) + 40px);padding-bottom:60px}
   .hero-label{justify-content:center}
   .hero-divider{margin:0 auto 24px}
@@ -347,6 +416,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
       <a href="#gallery">Gallery</a>
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
+      <a href="#testimonial">Kata Mereka</a>
       <a href="https://fardianarief.site/service.html">Service</a>
     </div>
     <div class="nav-actions">
@@ -365,6 +435,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
   <a href="#gallery" onclick="closeMobile()">Gallery</a>
   <a href="#blog" onclick="closeMobile()">Blog</a>
   <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#testimonial" onclick="closeMobile()">Testimoni</a>
 </div>
 
 <!-- HERO -->
@@ -766,17 +837,61 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
           <div class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/6282388308450?text=Halo%20Arief%2C%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20sama." target="_blank" style="color:var(--gold)">+62 8238830 8450 ↗</a></div></div></div>
         </div>
       </div>
-      <div class="contact-form reveal">
-        <h3>Send a Message</h3>
-        <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" placeholder="Your name"></div>
-        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your@email.com"></div>
-        <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="What is this about?"></div>
-        <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" placeholder="Tell me more..."></textarea></div>
-        <button class="form-submit" onclick="submitForm()">Send Message</button>
-      </div>
     </div>
   </div>
 </section>
+<!-- KATA MEREKA -->
+<section id="testimonial">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Kata Mereka</div>
+      <h2 class="sec-title">Kata Mereka</h2>
+      <p class="sec-sub">Kesan dan rekomendasi dari rekan kerja, kolega, dan mitra yang pernah bekerja bersama saya.</p>
+    </div>
+
+    <!-- Tampilan Rekomendasi -->
+    <div class="testi-display reveal">
+      <div class="testi-list-wrap">
+        <div class="testi-list" id="testiList">
+          <div class="testi-loading">⏳ Memuat rekomendasi...</div>
+        </div>
+        <div class="pagination" id="testiPagination" style="margin-top:28px"></div>
+      </div>
+    </div>
+
+    <!-- Tombol buka popup -->
+    <div style="text-align:center;margin-top:40px" class="reveal">
+      <button class="btn-testi-open" onclick="openTestiModal()">✍ Tulis Kesan &amp; Rekomendasi</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL FORM REKOMENDASI -->
+<div id="testiModal" class="testi-modal-overlay" onclick="closeTestiModal(event)">
+  <div class="testi-modal-box">
+    <button class="testi-modal-close" onclick="closeTestiModalDirect()">✕</button>
+    <h2 class="testi-modal-title">Tulis Kesan &amp; Rekomendasi</h2>
+    <p class="testi-modal-sub">Bagikan pengalaman dan pandangan Anda bekerja bersama Arief</p>
+    <label class="testi-modal-label">Nama <span style="color:var(--gold)">*</span></label>
+    <input type="text" id="testi_nama" placeholder="Nama lengkap Anda" class="testi-modal-input">
+    <label class="testi-modal-label">Instansi / Unit</label>
+    <input type="text" id="testi_instansi" placeholder="Contoh: Mayapada Hospital" class="testi-modal-input">
+    <label class="testi-modal-label">Kesan &amp; Rekomendasi <span style="color:var(--gold)">*</span></label>
+    <textarea id="testi_pesan" placeholder="Tuliskan pengalaman atau rekomendasi Anda..." class="testi-modal-textarea"></textarea>
+    <label class="testi-modal-label">Rating</label>
+    <input type="hidden" id="ratingValue" value="5">
+    <div class="rating" id="starRating">
+      <button type="button" class="star-btn on" data-val="1" onclick="setRating(1)"><svg viewBox="0 0 24 24"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+      <button type="button" class="star-btn on" data-val="2" onclick="setRating(2)"><svg viewBox="0 0 24 24"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+      <button type="button" class="star-btn on" data-val="3" onclick="setRating(3)"><svg viewBox="0 0 24 24"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+      <button type="button" class="star-btn on" data-val="4" onclick="setRating(4)"><svg viewBox="0 0 24 24"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+      <button type="button" class="star-btn on" data-val="5" onclick="setRating(5)"><svg viewBox="0 0 24 24"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+    </div>
+    <button class="testi-submit-btn" id="testiSubmitBtn" onclick="submitTestimoni()">Kirim Rekomendasi</button>
+    <div class="testi-msg" id="testiMsg" style="display:none"></div>
+  </div>
+</div>
 
 <footer>
   <div class="container">
@@ -787,7 +902,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
       <div class="footer-links">
         <a href="#home">Home</a><a href="#about">About</a><a href="#experience">Experience</a>
         <a href="#certification">Certification</a><a href="#project">Projects</a>
-        <a href="#gallery">Gallery</a><a href="#blog">Blog</a><a href="#contact">Contact</a>
+        <a href="#gallery">Gallery</a><a href="#blog">Blog</a><a href="#contact">Contact</a><a href="#testimonial">Kata Mereka</a>
       </div>
       <div class="footer-copy">© 2025 M. Arief Fardhiansyah · Crafted for healthcare innovation</div>
     </div>
@@ -1047,9 +1162,190 @@ function filterGallery(cat, btn) {
 // Init gallery
 renderGalleryGrid();
 
-// ══════════════════
+// ══════════════════════════════════════════
+// TESTIMONIAL — Google Sheets Integration
+// ══════════════════════════════════════════
+// PANDUAN SETUP:
+// 1. Buka Google Sheets baru → beri nama "Testimoni Portfolio"
+// 2. Buat header di baris 1: Timestamp | Nama | Instansi | Pesan | Rating
+// 3. Buka Extensions → Apps Script → paste kode di bawah ini → Save & Deploy as Web App
+//    (Pilih "Anyone" bisa akses, copy Web App URL-nya)
+// 4. Ganti nilai GSHEET_URL di bawah dengan URL tersebut
+
+var GSHEET_URL = 'https://script.google.com/macros/s/AKfycbzLmJMsB0QMPo9kbIYZ-bK31PP1-LhFQQL7XpR3ei2QvqCKjmtmbKtp0veaRtRGmy_9kA/exec';
+
+// ── MODAL ──
+function openTestiModal() {
+  document.getElementById('testiModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeTestiModal(e) {
+  if (e.target === document.getElementById('testiModal')) closeTestiModalDirect();
+}
+function closeTestiModalDirect() {
+  document.getElementById('testiModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeTestiModalDirect();
+});
+
+// ── STAR RATING SVG ──
+function setRating(val) {
+  document.getElementById('ratingValue').value = val;
+  document.querySelectorAll('#starRating .star-btn').forEach(function(btn) {
+    btn.classList.toggle('on', parseInt(btn.dataset.val) <= val);
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('#starRating .star-btn').forEach(function(btn) {
+    btn.addEventListener('mouseenter', function() {
+      var v = parseInt(btn.dataset.val);
+      document.querySelectorAll('#starRating .star-btn').forEach(function(b) {
+        b.classList.toggle('on', parseInt(b.dataset.val) <= v);
+      });
+    });
+    btn.addEventListener('mouseleave', function() {
+      setRating(parseInt(document.getElementById('ratingValue').value) || 5);
+    });
+  });
+  setRating(5);
+});
+
+// ── SUBMIT ──
+function submitTestimoni() {
+  var nama = document.getElementById('testi_nama').value.trim();
+  var instansi = document.getElementById('testi_instansi').value.trim();
+  var pesan = document.getElementById('testi_pesan').value.trim();
+  var rating = document.getElementById('ratingValue').value || '5';
+
+  if (!nama || !pesan) {
+    showTestiMsg('Nama dan Rekomendasi wajib diisi.', 'error');
+    return;
+  }
+
+  var btn = document.getElementById('testiSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Mengirim...';
+
+  var params = new URLSearchParams();
+  params.append('nama', nama);
+  params.append('instansi', instansi);
+  params.append('pesan', pesan);
+  params.append('rating', rating);
+
+  fetch(GSHEET_URL, { method: 'POST', body: params, mode: 'no-cors' })
+    .then(function() {
+      showTestiMsg('✅ Terima kasih! Rekomendasi Anda telah dikirim.', 'success');
+      document.getElementById('testi_nama').value = '';
+      document.getElementById('testi_instansi').value = '';
+      document.getElementById('testi_pesan').value = '';
+      setRating(5);
+      setTimeout(function() {
+        closeTestiModalDirect();
+        loadTestimoni();
+      }, 2000);
+    })
+    .catch(function() {
+      showTestiMsg('Gagal mengirim. Periksa koneksi Anda.', 'error');
+    })
+    .finally(function() {
+      btn.disabled = false;
+      btn.textContent = 'Kirim Rekomendasi';
+    });
+}
+
+function showTestiMsg(msg, type) {
+  var el = document.getElementById('testiMsg');
+  el.textContent = msg;
+  el.className = 'testi-msg ' + type;
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display = 'none'; }, 5000);
+}
+
+// ── PAGINATION ──
+var testiAllData = [];
+var testiCurrentPage = 1;
+var testiPerPage = 3;
+
+function loadTestimoni() {
+  fetch(GSHEET_URL + '?action=get')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      if (!data.data || data.data.length === 0) {
+        document.getElementById('testiList').innerHTML = '<div class="testi-empty">Belum ada rekomendasi. Jadilah yang pertama! 🙌</div>';
+        document.getElementById('testiPagination').innerHTML = '';
+        return;
+      }
+      testiAllData = data.data;
+      testiCurrentPage = 1;
+      renderTestiPage();
+    })
+    .catch(function(){
+      document.getElementById('testiList').innerHTML = '<div class="testi-empty">Gagal memuat rekomendasi.</div>';
+      document.getElementById('testiPagination').innerHTML = '';
+    });
+}
+
+function renderTestiPage() {
+  var total = testiAllData.length;
+  var totalPages = Math.ceil(total / testiPerPage);
+  var start = (testiCurrentPage - 1) * testiPerPage;
+  var pageItems = testiAllData.slice(start, start + testiPerPage);
+  var list = document.getElementById('testiList');
+
+  list.innerHTML = pageItems.map(function(t){
+    var stars = '';
+    var r = parseInt(t.rating) || 5;
+    for (var i = 0; i < 5; i++) stars += (i < r ? '★' : '☆');
+    return [
+      '<div class="testi-card reveal">',
+        '<div class="testi-card-text">'+escHTML(t.pesan)+'</div>',
+        '<div class="testi-card-footer">',
+          '<div class="testi-card-author">',
+            '<div class="testi-card-name">'+escHTML(t.nama)+'</div>',
+            t.instansi ? '<div class="testi-card-instansi">'+escHTML(t.instansi)+'</div>' : '',
+          '</div>',
+          '<div class="testi-stars">'+stars+'</div>',
+        '</div>',
+      '</div>'
+    ].join('');
+  }).join('');
+
+  document.querySelectorAll('#testiList .reveal').forEach(function(el){ revObs.observe(el); });
+  renderTestiPagination(total, totalPages);
+}
+
+function renderTestiPagination(total, totalPages) {
+  var pg = document.getElementById('testiPagination');
+  if (totalPages <= 1) { pg.innerHTML = ''; return; }
+  var html = '';
+  html += '<button class="page-arrow" '+(testiCurrentPage===1?'disabled':'')+' onclick="testiGoPage('+(testiCurrentPage-1)+')">&#8592;</button>';
+  for (var i = 1; i <= totalPages; i++) {
+    html += '<button class="page-btn'+(testiCurrentPage===i?' active':'')+'" onclick="testiGoPage('+i+')">'+i+'</button>';
+  }
+  html += '<button class="page-arrow" '+(testiCurrentPage===totalPages?'disabled':'')+' onclick="testiGoPage('+(testiCurrentPage+1)+')">&#8594;</button>';
+  var s = (testiCurrentPage-1)*testiPerPage+1;
+  var e = Math.min(testiCurrentPage*testiPerPage, total);
+  html += '<span class="page-counter">'+s+'–'+e+' / '+total+'</span>';
+  pg.innerHTML = html;
+}
+
+function testiGoPage(p) {
+  testiCurrentPage = p;
+  renderTestiPage();
+  document.getElementById('testimonial').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function escHTML(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+loadTestimoni();
+
+// ══════════════════════════════════════════
 // FORM
-// ══════════════════
+// ══════════════════════════════════════════
 function submitForm(){alert('script sedang diperbaiki, silahkan melalui chat whatsapp');}
 
 // ══════════════════════════════════════════
