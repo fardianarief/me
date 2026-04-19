@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare Apps — M. Arief Fardhiansyah</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="dark"]{
+  --bg:#0d0f12;--bg2:#141619;--bg3:#1a1d22;--surface:#1f2228;
+  --border:rgba(255,255,255,0.06);--text:#e6e8ec;--text2:#8c95a6;--text3:#52596a;
+  --gold:#c9a84c;--gold2:#e8c97a;--gold-dim:rgba(201,168,76,0.12);
+  --nav-bg:rgba(13,15,18,0.93);--nav-h:68px;
+  --shadow:0 12px 48px rgba(0,0,0,0.55);--tr:0.3s ease;
+  --teal:#1a8f72;--teal-dim:rgba(26,143,114,0.1);
+  --red-dim:rgba(200,60,60,0.1);--red:#d45050;
+}
+[data-theme="light"]{
+  --bg:#dddad3;--bg2:#d4d0c8;--bg3:#cac6be;--surface:#e2dfd8;
+  --border:rgba(0,0,0,0.12);--text:#1a1714;--text2:#3d372e;--text3:#6b6358;
+  --gold:#7a5a0a;--gold2:#9a7214;--gold-dim:rgba(122,90,10,0.08);
+  --nav-bg:rgba(212,208,200,0.96);--shadow:0 12px 48px rgba(0,0,0,0.14);
+  --teal:#0d6e57;--teal-dim:rgba(13,110,87,0.08);
+  --red-dim:rgba(170,40,40,0.08);--red:#b03030;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
+h1,h2,h3,h4,h5{font-family:'Playfair Display',serif;line-height:1.15}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:0 24px;height:100%}
+.nav-logo{display:flex;align-items:center;gap:11px}
+.logo-mark{width:36px;height:36px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold)}
+.logo-name{font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem;letter-spacing:0.03em}
+.nav-back{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);transition:color var(--tr)}
+.nav-back:hover{color:var(--gold)}
+.theme-btn{width:38px;height:38px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all var(--tr);border-radius:4px}
+.theme-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.page-hero{padding:calc(var(--nav-h) + 72px) 0 64px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 900px 400px at 50% 80%,rgba(201,168,76,0.05) 0%,transparent 65%);pointer-events:none}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:28px}
+.breadcrumb a{color:var(--gold);transition:opacity var(--tr)}
+.breadcrumb a:hover{opacity:0.75}
+.breadcrumb span{color:var(--text3)}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;font-size:0.68rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.hero-badge::before{content:'';width:28px;height:1px;background:var(--gold)}
+.hero-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;margin-bottom:14px;line-height:1.1}
+.hero-title em{color:var(--gold);font-style:normal}
+.hero-subtitle{font-size:1rem;color:var(--text2);line-height:1.8;max-width:600px;margin-bottom:36px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.hstat{display:flex;flex-direction:column;gap:4px}
+.hstat-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.hstat-l{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3)}
+
+/* SECTION */
+section{padding:80px 0}
+.sec-divider{width:100%;height:1px;background:var(--border);margin:0}
+
+/* APP CARD */
+.app-block{padding:88px 0}
+.app-block:nth-child(even){background:var(--bg2)}
+.app-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.app-layout.reverse{direction:rtl}
+.app-layout.reverse>*{direction:ltr}
+.app-meta{display:flex;flex-direction:column;gap:0}
+.app-number{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);letter-spacing:0.08em;margin-bottom:20px}
+.app-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border:1px solid;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;width:fit-content}
+.app-badge.teal{border-color:rgba(26,143,114,0.4);color:var(--teal);background:var(--teal-dim)}
+.app-badge.amber{border-color:rgba(201,168,76,0.35);color:var(--gold);background:var(--gold-dim)}
+.app-title{font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:700;line-height:1.15;margin-bottom:14px}
+.app-subtitle{font-size:0.92rem;color:var(--text2);line-height:1.85;margin-bottom:28px}
+.app-divider{width:40px;height:2px;background:var(--gold);margin-bottom:28px}
+
+/* FEATURES LIST */
+.features-title{font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.features-title::before{content:'';width:16px;height:1px;background:var(--gold)}
+.features-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.feat-item{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);transition:border-color var(--tr)}
+.feat-item:hover{border-color:rgba(201,168,76,0.25)}
+.feat-icon{font-size:0.95rem;flex-shrink:0;margin-top:1px}
+.feat-text h5{font-family:'Lato',sans-serif;font-size:0.86rem;font-weight:700;margin-bottom:3px;color:var(--text)}
+.feat-text p{font-size:0.78rem;color:var(--text2);line-height:1.65}
+
+/* METRICS ROW */
+.metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:32px}
+.metric-box{padding:18px 14px;text-align:center;background:var(--bg)}
+.app-block:nth-child(even) .metric-box{background:var(--bg2)}
+.metric-n{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:4px}
+.metric-l{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3)}
+
+/* CTA BUTTON */
+.btn-launch{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--gold);color:var(--bg);font-family:'Lato',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1.5px solid var(--gold);cursor:pointer;transition:all var(--tr);text-decoration:none}
+.btn-launch:hover{background:var(--gold2);border-color:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,0.25)}
+.btn-ghost-gold{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:transparent;color:var(--gold);font-family:'Lato',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1.5px solid rgba(201,168,76,0.4);cursor:pointer;transition:all var(--tr);text-decoration:none}
+.btn-ghost-gold:hover{border-color:var(--gold);background:var(--gold-dim)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* VISUAL SIDE */
+.app-visual{display:flex;flex-direction:column;gap:16px}
+.mockup-frame{background:var(--surface);border:1px solid var(--border);overflow:hidden;position:relative}
+.mockup-topbar{background:var(--bg3);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--border)}
+.dot-r{background:#d45050;opacity:0.6}
+.dot-y{background:#c9a84c;opacity:0.6}
+.dot-g{background:#1a8f72;opacity:0.6}
+.mockup-url{flex:1;background:var(--bg);padding:4px 10px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);margin:0 8px}
+
+/* SURVEILLANCE APP MOCKUP */
+.surv-mock{padding:20px}
+.surv-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.surv-header h4{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700}
+.live-badge{display:inline-flex;align-items:center;gap:5px;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);padding:3px 9px;border:1px solid rgba(26,143,114,0.35);background:var(--teal-dim)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.surv-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.kpi-box{background:var(--bg2);padding:10px 8px;text-align:center;border:1px solid var(--border)}
+.kpi-n{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;line-height:1;margin-bottom:2px}
+.kpi-l{font-size:0.58rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3)}
+.kpi-ok{color:var(--teal)}
+.kpi-warn{color:var(--gold)}
+.kpi-alert{color:var(--red)}
+.surv-chart-area{background:var(--bg2);border:1px solid var(--border);padding:12px;margin-bottom:12px}
+.chart-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.bar-name{font-size:0.62rem;color:var(--text2);width:52px;flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.bar-track{flex:1;height:10px;background:var(--border);position:relative}
+.bar-fill{height:100%;position:absolute;left:0;top:0;transition:width 0.8s ease}
+.bar-val{font-size:0.6rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--text2);width:30px;text-align:right;flex-shrink:0}
+.alert-row{display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(200,60,60,0.06);border:1px solid rgba(200,60,60,0.2);font-size:0.68rem;color:var(--text2)}
+.alert-icon{color:var(--red);font-size:0.75rem}
+.alert-row strong{color:var(--text);font-size:0.7rem}
+
+/* AUDIT APP MOCKUP */
+.audit-mock{padding:20px}
+.audit-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.audit-header h4{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700}
+.audit-period{font-size:0.62rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--gold);padding:3px 9px;border:1px solid rgba(201,168,76,0.35);background:var(--gold-dim)}
+.compliance-circles{display:flex;gap:12px;margin-bottom:14px;justify-content:space-between}
+.circ-wrap{flex:1;background:var(--bg2);border:1px solid var(--border);padding:10px 8px;text-align:center}
+.circ-pct{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;line-height:1}
+.circ-lbl{font-size:0.58rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);margin-top:2px}
+.audit-table-wrap{background:var(--bg2);border:1px solid var(--border);margin-bottom:12px;overflow:hidden}
+.atable-head{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:0;background:var(--bg3);border-bottom:1px solid var(--border);padding:7px 10px}
+.atable-head span{font-size:0.58rem;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3)}
+.atable-row{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:0;padding:8px 10px;border-bottom:1px solid var(--border)}
+.atable-row:last-child{border-bottom:none}
+.atable-row span{font-size:0.68rem;color:var(--text2)}
+.atable-row span:first-child{color:var(--text);font-weight:700}
+.pill{display:inline-block;padding:2px 7px;font-size:0.58rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.pill-green{background:rgba(26,143,114,0.12);color:var(--teal);border:1px solid rgba(26,143,114,0.25)}
+.pill-amber{background:rgba(201,168,76,0.1);color:var(--gold);border:1px solid rgba(201,168,76,0.3)}
+.pill-red{background:rgba(200,60,60,0.08);color:var(--red);border:1px solid rgba(200,60,60,0.2)}
+.export-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg3);border:1px solid var(--border)}
+.export-btn{padding:4px 12px;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer}
+.export-btn:hover{border-color:var(--gold);color:var(--gold)}
+.export-label{font-size:0.62rem;color:var(--text3);margin-left:auto}
+
+/* TECH STACK */
+.stack-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.stack-tag{padding:4px 12px;background:var(--bg2);border:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3)}
+
+/* USE CASE */
+.usecase-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.uc-row{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-left:2px solid var(--gold)}
+.app-block:nth-child(even) .uc-row{background:var(--bg2)}
+.uc-check{color:var(--teal);font-size:0.8rem;flex-shrink:0;margin-top:1px}
+.uc-row span{font-size:0.84rem;color:var(--text2);line-height:1.6}
+
+/* BOTTOM CTA */
+.bottom-cta{padding:80px 0;background:var(--bg);text-align:center;border-top:1px solid var(--border)}
+.cta-label{font-size:0.68rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:12px}
+.cta-label::before,.cta-label::after{content:'';width:24px;height:1px;background:var(--gold)}
+.cta-title{font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:700;margin-bottom:14px}
+.cta-sub{font-size:0.9rem;color:var(--text2);margin-bottom:32px}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 0;text-align:center}
+.foot-inner{display:flex;flex-direction:column;align-items:center;gap:10px}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700}
+.foot-logo em{color:var(--gold);font-style:normal}
+.foot-copy{font-size:0.72rem;color:var(--text3)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .app-layout{grid-template-columns:1fr;gap:40px}
+  .app-layout.reverse{direction:ltr}
+  .hero-stats{gap:24px}
+  .surv-kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .metrics-row{grid-template-columns:1fr}
+  .compliance-circles{flex-wrap:wrap}
+  .atable-head,.atable-row{grid-template-columns:2fr 1fr}
+  .atable-head span:nth-child(n+3),.atable-row span:nth-child(n+3){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="logo-mark">AF</div>
+      <div class="logo-name">Portfolio</div>
+    </div>
+    <a href="https://fardianarief.site" class="nav-back">← Back to Portfolio</a>
+    <button class="theme-btn" id="themeBtn" title="Toggle tema">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="breadcrumb reveal">
+      <a href="https://fardianarief.site">Portfolio</a>
+      <span>/</span>
+      <span>Healthcare Apps</span>
+    </div>
+    <div class="hero-badge reveal">Internal Tools</div>
+    <h1 class="hero-title reveal">Healthcare Digital<br><em>Applications</em></h1>
+    <p class="hero-subtitle reveal">Dua aplikasi internal yang dibangun dari kebutuhan klinis nyata — menggabungkan standar PCI internasional dengan antarmuka digital yang mudah digunakan oleh tim kesehatan.</p>
+    <div class="hero-stats reveal">
+      <div class="hstat"><div class="hstat-n">2</div><div class="hstat-l">Internal Apps</div></div>
+      <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">HAIs Bundle Types</div></div>
+      <div class="hstat"><div class="hstat-n">JCI</div><div class="hstat-l">Compliant Standards</div></div>
+      <div class="hstat"><div class="hstat-n">Real-time</div><div class="hstat-l">Monitoring</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-divider"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- APP 1 : SURVEILLANCE HAIs -->
+<!-- ═══════════════════════════════════════ -->
+<div class="app-block">
+  <div class="container">
+    <div class="app-layout">
+
+      <!-- META -->
+      <div class="app-meta">
+        <div class="app-number reveal">01 / 02</div>
+        <div class="app-badge teal reveal">🦠 Infection Control · PCI Committee</div>
+        <h2 class="app-title reveal">Digital Surveillance<br>HAIs &amp; Bundle</h2>
+        <div class="app-divider reveal"></div>
+        <p class="app-subtitle reveal">Platform surveilans infeksi nosokomial berbasis bundle care yang memantau empat tipe HAIs secara simultan — menghitung laju infeksi per 1.000 hari device, mendeteksi klaster dini, dan mengirimkan alert otomatis ke IPCN saat kasus melampaui ambang batas yang ditetapkan.</p>
+
+        <div class="features-title reveal">Fitur Utama</div>
+        <div class="features-grid">
+          <div class="feat-item reveal">
+            <div class="feat-icon">📡</div>
+            <div class="feat-text">
+              <h5>Multi-HAIs Monitoring</h5>
+              <p>Pantau CLABSI, CAUTI, VAP, dan SSI dalam satu dashboard terintegrasi — setiap tipe dengan indikator dan bundle care-nya masing-masing.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-icon">📐</div>
+            <div class="feat-text">
+              <h5>Kalkulasi Laju Infeksi Otomatis</h5>
+              <p>Sistem menghitung infection rate per 1.000 hari device secara real-time sesuai standar CDC/NHSN — tanpa perlu kalkulasi manual.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-icon">🔔</div>
+            <div class="feat-text">
+              <h5>Alert System &amp; Deteksi Klaster</h5>
+              <p>Notifikasi otomatis dikirim ke IPCN ketika angka infeksi melampaui threshold — mendukung respons dini sebelum klaster meluas.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-icon">📊</div>
+            <div class="feat-text">
+              <h5>Trend Analysis &amp; Visualisasi</h5>
+              <p>Grafik tren per periode, perbandingan antar unit, dan laporan kepatuhan bundle siap cetak untuk keperluan akreditasi JCI/SNARS.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-row reveal">
+          <div class="metric-box"><div class="metric-n">4</div><div class="metric-l">Tipe HAIs</div></div>
+          <div class="metric-box"><div class="metric-n">CDC</div><div class="metric-l">Standar NHSN</div></div>
+          <div class="metric-box"><div class="metric-n">24/7</div><div class="metric-l">Real-time Data</div></div>
+        </div>
+
+        <div class="features-title reveal">Tujuan Pembangunan</div>
+        <div class="usecase-grid reveal">
+          <div class="uc-row"><div class="uc-check">✓</div><span>Menggantikan pencatatan manual HAIs yang rawan human error dan tidak real-time</span></div>
+          <div class="uc-row"><div class="uc-check">✓</div><span>Mendukung program PCI Committee dalam surveillance aktif sesuai standar JCI Chapter IPSG</span></div>
+          <div class="uc-row"><div class="uc-check">✓</div><span>Mempercepat pelaporan insiden ke manajemen dan komite mutu rumah sakit</span></div>
+          <div class="uc-row"><div class="uc-check">✓</div><span>Menyediakan data berbasis bukti untuk evaluasi intervensi pencegahan infeksi</span></div>
+        </div>
+
+        <div class="features-title reveal">Tech Stack</div>
+        <div class="stack-list reveal">
+          <span class="stack-tag">Microsoft Excel</span>
+          <span class="stack-tag">VBA Macro</span>
+          <span class="stack-tag">Power Query</span>
+          <span class="stack-tag">PivotChart</span>
+          <span class="stack-tag">Conditional Logic</span>
+          <span class="stack-tag">Alert Automation</span>
+        </div>
+
+        <div class="btn-row reveal">
+          <a href="https://fardianarief.site/app/surveilance" class="btn-launch" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Launch App
+          </a>
+          <a href="https://wa.me/6282388308450?text=Halo%20Arief%2C%20saya%20tertarik%20dengan%20Surveilance%20HAIs%20App" class="btn-ghost-gold" target="_blank">Tanya Demo</a>
+        </div>
+      </div>
+
+      <!-- VISUAL MOCKUP -->
+      <div class="app-visual reveal">
+        <div class="mockup-frame">
+          <div class="mockup-topbar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <div class="mockup-url">fardianarief.site/app/surveilance</div>
+          </div>
+          <div class="surv-mock">
+            <div class="surv-header">
+              <h4>HAIs Surveillance Dashboard</h4>
+              <div class="live-badge"><div class="live-dot"></div>Live</div>
+            </div>
+            <!-- KPIs -->
+            <div class="surv-kpis">
+              <div class="kpi-box">
+                <div class="kpi-n kpi-ok">0.8</div>
+                <div class="kpi-l">CLABSI Rate</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-n kpi-ok">1.2</div>
+                <div class="kpi-l">CAUTI Rate</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-n kpi-warn">2.4</div>
+                <div class="kpi-l">VAP Rate</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-n kpi-ok">0.3</div>
+                <div class="kpi-l">SSI Rate</div>
+              </div>
+            </div>
+            <!-- Chart bars -->
+            <div class="surv-chart-area">
+              <div class="chart-label">Bundle Compliance per Unit (%) — April 2026</div>
+              <div class="bar-row">
+                <span class="bar-name">ICU</span>
+                <div class="bar-track"><div class="bar-fill" style="width:92%;background:var(--teal)"></div></div>
+                <span class="bar-val kpi-ok">92%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-name">HCU</span>
+                <div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--gold)"></div></div>
+                <span class="bar-val kpi-warn">78%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-name">Rawat Inap</span>
+                <div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--teal)"></div></div>
+                <span class="bar-val kpi-ok">85%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-name">OK</span>
+                <div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--teal)"></div></div>
+                <span class="bar-val kpi-ok">95%</span>
+              </div>
+              <div class="bar-row">
+                <span class="bar-name">NICU</span>
+                <div class="bar-track"><div class="bar-fill" style="width:61%;background:var(--red)"></div></div>
+                <span class="bar-val kpi-alert">61%</span>
+              </div>
+            </div>
+            <!-- Alert -->
+            <div class="alert-row">
+              <span class="alert-icon">⚠</span>
+              <span><strong>Alert IPCN:</strong> VAP rate NICU melampaui threshold (3.0/1000 ventilator days). Segera investigasi.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caption card -->
+        <div style="background:var(--surface);border:1px solid var(--border);padding:18px 20px">
+          <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Standar Referensi</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">CDC NHSN</span>
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">JCI IPSG</span>
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">SNARS Edisi 2</span>
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">Kemenkes RI</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- APP 2 : AUDIT TOOLS -->
+<!-- ═══════════════════════════════════════ -->
+<div class="app-block">
+  <div class="container">
+    <div class="app-layout reverse">
+
+      <!-- VISUAL MOCKUP -->
+      <div class="app-visual reveal">
+        <div class="mockup-frame">
+          <div class="mockup-topbar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <div class="mockup-url">fardianarief.site/app/audit-tools</div>
+          </div>
+          <div class="audit-mock">
+            <div class="audit-header">
+              <h4>PCI Compliance Dashboard</h4>
+              <div class="audit-period">April 2026</div>
+            </div>
+            <!-- Compliance circles -->
+            <div class="compliance-circles">
+              <div class="circ-wrap">
+                <div class="circ-pct kpi-ok">94%</div>
+                <div class="circ-lbl">Hand Hygiene</div>
+              </div>
+              <div class="circ-wrap">
+                <div class="circ-pct kpi-warn">79%</div>
+                <div class="circ-lbl">APD Usage</div>
+              </div>
+              <div class="circ-wrap">
+                <div class="circ-pct kpi-ok">88%</div>
+                <div class="circ-lbl">Env. Cleaning</div>
+              </div>
+              <div class="circ-wrap">
+                <div class="circ-pct kpi-ok">91%</div>
+                <div class="circ-lbl">Avg Overall</div>
+              </div>
+            </div>
+            <!-- Table -->
+            <div class="audit-table-wrap">
+              <div class="atable-head">
+                <span>Unit</span>
+                <span>HH Score</span>
+                <span>APD</span>
+                <span>Status</span>
+              </div>
+              <div class="atable-row">
+                <span>ICU</span>
+                <span>97%</span>
+                <span>96%</span>
+                <span><span class="pill pill-green">Compliant</span></span>
+              </div>
+              <div class="atable-row">
+                <span>IGD</span>
+                <span>92%</span>
+                <span>88%</span>
+                <span><span class="pill pill-green">Compliant</span></span>
+              </div>
+              <div class="atable-row">
+                <span>Rawat Inap A</span>
+                <span>85%</span>
+                <span>72%</span>
+                <span><span class="pill pill-amber">Review</span></span>
+              </div>
+              <div class="atable-row">
+                <span>Rawat Inap B</span>
+                <span>76%</span>
+                <span>61%</span>
+                <span><span class="pill pill-red">Alert</span></span>
+              </div>
+              <div class="atable-row">
+                <span>OK</span>
+                <span>99%</span>
+                <span>98%</span>
+                <span><span class="pill pill-green">Compliant</span></span>
+              </div>
+            </div>
+            <!-- Export -->
+            <div class="export-bar">
+              <button class="export-btn">📄 PDF Report</button>
+              <button class="export-btn">📊 Excel</button>
+              <button class="export-btn">🖨 Print</button>
+              <span class="export-label">Ready for JCI submission</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reference card -->
+        <div style="background:var(--surface);border:1px solid var(--border);padding:18px 20px">
+          <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Cakupan Audit</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">Hand Hygiene</span>
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">APD / PPE</span>
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">Env. Cleaning</span>
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">Linen Management</span>
+            <span style="padding:3px 10px;border:1px solid var(--border);font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3)">Waste Disposal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- META -->
+      <div class="app-meta">
+        <div class="app-number reveal">02 / 02</div>
+        <div class="app-badge amber reveal">📋 Quality &amp; PCI Audit Tools</div>
+        <h2 class="app-title reveal">Audit Tools Apps &amp;<br>Dashboard Kepatuhan</h2>
+        <div class="app-divider reveal"></div>
+        <p class="app-subtitle reveal">Platform audit digital untuk Komite PCI yang mengotomasi proses penilaian kepatuhan di seluruh unit rumah sakit. Temuan terdokumentasi otomatis dalam dashboard tren kepatuhan per unit — siap ekspor untuk pelaporan akreditasi JCI dan SNARS tanpa membutuhkan rekap manual.</p>
+
+        <div class="features-title reveal">Fitur Utama</div>
+        <div class="features-grid">
+          <div class="feat-item reveal">
+            <div class="feat-icon">🗂</div>
+            <div class="feat-text">
+              <h5>Multi-Audit Module</h5>
+              <p>Modul terpisah untuk hand hygiene (WHO 5 Moments), APD, kebersihan lingkungan, manajemen linen, dan pembuangan limbah — dalam satu platform terpadu.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-icon">📈</div>
+            <div class="feat-text">
+              <h5>Dashboard Tren Kepatuhan</h5>
+              <p>Visualisasi tren kepatuhan per unit dan per periode secara otomatis — perbandingan bulan ke bulan dan identifikasi unit dengan risiko non-compliance tertinggi.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-icon">📤</div>
+            <div class="feat-text">
+              <h5>Ekspor Laporan Akreditasi</h5>
+              <p>Generate laporan dalam format PDF dan Excel siap submit — terstruktur sesuai persyaratan JCI dan SNARS sehingga menghemat waktu tim PCI secara signifikan.</p>
+            </div>
+          </div>
+          <div class="feat-item reveal">
+            <div class="feat-icon">🎯</div>
+            <div class="feat-text">
+              <h5>Scoring &amp; Rekomendasi</h5>
+              <p>Setiap unit mendapat skor kepatuhan beserta flagging otomatis (compliant / review / alert) dan rekomendasi tindak lanjut yang terstandar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-row reveal">
+          <div class="metric-box"><div class="metric-n">5+</div><div class="metric-l">Audit Modules</div></div>
+          <div class="metric-box"><div class="metric-n">JCI</div><div class="metric-l">Ready Export</div></div>
+          <div class="metric-box"><div class="metric-n">Auto</div><div class="metric-l">Scoring System</div></div>
+        </div>
+
+        <div class="features-title reveal">Tujuan Pembangunan</div>
+        <div class="usecase-grid reveal">
+          <div class="uc-row"><div class="uc-check">✓</div><span>Mendigitalisasi form audit PCI yang sebelumnya dilakukan secara manual dan tercecer</span></div>
+          <div class="uc-row"><div class="uc-check">✓</div><span>Menyediakan laporan siap JCI untuk mempercepat proses re-akreditasi internasional</span></div>
+          <div class="uc-row"><div class="uc-check">✓</div><span>Membantu IPCN memantau kepatuhan seluruh unit dalam waktu nyata tanpa rapat koordinasi</span></div>
+          <div class="uc-row"><div class="uc-check">✓</div><span>Membangun budaya kepatuhan berbasis data yang berkelanjutan di seluruh area klinis</span></div>
+        </div>
+
+        <div class="features-title reveal">Tech Stack</div>
+        <div class="stack-list reveal">
+          <span class="stack-tag">Microsoft Excel</span>
+          <span class="stack-tag">VBA Macro</span>
+          <span class="stack-tag">Power Query</span>
+          <span class="stack-tag">Dynamic Charts</span>
+          <span class="stack-tag">PDF Export</span>
+          <span class="stack-tag">Auto Scoring</span>
+        </div>
+
+        <div class="btn-row reveal">
+          <a href="https://fardianarief.site/app/audit-tools" class="btn-launch" target="_blank">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Launch App
+          </a>
+          <a href="https://wa.me/6282388308450?text=Halo%20Arief%2C%20saya%20tertarik%20dengan%20Audit%20Tools%20PCI" class="btn-ghost-gold" target="_blank">Tanya Demo</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <div class="container">
+    <div class="cta-label">Get in Touch</div>
+    <h2 class="cta-title">Tertarik berkolaborasi<br>atau butuh konsultasi?</h2>
+    <p class="cta-sub">Kedua aplikasi ini dibangun sepenuhnya dari kebutuhan klinis nyata. Saya terbuka untuk diskusi, demo, atau pengembangan tools serupa untuk institusi Anda.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/6282388308450?text=Halo%20Arief%2C%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20healthcare%20apps" class="btn-launch" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Hubungi via WhatsApp
+      </a>
+      <a href="https://fardianarief.site#project" class="btn-ghost-gold">← Lihat Semua Projects</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <div class="foot-logo">M. Arief <em>Fardhiansyah</em></div>
+      <div class="foot-copy">© 2025 · HIS Officer · Healthcare IT Innovator · Mayapada Hospital Jakarta Selatan</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// THEME
+var themeBtn=document.getElementById('themeBtn');
+var html=document.documentElement;
+function getCurrentTheme(){return html.getAttribute('data-theme')||'dark';}
+function setTheme(t){html.setAttribute('data-theme',t);themeBtn.textContent=(t==='dark')?'🌙':'☀️';}
+setTheme(getCurrentTheme());
+themeBtn.onclick=function(){setTheme(getCurrentTheme()==='dark'?'light':'dark');};
+
+// REVEAL
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('revealed');});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+</script>
+</body>
+</html>
