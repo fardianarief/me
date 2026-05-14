@@ -1,0 +1,20 @@
+{
+  "name": "HIS MHJS",
+  "short_name": "HIS MHJS",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjg4atlTOzmEO68E10MhQVShNsfqVP6msdKdP87mX0mWv-NYd3tAOOmzNTtUkzq8O2U2mdPJEkdi3VGBgcOfYeJ3ZKUANrdSKYuMEn-iYM1mfrI-fxshm9dywGwkDn26CZR2RhVqlhoZcmu0jLPjjrosnpw8-C2J4tdSmlKjte7UGbMSEDGRZnMsU67ba0/s16000/icon1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjg4atlTOzmEO68E10MhQVShNsfqVP6msdKdP87mX0mWv-NYd3tAOOmzNTtUkzq8O2U2mdPJEkdi3VGBgcOfYeJ3ZKUANrdSKYuMEn-iYM1mfrI-fxshm9dywGwkDn26CZR2RhVqlhoZcmu0jLPjjrosnpw8-C2J4tdSmlKjte7UGbMSEDGRZnMsU67ba0/s16000/icon1.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
