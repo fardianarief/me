@@ -1,138 +1,56 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRD9hVsVkTLhs4affbphN2jGmwPgxFWIn-3Inu2-6PzEnnB73O5Uyn6A4vVb5je5v4NT533OIuBAck7t0TehuXWk_oFA84lZ-f1wZawD3zNrog5WX9gU8vuVHo8hyz3FM3JDU_E80mbf_E9afs1Q3HfHWcV9k_ChrZb67NQbuzeflrVhL4MmwtSNL3q1U/s16000/Untitled%20design%20(4).png">
+<title>DIGITAL SSI</title>
 
-  <title>DIGITAL SSI</title>
+<link rel="icon" type="image/png"
+href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRD9hVsVkTLhs4affbphN2jGmwPgxFWIn-3Inu2-6PzEnnB73O5Uyn6A4vVb5je5v4NT533OIuBAck7t0TehuXWk_oFA84lZ-f1wZawD3zNrog5WX9gU8vuVHo8hyz3FM3JDU_E80mbf_E9afs1Q3HfHWcV9k_ChrZb67NQbuzeflrVhL4MmwtSNL3q1U/s16000/Untitled%20design%20(4).png">
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: #000;
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    body {
-      display: flex;
-      flex-direction: column;
-    }
+body{
+    background:#f5f8fb;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    font-family:Arial, sans-serif;
+}
 
-    iframe {
-      flex: 1;
-      border: none;
-      width: 100%;
-    }
+.container{
+    width:100%;
+    max-width:1400px;
+}
 
-    #timeout-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      color: white;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
+.info-image{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+</style>
 
-    #timeout-box {
-      background: #1f1f1f;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 400px;
-    }
-
-    #reload-btn {
-      margin-top: 20px;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  </style>
 </head>
 
 <body>
 
-  <iframe
-    id="appsheet-frame"
-    src="https://www.appsheet.com/start/bac7f441-5b2c-4954-be53-aa28ab4dc05d?refresh=1&wipe=1"
-    allowfullscreen
-    allow="geolocation">
-  </iframe>
-
-  <div id="timeout-overlay">
-    <div id="timeout-box">
-      <h2>Session Timeout</h2>
-      <p>
-        Sesi telah berakhir.<br>
-        Silahkan login ulang kembali.
-      </p>
-
-      <button id="reload-btn" onclick="reloadApp()">
-        Login Ulang
-      </button>
-    </div>
-  </div>
-
-  <script>
-    // 3 jam = 10800000 ms
-    const SESSION_TIMEOUT = 10800000;
-
-    // waktu awal buka aplikasi
-    const startTime = Date.now();
-
-    let sessionExpired = false;
-
-    function checkSessionTimeout() {
-      const now = Date.now();
-
-      if (now - startTime >= SESSION_TIMEOUT) {
-        sessionExpired = true;
-      }
-    }
-
-    // cek timeout tiap 1 menit
-    setInterval(checkSessionTimeout, 60000);
-
-    // semua aktivitas user
-    const events = [
-      "click",
-      "touchstart",
-      "mousemove",
-      "keydown",
-      "scroll"
-    ];
-
-    events.forEach(event => {
-      document.addEventListener(event, function () {
-
-        if (sessionExpired) {
-
-          // tampilkan popup timeout
-          document.getElementById("timeout-overlay").style.display = "flex";
-
-        }
-
-      });
-    });
-
-    function reloadApp() {
-
-      // reload ulang page + force refresh appsheet
-      location.href =
-        "https://www.appsheet.com/start/bac7f441-5b2c-4954-be53-aa28ab4dc05d?refresh=1&wipe=1";
-
-    }
-  </script>
+<div class="container">
+    <img
+        class="info-image"
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4_fRelry321hQ9OVhVoRAyT4oALJ5jL-Szl3x2QDdL_2iA9iNGQoQG8le_QRwQFcUmzenOzWaESY2O_sSJ3rBWoZRP3lM_B1gqZj_tP8IdepicDwSqGXinnLZr_nhCIAnyWUSgj8q0idC5ApE-m0GGXQ68JQgYrKiBGFeDwNUR_0AS8o1FAuOtGTsDTw/s16000/ChatGPT%20Image%20Jun%205,%202026,%2004_26_36%20PM.png"
+        alt="DIGITAL SSI Sedang Dalam Pengembangan">
+</div>
 
 </body>
 </html>
