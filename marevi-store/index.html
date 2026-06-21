@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MAREVI - Moeslim Fashion</title>
+
+<link rel="icon" type="image/png"
+href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjYFDE4ekE0ua7b1RjbpAENLB63UzhEvOR5ctrf0LRypl7a4d5uITYrErz8Im2ZoVFwusC_VFIQSi3fcWe1BgrOvqsJKDHJR5pGaw6gtRBRtVrxA19tqU0757HYvFF6tGQv3pS97FqIQJCHP1AQTgpFf6y8061Lr1lVIrEty6DH2awKEQA4WEyBirjXNbWH/s320/Untitled_design__2_-removebg-preview.png">
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#000000">
+
+<!-- iPhone -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="MAREVI">
+
+<link rel="apple-touch-icon"
+href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjYFDE4ekE0ua7b1RjbpAENLB63UzhEvOR5ctrf0LRypl7a4d5uITYrErz8Im2ZoVFwusC_VFIQSi3fcWe1BgrOvqsJKDHJR5pGaw6gtRBRtVrxA19tqU0757HYvFF6tGQv3pS97FqIQJCHP1AQTgpFf6y8061Lr1lVIrEty6DH2awKEQA4WEyBirjXNbWH/s512/Untitled_design__2_-removebg-preview.png">
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+height:100%;
+background:#000;
+overflow:hidden;
+}
+
+iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+/* Tombol install */
+
+#installBtn{
+position:fixed;
+left:15px;
+bottom:15px;
+padding:12px 16px;
+background:#000;
+color:white;
+border-radius:40px;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,.4);
+z-index:9999;
+display:none;
+}
+
+#installBtn:hover{
+background:#222;
+}
+
+</style>
+
+</head>
+<body>
+
+<iframe
+src="https://www.appsheet.com/start/9f26de9e-d00d-416f-84c2-54365e5917ae?refresh=1"
+allowfullscreen
+allow="geolocation">
+</iframe>
+
+<div id="installBtn">
+📲 Install App
+</div>
+
+<script>
+
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+// Android Chrome
+window.addEventListener("beforeinstallprompt",(e)=>{
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+installBtn.style.display = "block";
+
+});
+
+// Tombol diklik
+installBtn.addEventListener("click",async()=>{
+
+// iPhone Safari
+if (/iphone|ipad|ipod/i.test(navigator.userAgent)){
+
+alert(
+"Untuk iPhone:\n\nTekan tombol Share Safari lalu pilih 'Add to Home Screen'."
+);
+
+return;
+}
+
+// Android
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+
+const { outcome } = await deferredPrompt.userChoice;
+
+deferredPrompt = null;
+
+installBtn.style.display = "none";
+
+}
+
+});
+
+// App sudah terpasang
+window.addEventListener("appinstalled",()=>{
+
+installBtn.style.display = "none";
+
+});
+
+// Register Service Worker
+if ("serviceWorker" in navigator){
+
+window.addEventListener("load",()=>{
+
+navigator.serviceWorker.register("./sw.js");
+
+});
+
+}
+
+// Jika iPhone Safari dan belum terinstall
+if (
+/iphone|ipad|ipod/i.test(navigator.userAgent) &&
+!window.navigator.standalone
+){
+installBtn.style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
