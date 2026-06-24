@@ -1,138 +1,28 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRD9hVsVkTLhs4affbphN2jGmwPgxFWIn-3Inu2-6PzEnnB73O5Uyn6A4vVb5je5v4NT533OIuBAck7t0TehuXWk_oFA84lZ-f1wZawD3zNrog5WX9gU8vuVHo8hyz3FM3JDU_E80mbf_E9afs1Q3HfHWcV9k_ChrZb67NQbuzeflrVhL4MmwtSNL3q1U/s16000/Untitled%20design%20(4).png">
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    background:#fff;
+}
 
-  <title>Dashboard DIGITAL SSI</title>
-
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: #000;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    iframe {
-      flex: 1;
-      border: none;
-      width: 100%;
-    }
-
-    #timeout-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      color: white;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-
-    #timeout-box {
-      background: #1f1f1f;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 400px;
-    }
-
-    #reload-btn {
-      margin-top: 20px;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-  </style>
+img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+</style>
 </head>
 
 <body>
 
-  <iframe
-    id="appsheet-frame"
-    src="https://datastudio.google.com/embed/reporting/f096ec7b-d13a-4586-a925-9d6af5d757ff/page/fiBzF"
-    allowfullscreen
-    allow="geolocation">
-  </iframe>
-
-  <div id="timeout-overlay">
-    <div id="timeout-box">
-      <h2>Session Timeout</h2>
-      <p>
-        Sesi telah berakhir.<br>
-        Silahkan buka ulang kembali.
-      </p>
-
-      <button id="reload-btn" onclick="reloadApp()">
-        Reload
-      </button>
-    </div>
-  </div>
-
-  <script>
-    // 3 jam = 10800000 ms
-    const SESSION_TIMEOUT = 10800000;
-
-    // waktu awal buka aplikasi
-    const startTime = Date.now();
-
-    let sessionExpired = false;
-
-    function checkSessionTimeout() {
-      const now = Date.now();
-
-      if (now - startTime >= SESSION_TIMEOUT) {
-        sessionExpired = true;
-      }
-    }
-
-    // cek timeout tiap 1 menit
-    setInterval(checkSessionTimeout, 60000);
-
-    // semua aktivitas user
-    const events = [
-      "click",
-      "touchstart",
-      "mousemove",
-      "keydown",
-      "scroll"
-    ];
-
-    events.forEach(event => {
-      document.addEventListener(event, function () {
-
-        if (sessionExpired) {
-
-          // tampilkan popup timeout
-          document.getElementById("timeout-overlay").style.display = "flex";
-
-        }
-
-      });
-    });
-
-    function reloadApp() {
-
-      // reload ulang page + force refresh appsheet
-      location.href =
-        "https://datastudio.google.com/embed/reporting/f096ec7b-d13a-4586-a925-9d6af5d757ff/page/fiBzF";
-
-    }
-  </script>
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivdG_xfWujazIQpwGWZOFQcTBNDb9L5-Or3fei5SzazIBHGU00lNaaXu77bLxxC90be0wABqMzhC76YLXygvGr5rYEJGvho2i6H-3kYB3TurG5NWM0vdi0HSFeUyj10VSYWefgKdDeqktTf5bhn67zY-Wq0EbFtgaZl5esldjOa4ZwTNLUoPaK_OdTUYs/s16000/1000209021.jpg" alt="DIGITAL SSI">
 
 </body>
 </html>
