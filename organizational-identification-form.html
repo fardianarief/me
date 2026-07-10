@@ -878,14 +878,18 @@
       const formData = new URLSearchParams();
       Object.keys(payload).forEach(key => formData.append(key, payload[key]));
 
-      await fetch(SCRIPT_URL, {
+      // Kirim data tanpa menunggu respons Apps Script selesai diproses.
+      // Permintaan tetap berjalan di background dan data tetap tersimpan,
+      // tapi pengguna tidak perlu menunggu cold-start Google Apps Script yang lambat.
+      fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString()
-      });
+      }).catch(err => console.error('Gagal mengirim ke spreadsheet:', err));
 
-      goToStep(4);
+      // Beri jeda singkat agar animasi spinner terlihat wajar, lalu lanjut.
+      setTimeout(() => { goToStep(4); }, 700);
     } catch (error){
       label.textContent = 'Kirim Jawaban';
       btn.disabled = false;
