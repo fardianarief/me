@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Kuesioner Penelitian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4FAF9;
+    --bg-alt:#E7F5F3;
+    --primary:#0E7C7B;
+    --primary-dark:#0A5F5E;
+    --primary-light:#CFEEEB;
+    --accent:#F2A93B;
+    --accent-dark:#D98F1F;
+    --card:#FFFFFF;
+    --text:#0F2A27;
+    --text-muted:#5F7472;
+    --border:#DCEEEA;
+    --danger:#E0435A;
+    --radius-lg:20px;
+    --radius-md:14px;
+    --radius-sm:10px;
+    --shadow:0 10px 30px -12px rgba(14,124,123,0.25);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 12% 8%, var(--bg-alt) 0%, transparent 45%),
+      radial-gradient(circle at 90% 90%, #FCEFDC 0%, transparent 40%),
+      var(--bg);
+    min-height:100vh;
+    font-family:'Inter', sans-serif;
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    padding:24px 14px 60px;
+  }
+  h1,h2,h3,.display{
+    font-family:'Plus Jakarta Sans', sans-serif;
+  }
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+  }
+  .topbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+    padding:0 4px;
+  }
+  .topbar .badge{
+    width:38px;height:38px;border-radius:12px;
+    background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+    display:flex;align-items:center;justify-content:center;
+    color:white; font-weight:800; font-family:'Plus Jakarta Sans';
+    font-size:15px; flex-shrink:0;
+    box-shadow:0 6px 16px -6px rgba(14,124,123,0.5);
+  }
+  .topbar .brand{
+    font-size:13px;
+    color:var(--text-muted);
+    line-height:1.3;
+    font-weight:500;
+  }
+  .topbar .brand strong{
+    display:block;
+    color:var(--text);
+    font-family:'Plus Jakarta Sans';
+    font-size:14.5px;
+    font-weight:700;
+  }
+
+  /* Stepper */
+  .stepper{
+    display:flex;
+    gap:6px;
+    margin-bottom:22px;
+    padding:0 4px;
+  }
+  .stepper .seg{
+    flex:1;
+    height:6px;
+    border-radius:99px;
+    background:var(--border);
+    overflow:hidden;
+    position:relative;
+  }
+  .stepper .seg::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, var(--primary), var(--accent));
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .4s ease;
+  }
+  .stepper .seg.done::after{transform:scaleX(1);}
+  .stepper .seg.current::after{transform:scaleX(0.5);}
+
+  .card{
+    background:var(--card);
+    border-radius:var(--radius-lg);
+    padding:28px 24px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+  }
+  @media (max-width:480px){
+    .card{padding:22px 18px;}
+  }
+
+  .screen{display:none;}
+  .screen.active{display:block; animation:fadeUp .45s ease;}
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* Intro screen */
+  .intro-icon{
+    width:56px;height:56px;
+    border-radius:16px;
+    background:linear-gradient(135deg, var(--primary-light), #fff);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+    box-shadow:inset 0 0 0 1px var(--border);
+  }
+  .intro-icon svg{width:28px;height:28px;stroke:var(--primary-dark);}
+  h1.title{
+    font-size:22px;
+    font-weight:800;
+    margin:0 0 6px;
+    color:var(--primary-dark);
+    letter-spacing:-0.01em;
+  }
+  .subtitle{
+    font-size:13.5px;
+    color:var(--text-muted);
+    margin:0 0 22px;
+    font-weight:500;
+  }
+  .intro-text p{
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--text);
+    margin:0 0 14px;
+  }
+  .assurance{
+    display:flex;
+    gap:10px;
+    background:var(--bg-alt);
+    border:1px solid var(--primary-light);
+    border-radius:var(--radius-md);
+    padding:14px 16px;
+    margin:18px 0;
+  }
+  .assurance svg{flex-shrink:0; width:20px;height:20px; stroke:var(--primary-dark); margin-top:1px;}
+  .assurance p{margin:0; font-size:13px; color:var(--primary-dark); font-weight:600; line-height:1.6;}
+
+  .highlight-box{
+    display:flex;
+    gap:10px;
+    background:#FDF6E8;
+    border:1.5px solid var(--accent);
+    border-radius:var(--radius-md);
+    padding:14px 16px;
+    margin:16px 0;
+  }
+  .highlight-box svg{flex-shrink:0; width:20px;height:20px; stroke:var(--accent-dark); margin-top:1px;}
+  .highlight-box p{
+    margin:0;
+    font-size:13.5px;
+    line-height:1.7;
+    color:var(--text);
+    font-weight:600;
+  }
+  .highlight-box p strong{color:var(--accent-dark);}
+
+  .btn{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    border-radius:var(--radius-md);
+    padding:15px 22px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease, background .2s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color:#fff;
+    box-shadow:0 10px 22px -8px rgba(14,124,123,0.55);
+  }
+  .btn-primary:active{transform:scale(.98);}
+  .btn-primary:disabled{
+    opacity:.5; cursor:not-allowed; box-shadow:none;
+  }
+  .btn-ghost{
+    background:transparent;
+    color:var(--text-muted);
+    font-weight:600;
+    padding:12px;
+  }
+  .btn svg{width:18px;height:18px;}
+
+  /* Form fields */
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:8px;
+    font-family:'Plus Jakarta Sans';
+  }
+  .field .hint{
+    font-weight:500;
+    color:var(--text-muted);
+    font-size:12px;
+    margin-left:4px;
+  }
+  textarea.input{
+    resize:vertical;
+    min-height:150px;
+    line-height:1.6;
+    font-family:'Inter';
+  }
+  .field-hint-box{
+    background:var(--bg-alt);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:12px 14px;
+    margin-top:10px;
+  }
+  .field-hint-box p{
+    margin:0;
+    font-size:12.5px;
+    line-height:1.65;
+    color:var(--text-muted);
+    font-weight:500;
+  }
+  .field-hint-box p strong{color:var(--primary-dark); font-weight:700;}
+  .optional-tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:700;
+    color:var(--accent-dark);
+    background:#FDF1DC;
+    border-radius:99px;
+    padding:2px 10px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .input, select{
+    width:100%;
+    padding:13px 14px;
+    font-size:15px;
+    font-family:'Inter';
+    border:1.5px solid var(--border);
+    border-radius:var(--radius-sm);
+    background:#FBFEFE;
+    color:var(--text);
+    transition:border-color .15s ease, box-shadow .15s ease;
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  .input:focus, select:focus{
+    outline:none;
+    border-color:var(--primary);
+    box-shadow:0 0 0 4px rgba(14,124,123,0.12);
+  }
+  .select-wrap{position:relative;}
+  .select-wrap::after{
+    content:"";
+    position:absolute; right:16px; top:50%;
+    width:9px;height:9px;
+    border-right:2px solid var(--text-muted);
+    border-bottom:2px solid var(--text-muted);
+    transform:translateY(-65%) rotate(45deg);
+    pointer-events:none;
+  }
+  .suffix-wrap{position:relative;}
+  .suffix-wrap .input{padding-right:62px;}
+  .suffix-wrap .suffix{
+    position:absolute; right:14px; top:50%; transform:translateY(-50%);
+    font-size:13px; color:var(--text-muted); font-weight:600;
+    pointer-events:none;
+  }
+
+  .radio-row{
+    display:flex;
+    gap:10px;
+  }
+  .radio-pill{
+    flex:1;
+    position:relative;
+  }
+  .radio-pill input{
+    position:absolute; opacity:0; width:100%; height:100%; margin:0; cursor:pointer;
+  }
+  .radio-pill .box{
+    border:1.5px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:13px 10px;
+    text-align:center;
+    font-weight:600;
+    font-size:14px;
+    color:var(--text-muted);
+    background:#FBFEFE;
+    transition:all .15s ease;
+  }
+  .radio-pill input:checked + .box{
+    border-color:var(--primary);
+    background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color:#fff;
+    box-shadow:0 8px 16px -6px rgba(14,124,123,0.5);
+  }
+
+  .error-msg{
+    color:var(--danger);
+    font-size:12.5px;
+    font-weight:600;
+    margin-top:16px;
+    display:none;
+  }
+  .error-msg.show{display:block;}
+
+  /* Questionnaire screen */
+  .legend{
+    position:sticky;
+    top:10px;
+    z-index:5;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:10px 12px;
+    margin-bottom:18px;
+    box-shadow:0 6px 18px -10px rgba(14,124,123,0.3);
+  }
+  .legend-title{
+    font-size:11px; font-weight:700; color:var(--text-muted);
+    text-transform:uppercase; letter-spacing:.04em;
+    margin-bottom:6px;
+  }
+  .legend-scale{
+    display:flex; justify-content:space-between; gap:4px;
+  }
+  .legend-scale div{
+    flex:1; text-align:center; font-size:9.5px; font-weight:700;
+    color:var(--primary-dark);
+    line-height:1.3;
+  }
+
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:26px 0 14px;
+  }
+  .section-title:first-of-type{margin-top:4px;}
+  .section-title .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+    flex-shrink:0;
+  }
+  .section-title h3{
+    font-size:14px;
+    font-weight:800;
+    color:var(--primary-dark);
+    margin:0;
+    letter-spacing:.01em;
+  }
+
+  .question{
+    border:1.5px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:16px 14px;
+    margin-bottom:12px;
+    background:#FDFFFE;
+    transition:border-color .2s ease;
+  }
+  .question.answered{border-color:var(--primary-light); background:#F7FDFC;}
+  .question.error{border-color:var(--danger);}
+  .question .q-text{
+    font-size:14px;
+    font-weight:600;
+    line-height:1.55;
+    margin-bottom:12px;
+    color:var(--text);
+  }
+  .question .q-text .num{
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    width:22px;height:22px;
+    background:var(--bg-alt);
+    color:var(--primary-dark);
+    border-radius:7px;
+    font-size:11.5px;
+    font-weight:800;
+    margin-right:8px;
+    font-family:'Plus Jakarta Sans';
+  }
+  .likert{
+    display:flex;
+    gap:6px;
+  }
+  .likert .opt{
+    flex:1;
+    position:relative;
+  }
+  .likert .opt input{
+    position:absolute; opacity:0; width:100%; height:100%; margin:0; cursor:pointer;
+  }
+  .likert .opt .circ{
+    width:100%;
+    aspect-ratio:1/1;
+    max-height:42px;
+    border-radius:10px;
+    border:1.5px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    font-size:14px;
+    color:var(--text-muted);
+    background:#fff;
+    transition:all .15s ease;
+  }
+  .likert .opt input:checked + .circ{
+    background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color:var(--primary-dark);
+    color:#fff;
+    transform:scale(1.05);
+    box-shadow:0 6px 14px -6px rgba(14,124,123,0.6);
+  }
+
+  /* Floating progress badge */
+  .float-badge{
+    position:fixed;
+    right:16px; bottom:16px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:99px;
+    padding:8px 16px 8px 8px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 12px 28px -10px rgba(14,124,123,0.4);
+    z-index:20;
+    font-family:'Plus Jakarta Sans';
+  }
+  .float-badge .ring{
+    width:34px;height:34px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .float-badge .txt{
+    font-size:12px;
+    font-weight:700;
+    color:var(--primary-dark);
+    white-space:nowrap;
+  }
+
+  .submit-block{
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px dashed var(--border);
+  }
+  .submit-note{
+    font-size:12px;
+    color:var(--text-muted);
+    text-align:center;
+    margin-top:10px;
+    font-weight:500;
+  }
+
+  /* Thank you screen */
+  .done-icon{
+    width:70px;height:70px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--primary-light), #fff);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 20px;
+    box-shadow:inset 0 0 0 1px var(--border);
+  }
+  .done-icon svg{width:34px;height:34px;stroke:var(--primary-dark);}
+  .center{text-align:center;}
+
+  .spinner{
+    width:18px;height:18px;
+    border:2.5px solid rgba(255,255,255,0.4);
+    border-top-color:#fff;
+    border-radius:50%;
+    animation:spin .7s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="badge">RS</div>
+    <div class="brand">Kuesioner Penelitian Akademik<strong>Organizational Identification Study</strong></div>
+  </div>
+
+  <div class="stepper" id="stepper">
+    <div class="seg current" data-step="0"></div>
+    <div class="seg" data-step="1"></div>
+    <div class="seg" data-step="2"></div>
+  </div>
+
+  <div class="card">
+
+    <!-- SCREEN 1: INTRO -->
+    <section class="screen active" id="screen-intro">
+      <div class="intro-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      </div>
+      <h1 class="title">Selamat Datang</h1>
+      <p class="subtitle">Mohon luangkan waktu sekitar 5 menit untuk mengisi kuesioner ini.</p>
+
+      <div class="intro-text">
+        <p>Terima kasih atas kesediaan Anda meluangkan waktu untuk mengisi kuesioner ini.</p>
+
+        <div class="highlight-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          <p>Kuesioner ini tidak meminta identitas pribadi seperti nama, nomor induk pegawai, atau informasi lain yang dapat mengidentifikasi Anda. Seluruh jawaban yang diberikan bersifat anonim, dijaga kerahasiaannya, dan hanya digunakan untuk keperluan penelitian akademik.</p>
+        </div>
+
+        <p>Kami mengharapkan Anda menjawab setiap pertanyaan secara jujur, objektif, dan sesuai dengan pengalaman serta kondisi yang Anda rasakan. Tidak ada jawaban yang benar atau salah. Kejujuran Anda sangat penting untuk menghasilkan data penelitian yang valid, akurat, dan dapat dipertanggungjawabkan.</p>
+        <p>Penelitian ini tidak berhubungan dengan penilaian kinerja, evaluasi individu, maupun kebijakan kepegawaian di Mayapada Hospital. Seluruh hasil akan dianalisis dan disajikan dalam bentuk data kelompok sehingga tidak dapat digunakan untuk mengidentifikasi responden secara individu.</p>
+      </div>
+
+      <div class="assurance">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+        <p>Data Anda 100% anonim &amp; rahasia — semata untuk kepentingan riset.</p>
+      </div>
+
+      <button class="btn btn-primary" onclick="goToStep(1)">
+        Lanjut Mengisi Kuesioner
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </section>
+
+    <!-- SCREEN 2: DATA DIRI -->
+    <section class="screen" id="screen-demografi">
+      <h1 class="title">Data Diri Responden</h1>
+      <p class="subtitle">Data berikut hanya untuk keperluan kelompok analisis, bukan identitas pribadi.</p>
+
+      <form id="formDemografi" novalidate>
+        <div class="field">
+          <label>Usia <span class="hint">(dalam tahun)</span></label>
+          <div class="suffix-wrap">
+            <input type="number" class="input" id="usia" min="17" max="70" placeholder="Contoh: 25" required>
+            <span class="suffix">Tahun</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Jenis Kelamin</label>
+          <div class="radio-row">
+            <label class="radio-pill">
+              <input type="radio" name="jenisKelamin" value="Pria" required>
+              <div class="box">Pria</div>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="jenisKelamin" value="Wanita" required>
+              <div class="box">Wanita</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Ruangan</label>
+          <div class="select-wrap">
+            <select id="ruangan" required>
+              <option value="" disabled selected>Pilih ruangan Anda</option>
+              <option value="Ward 8">Ward 8</option>
+              <option value="Ward 9">Ward 9</option>
+              <option value="Ward 11">Ward 11</option>
+              <!-- Tambahkan opsi ruangan lain di sini, contoh: <option value="Ward 12">Ward 12</option> -->
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Lama Bekerja <span class="hint">(dalam tahun)</span></label>
+          <div class="suffix-wrap">
+            <input type="number" class="input" id="lamaBekerja" min="0" max="50" step="0.5" placeholder="Contoh: 5" required>
+            <span class="suffix">Tahun</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Jenjang Pendidikan</label>
+          <div class="select-wrap">
+            <select id="pendidikan" required>
+              <option value="" disabled selected>Pilih jenjang pendidikan</option>
+              <option value="D3 Keperawatan">D3 Keperawatan</option>
+              <option value="D4 Keperawatan">D4 Keperawatan</option>
+              <option value="Ners">Ners</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="error-msg" id="errDemografi">Mohon lengkapi seluruh data di atas sebelum melanjutkan.</p>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:6px;">
+          Lanjut ke Kuesioner
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <button type="button" class="btn btn-ghost" onclick="goToStep(0)">← Kembali</button>
+      </form>
+    </section>
+
+    <!-- SCREEN 3: KUESIONER -->
+    <section class="screen" id="screen-kuesioner">
+      <h1 class="title">Kuesioner Penelitian</h1>
+      <p class="subtitle">Pilih angka 1–5 sesuai dengan kondisi yang paling menggambarkan diri Anda.</p>
+
+      <div class="legend">
+        <div class="legend-title">Skala Jawaban</div>
+        <div class="legend-scale">
+          <div>1<br>Sangat<br>Tidak Setuju</div>
+          <div>2<br>Tidak<br>Setuju</div>
+          <div>3<br>Cukup<br>Setuju</div>
+          <div>4<br>Setuju</div>
+          <div>5<br>Sangat<br>Setuju</div>
+        </div>
+      </div>
+
+      <form id="formKuesioner"></form>
+
+      <div class="submit-block">
+        <p class="error-msg" id="errKuesioner">Masih ada pertanyaan yang belum dijawab. Mohon lengkapi seluruh pertanyaan.</p>
+        <button type="button" class="btn btn-primary" id="btnSubmit" onclick="validateKuesioner()">
+          <span id="submitLabel">Lanjutkan</span>
+        </button>
+        <p class="submit-note">Pastikan seluruh 25 pertanyaan telah terjawab sebelum melanjutkan.</p>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: CATATAN TAMBAHAN (OPSIONAL) -->
+    <section class="screen" id="screen-info">
+      <h1 class="title">Catatan Tambahan <span class="optional-tag">Opsional</span></h1>
+      <p class="subtitle">Ruang bebas untuk Anda menyampaikan hal yang ingin diungkapkan.</p>
+
+      <div class="intro-text">
+        <p>Sebelum mengirimkan jawaban, apabila Anda berkenan, silakan gunakan kolom di bawah ini untuk menyampaikan pengalaman, pendapat, keluh kesah, saran, atau hal lain yang ingin Anda ungkapkan terkait pekerjaan maupun lingkungan kerja.</p>
+        <p>Kolom ini disediakan sebagai ruang yang bebas bagi Anda untuk menyampaikan hal-hal yang mungkin belum pernah dapat disampaikan secara terbuka. Tidak ada penilaian terhadap isi jawaban Anda, dan Anda tidak perlu mencantumkan nama atau identitas pribadi.</p>
+        <p>Seluruh informasi yang Anda tuliskan akan dijaga kerahasiaannya, digunakan hanya untuk kepentingan penelitian, serta dianalisis secara anonim bersama jawaban kuesioner lainnya. Harap tetap menghindari penyebutan nama individu atau informasi yang dapat mengungkap identitas Anda maupun orang lain.</p>
+        <p>Silakan tuliskan apabila Anda ingin berbagi. Kolom ini bersifat opsional.</p>
+      </div>
+
+      <div class="field">
+        <label>Cerita, Pendapat, atau Saran Anda</label>
+        <textarea class="input" id="infoText" rows="6" placeholder="Tuliskan di sini..."></textarea>
+        <div class="field-hint-box">
+          <p><strong>Panduan pengisian:</strong> Tidak ada format khusus. Tuliskan apa pun yang ingin Anda sampaikan, baik pengalaman yang menyenangkan, tantangan yang Anda hadapi, harapan untuk perbaikan, maupun hal-hal yang selama ini belum sempat Anda ungkapkan. Contoh: "Saya merasa didukung oleh tim sehingga nyaman bekerja.", "Saya sering merasa kelelahan karena beban kerja yang tinggi.", atau "Saya berharap komunikasi antarunit dapat ditingkatkan."</p>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" id="btnSubmitFinal" onclick="submitKuesioner()">
+        <span id="submitFinalLabel">Kirim Jawaban</span>
+      </button>
+      <button type="button" class="btn btn-ghost" onclick="goToStep(2)">← Kembali ke Kuesioner</button>
+      <p class="error-msg" id="errInfo">Gagal mengirim data. Periksa koneksi internet Anda dan coba lagi.</p>
+    </section>
+
+    <!-- SCREEN 5: SELESAI -->
+    <section class="screen" id="screen-selesai">
+      <div class="done-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h1 class="title center">Terima Kasih!</h1>
+      <p class="subtitle center" id="selesaiMsg">Jawaban Anda telah berhasil dikirim dan tersimpan secara anonim. Kontribusi Anda sangat berarti bagi penelitian ini.</p>
+    </section>
+
+  </div>
+</div>
+
+<!-- Floating progress badge (hanya tampil di layar kuesioner) -->
+<div class="float-badge" id="floatBadge" style="display:none;">
+  <svg class="ring" id="ringSvg" viewBox="0 0 36 36">
+    <circle cx="18" cy="18" r="15.5" fill="none" stroke="#E7F5F3" stroke-width="4"></circle>
+    <circle cx="18" cy="18" r="15.5" fill="none" stroke="#0E7C7B" stroke-width="4" stroke-linecap="round"
+      id="ringProgress" stroke-dasharray="97.4" stroke-dashoffset="97.4" transform="rotate(-90 18 18)"></circle>
+  </svg>
+  <div class="txt" id="badgeText">0 / 25 terjawab</div>
+</div>
+
+<script>
+  // ================= KONFIGURASI =================
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxztcXZAfZTBuVr4vv1LJrte8awRYiX1aInjYq2bZknFxU_mI3fhDbAqVQFGeFGzXyY/exec";
+
+  const SECTIONS = [
+    { title: "Organizational Identification", questions: [
+      "Saya lebih sering mengatakan 'kita' daripada 'mereka' ketika berbicara tentang organisasi.",
+      "Saya tertarik pada pendapat orang lain tentang tempat saya bekerja.",
+      "Saya merasa bangga dapat mengidentifikasi diri dengan organisasi ini.",
+      "Saya merasakan keberhasilan organisasi sebagai keberhasilan pribadi.",
+      "Saya merasa malu atau tersinggung ketika organisasi ini dikritik secara eksternal."
+    ]},
+    { title: "Turnover Intention", questions: [
+      "Saya memiliki keinginan untuk mencari pekerjaan di organisasi lain.",
+      "Saya berniat untuk mengundurkan diri dari organisasi ini dalam waktu dekat.",
+      "Saya sering memikirkan kemungkinan untuk resign dari pekerjaan ini.",
+      "Komitmen saya untuk bertahan di organisasi ini semakin menurun.",
+      "Saya merasa siap untuk meninggalkan pekerjaan saya saat ini."
+    ]},
+    { title: "Emotional Exhaustion", questions: [
+      "Saya merasa kelelahan secara emosional setelah bekerja.",
+      "Saya merasa kehabisan energi untuk menghadapi tuntutan pekerjaan.",
+      "Saya merasa lelah secara mental bahkan sebelum memulai pekerjaan.",
+      "Saya mengalami kesulitan memulihkan energi emosional setelah jam kerja.",
+      "Saya merasa terkuras akibat interaksi kerja yang intens."
+    ]},
+    { title: "Role Conflict", questions: [
+      "Saya menghadapi tuntutan pekerjaan yang saling bertentangan.",
+      "Saya mengalami kesulitan memenuhi harapan dari lebih dari satu pihak.",
+      "Saya merasa bingung dalam menentukan prioritas tugas.",
+      "Saya merasa tertekan akibat ekspektasi peran yang tidak konsisten.",
+      "Saya mengalami ketidakjelasan dalam mengambil keputusan kerja karena konflik tuntutan peran."
+    ]},
+    { title: "Moral Distress", questions: [
+      "Saya merasa bersalah atau frustrasi karena tidak dapat melakukan tindakan yang saya anggap benar.",
+      "Saya mengalami tekanan emosional saat menghadapi keputusan etis yang bertentangan.",
+      "Saya merasa tidak berdaya dalam situasi klinis tertentu.",
+      "Saya merasa cemas akibat keterbatasan wewenang dalam pengambilan keputusan.",
+      "Saya merasakan ketegangan emosional setelah menghadapi dilema moral di tempat kerja."
+    ]}
+  ];
+
+  const TOTAL_Q = 25;
+  const RING_CIRC = 97.4; // 2 * PI * 15.5
+
+  // ================= BUILD KUESIONER =================
+  const formKuesioner = document.getElementById('formKuesioner');
+  let qCounter = 0;
+
+  SECTIONS.forEach((section, sIdx) => {
+    const st = document.createElement('div');
+    st.className = 'section-title';
+    st.innerHTML = `<span class="dot"></span><h3>${section.title}</h3>`;
+    formKuesioner.appendChild(st);
+
+    section.questions.forEach((qText) => {
+      qCounter++;
+      const qNum = qCounter;
+      const q = document.createElement('div');
+      q.className = 'question';
+      q.id = `question-${qNum}`;
+      q.innerHTML = `
+        <div class="q-text"><span class="num">${qNum}</span>${qText}</div>
+        <div class="likert">
+          ${[1,2,3,4,5].map(v => `
+            <label class="opt">
+              <input type="radio" name="Q${qNum}" value="${v}">
+              <div class="circ">${v}</div>
+            </label>
+          `).join('')}
+        </div>
+      `;
+      formKuesioner.appendChild(q);
+    });
+  });
+
+  // update progress badge & question highlight when answered
+  formKuesioner.addEventListener('change', (e) => {
+    if (e.target.type === 'radio') {
+      const qDiv = e.target.closest('.question');
+      qDiv.classList.add('answered');
+      qDiv.classList.remove('error');
+      updateProgress();
+    }
+  });
+
+  function updateProgress(){
+    const answered = document.querySelectorAll('#formKuesioner input[type=radio]:checked').length;
+    document.getElementById('badgeText').textContent = `${answered} / ${TOTAL_Q} terjawab`;
+    const offset = RING_CIRC - (RING_CIRC * (answered / TOTAL_Q));
+    document.getElementById('ringProgress').style.strokeDashoffset = offset;
+  }
+
+  // ================= NAVIGASI STEP =================
+  const screens = ['screen-intro','screen-demografi','screen-kuesioner','screen-info','screen-selesai'];
+  function goToStep(stepIndex){
+    screens.forEach((id, i) => {
+      document.getElementById(id).classList.toggle('active', i === stepIndex);
+    });
+    // stepper indicator (3 segmen: intro, demografi, kuesioner/info/selesai)
+    const segMap = [0,1,2,2,2];
+    document.querySelectorAll('#stepper .seg').forEach((seg, i) => {
+      seg.classList.remove('done','current');
+      const target = segMap[stepIndex];
+      if (i < target) seg.classList.add('done');
+      if (i === target) seg.classList.add('current');
+    });
+    document.getElementById('floatBadge').style.display = (stepIndex === 2) ? 'flex' : 'none';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // ================= VALIDASI DATA DIRI =================
+  document.getElementById('formDemografi').addEventListener('submit', function(e){
+    e.preventDefault();
+    const usia = document.getElementById('usia').value;
+    const gender = document.querySelector('input[name="jenisKelamin"]:checked');
+    const ruangan = document.getElementById('ruangan').value;
+    const lama = document.getElementById('lamaBekerja').value;
+    const pendidikan = document.getElementById('pendidikan').value;
+    const err = document.getElementById('errDemografi');
+
+    if (!usia || !gender || !ruangan || lama === '' || !pendidikan){
+      err.classList.add('show');
+      return;
+    }
+    err.classList.remove('show');
+    goToStep(2);
+  });
+
+  // ================= VALIDASI KUESIONER =================
+  function validateKuesioner(){
+    const answered = document.querySelectorAll('#formKuesioner input[type=radio]:checked').length;
+    const err = document.getElementById('errKuesioner');
+
+    if (answered < TOTAL_Q){
+      // highlight unanswered & scroll to first one
+      let firstUnanswered = null;
+      for (let i = 1; i <= TOTAL_Q; i++){
+        const checked = document.querySelector(`input[name="Q${i}"]:checked`);
+        const qDiv = document.getElementById(`question-${i}`);
+        if (!checked){
+          qDiv.classList.add('error');
+          if (!firstUnanswered) firstUnanswered = qDiv;
+        }
+      }
+      err.classList.add('show');
+      if (firstUnanswered) firstUnanswered.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    err.classList.remove('show');
+    goToStep(3);
+  }
+
+  // ================= SUBMIT AKHIR (TERMASUK CATATAN TAMBAHAN) =================
+  async function submitKuesioner(){
+    const btn = document.getElementById('btnSubmitFinal');
+    const label = document.getElementById('submitFinalLabel');
+    const errInfo = document.getElementById('errInfo');
+    errInfo.classList.remove('show');
+    btn.disabled = true;
+    label.innerHTML = '<span class="spinner"></span> Mengirim...';
+
+    // Kumpulkan data
+    const payload = {
+      "Timestamp": new Date().toLocaleString('id-ID'),
+      "Usia": document.getElementById('usia').value + " Tahun",
+      "Jenis Kelamin": document.querySelector('input[name="jenisKelamin"]:checked').value,
+      "Ruangan": document.getElementById('ruangan').value,
+      "Lama Bekerja": document.getElementById('lamaBekerja').value + " Tahun",
+      "Jenjang Pendidikan": document.getElementById('pendidikan').value
+    };
+    for (let i = 1; i <= TOTAL_Q; i++){
+      payload["Q" + i] = document.querySelector(`input[name="Q${i}"]:checked`).value;
+    }
+    payload["Info"] = document.getElementById('infoText').value.trim();
+
+    try {
+      const formData = new URLSearchParams();
+      Object.keys(payload).forEach(key => formData.append(key, payload[key]));
+
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
+      });
+
+      goToStep(4);
+    } catch (error){
+      label.textContent = 'Kirim Jawaban';
+      btn.disabled = false;
+      errInfo.classList.add('show');
+    }
+  }
+</script>
+</body>
+</html>
