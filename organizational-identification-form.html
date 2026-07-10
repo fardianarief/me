@@ -494,6 +494,24 @@
   .done-icon svg{width:34px;height:34px;stroke:var(--primary-dark);}
   .center{text-align:center;}
 
+  .submit-progress{
+    width:100%;
+    height:6px;
+    border-radius:99px;
+    background:rgba(255,255,255,0.35);
+    overflow:hidden;
+    margin-top:10px;
+    display:none;
+  }
+  .submit-progress.show{display:block;}
+  .submit-progress .fill{
+    height:100%;
+    width:0%;
+    border-radius:99px;
+    background:#fff;
+    transition:width .3s ease;
+  }
+
   .spinner{
     width:18px;height:18px;
     border:2.5px solid rgba(255,255,255,0.4);
@@ -672,6 +690,7 @@
       <button type="button" class="btn btn-primary" id="btnSubmitFinal" onclick="submitKuesioner()">
         <span id="submitFinalLabel">Kirim Jawaban</span>
       </button>
+      <div class="submit-progress" id="submitProgress"><div class="fill" id="submitProgressFill"></div></div>
       <button type="button" class="btn btn-ghost" onclick="goToStep(2)">← Kembali ke Kuesioner</button>
       <p class="error-msg" id="errInfo">Gagal mengirim data. Periksa koneksi internet Anda dan coba lagi.</p>
     </section>
@@ -856,9 +875,24 @@
     const btn = document.getElementById('btnSubmitFinal');
     const label = document.getElementById('submitFinalLabel');
     const errInfo = document.getElementById('errInfo');
+    const progress = document.getElementById('submitProgress');
+    const progressFill = document.getElementById('submitProgressFill');
+
     errInfo.classList.remove('show');
     btn.disabled = true;
-    label.innerHTML = '<span class="spinner"></span> Mengirim...';
+    label.textContent = 'Mengirim...';
+    progress.classList.add('show');
+    progressFill.style.width = '0%';
+
+    // Simulasi progress bertahap selama menunggu respons server.
+    // Naik cepat di awal, melambat mendekati 90% (belum tahu kapan respons akan datang),
+    // lalu dilompatkan ke 100% begitu respons benar-benar diterima.
+    let simulatedPct = 0;
+    const progressTimer = setInterval(() => {
+      const step = simulatedPct < 60 ? 4 : simulatedPct < 85 ? 1 : 0.3;
+      simulatedPct = Math.min(simulatedPct + step, 90);
+      progressFill.style.width = simulatedPct + '%';
+    }, 200);
 
     // Kumpulkan data
     const payload = {
@@ -878,19 +912,22 @@
       const formData = new URLSearchParams();
       Object.keys(payload).forEach(key => formData.append(key, payload[key]));
 
-      // Kirim data tanpa menunggu respons Apps Script selesai diproses.
-      // Permintaan tetap berjalan di background dan data tetap tersimpan,
-      // tapi pengguna tidak perlu menunggu cold-start Google Apps Script yang lambat.
-      fetch(SCRIPT_URL, {
+      await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString()
-      }).catch(err => console.error('Gagal mengirim ke spreadsheet:', err));
+      });
 
-      // Beri jeda singkat agar animasi spinner terlihat wajar, lalu lanjut.
-      setTimeout(() => { goToStep(4); }, 700);
+      clearInterval(progressTimer);
+      progressFill.style.width = '100%';
+      label.textContent = 'Terkirim!';
+
+      setTimeout(() => { goToStep(4); }, 400);
     } catch (error){
+      clearInterval(progressTimer);
+      progress.classList.remove('show');
+      progressFill.style.width = '0%';
       label.textContent = 'Kirim Jawaban';
       btn.disabled = false;
       errInfo.classList.add('show');
