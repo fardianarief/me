@@ -159,9 +159,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
 .cert-card{background:var(--bg2);transition:background var(--tr);cursor:pointer;overflow:hidden;display:flex;flex-direction:column}
 .cert-card:hover{background:var(--surface)}
-.cert-card-img{width:100%;height:220px;overflow:hidden;background:var(--bg3);display:block}
+.cert-card-img{width:100%;height:220px;overflow:hidden;background:var(--bg3);display:block;cursor:pointer}
 .cert-card-img img{width:100%;height:100%;object-fit:fill;display:block;transition:transform 0.5s ease}
-.cert-card:hover .cert-card-img img{transform:scale(1.03)}
+.cert-card-img:hover img{transform:scale(1.05)}
 .cert-card-body{padding:20px}
 .cert-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
 .cert-icon{font-size:1.4rem}
@@ -218,7 +218,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 
 /* GALLERY */
 .gallery-filter{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;margin-bottom:36px}
-.filter-btn{padding:8px 18px;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr)}
+.filter-btn{padding:8px 16px;font-size:0.66rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr);white-space:nowrap}
 .filter-btn.active,.filter-btn:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
 [data-theme="dark"] .filter-btn.active,[data-theme="dark"] .filter-btn:hover{color:var(--bg)}
 .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border)}
@@ -476,7 +476,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
       </div>
     </div>
     <div class="profile-wrap">
-      <div class="insignia-bar">✦ Tech - Nurse Pioneer ✦</div>
+      <div class="insignia-bar">✦ hey There, It's me ✦</div>
       <div class="profile-card">
         <div class="profile-card-photo">
           <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjAnzbdbjDBENUlM9MdL6MZT-xlMdY0rRZVVtcNJ43zfLr6C4TO8232pBD1hfStp8q9v4UbCA8KIIhlz8tMLOzqNUAKjuMqYf88GQCgGsoGQFQzgM2Z1P2Mr7doJXzt6S6GzqUOtwnC_RjIVjpSV7HiKbHO_nQB527pIIWzzDK6gB6PTnO3__76-2fOmQ2x/s16000/1000111421.jpg" alt="M. Arief Fardhiansyah" loading="eager">
@@ -865,14 +865,16 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
   <div class="container">
     <div class="sec-header reveal">
       <div class="sec-label">Gallery</div>
-      <h2 class="sec-title">Moments &amp; Milestones</h2>
+      <h2 class="sec-title">Professional Moments &amp; Milestones</h2>
       <p class="sec-sub">A visual record of work, achievements, and meaningful experiences.</p>
     </div>
     <div class="gallery-filter reveal">
       <button class="filter-btn active" onclick="filterGallery('all',this)">All</button>
-      <button class="filter-btn" onclick="filterGallery('work',this)">Work</button>
-      <button class="filter-btn" onclick="filterGallery('cert',this)">Certificates</button>
       <button class="filter-btn" onclick="filterGallery('event',this)">Events</button>
+      <button class="filter-btn" onclick="filterGallery('speaking',this)">Speaking</button>
+      <button class="filter-btn" onclick="filterGallery('project',this)">Projects</button>
+      <button class="filter-btn" onclick="filterGallery('award',this)">Awards &amp; Recognition</button>
+      <button class="filter-btn" onclick="filterGallery('activity',this)">Professional Activities</button>
     </div>
     <div class="gallery-grid" id="galleryGrid"></div>
     <!-- Pagination Gallery -->
@@ -1051,8 +1053,8 @@ document.querySelectorAll('.skill-fill').forEach(function(f){f.style.width='0%';
 // ══════════════════════════════════════════
 var CERTS = [
    {
-    cat:'cert', icon:'📊', status:'Verified', issuer:'Special Skill Indonesia',
-    title:'Certified Energy Management Professional (CEMP)', date:'Issued 2026 · ID: SSB40E018',
+    cat:'cert', icon:'📊', status:'Verified', issuer:'ACCREVIA',
+    title:'Certified Energy Management Professional (CEMP)', date:'Issued 2026',
     link:'',
     img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7_sV-o6kENyPKZ3hvNhnnqaLlvQutX5ZipVuXPSD_SeOO4Prsp5mxLyTcRLfHm43qrwAihc5CbYKtdgydhSzBcGK_Le8sWPgROB1y6js-UtLLbzvgBPLzU9JrcdZ9FGHyJ2Mj1vqhRdDyjcxfCRJYnXI98WzE09SZpQIzxKYeYZtp89wPq6rCIMws6HE/s1600/WhatsApp%20Image%202026-07-19%20at%2023.16.17.jpeg',
     alt:'CEMP'
@@ -1192,10 +1194,11 @@ function renderCertGrid() {
   var start = (certCurrentPage - 1) * certPerPage;
   var pageItems = filtered.slice(start, start + certPerPage);
   var grid = document.getElementById('certGrid');
-  grid.innerHTML = pageItems.map(function(c){
+  window.currentCertPageItems = pageItems;
+  grid.innerHTML = pageItems.map(function(c, idx){
     return [
       '<div class="cert-card" data-cat="'+c.cat+'">',
-        '<div class="cert-card-img"><img src="'+c.img+'" alt="'+c.alt+'" loading="lazy"></div>',
+        '<div class="cert-card-img" onclick="openLightbox('+idx+',\'cert\')"><img src="'+c.img+'" alt="'+c.alt+'" loading="lazy"></div>',
         '<div class="cert-card-body">',
           '<div class="cert-card-top"><div class="cert-icon">'+c.icon+'</div><div class="cert-status">'+c.status+'</div></div>',
           '<div class="cert-issuer">'+c.issuer+'</div>',
@@ -1250,26 +1253,27 @@ renderCertGrid();
 // ══════════════════════════════════════════
 var GALLERY = [
   { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEio9TV53azGraXR4v0g0uhurJ8RtXY8ms_eW0bYsO4BqtK0iTH265hTfz9Cep9Irvrbd-hWGtyPKubfVFiAW56uQTrI_AbYYc1SPE_xvdecsH51bX-e4QyxYsAwM5OuoukZmZRerm3fXVL53JXjf8DkUubVrTfxvjOYLAHqVESFKUXjDvoKi_nNgsrsO54/s1600/WhatsApp%20Image%202026-08-12%20at%2015.10.43%20(1).jpeg', title:'National LAFKI Accreditation', year:'POKJA MRMIK · 2026' }, 
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHjKdD7sFFUcmJIn28vMin137gClADRvJWaMKLN2sRiZbnaHzzcsTynHJ2Ne8omfEV135G3XCtckRK_f0Vn_PYp-Um7rQwYw4qnbhc25rga0gVHF6pvqiCehEbIQG_Qjz3Tf4hdbA62Qc1fm4X3mU91CReVp2BjmUNGgRdQQIYGZa6RJ7SSr894hxsgLE/s1600/WhatsApp%20Image%202026-08-12%20at%2015.10.43.jpeg', title:'Lead Training Diagnostic Module', year:'Syngo Carbon Space · 2026' }, 
- { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTsUpXiGPT-0509qR6awcpqQxoSGn3EepKXUjJKQmtot8mWtPW2tSy1EIG5h24j6QcODNa9KU84vkBh0ltVRx717gzXnsfOapS8j9RFvIcKJ6roMvx_kNbWkGRLoTmEUzzoPjomDJ6b3C8ZhZMnU4TKxau25-QcIIX13xghD3_xOg61WSm-UH8UtO-o2c/s1600/WhatsApp%20Image%202026-08-12%20at%2015.10.42.jpeg', title:'Lead Training Diagnostic Module', year:'Syngo Carbon Space · 2026' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZJ-iYD7U5NJomjKys8ikds7unEF4qy4KmoOXi9jIJx0YFJvUB-VodfnNZt9Bc_ElRjoho1BXp1srmXnP0ytGi2hWKMBh8Ba__-BgQIUaj5nn6wf4wtWRGVFPB2tPUbpEZtAoX5k-b0b09cz3sYQR7YMX7MDt5CcO8CTllJVIZ_hTEDBunzHiXyq8IZkI/s1600/WhatsApp%20Image%202026-08-12%20at%2015.10.42%20(1).jpeg', title:'Lead Training Diagnostic Module', year:'Syngo Carbon Space · 2026' },
+  { cat:'project', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHjKdD7sFFUcmJIn28vMin137gClADRvJWaMKLN2sRiZbnaHzzcsTynHJ2Ne8omfEV135G3XCtckRK_f0Vn_PYp-Um7rQwYw4qnbhc25rga0gVHF6pvqiCehEbIQG_Qjz3Tf4hdbA62Qc1fm4X3mU91CReVp2BjmUNGgRdQQIYGZa6RJ7SSr894hxsgLE/s1600/WhatsApp%20Image%202026-08-12%20at%2015.10.43.jpeg', title:'Lead Training Diagnostic Module', year:'Syngo Carbon Space · 2026' }, 
+ { cat:'project', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTsUpXiGPT-0509qR6awcpqQxoSGn3EepKXUjJKQmtot8mWtPW2tSy1EIG5h24j6QcODNa9KU84vkBh0ltVRx717gzXnsfOapS8j9RFvIcKJ6roMvx_kNbWkGRLoTmEUzzoPjomDJ6b3C8ZhZMnU4TKxau25-QcIIX13xghD3_xOg61WSm-UH8UtO-o2c/s1600/WhatsApp%20Image%202026-08-12%20at%2015.10.42.jpeg', title:'Lead Training Diagnostic Module', year:'Syngo Carbon Space · 2026' },
+  { cat:'project', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZJ-iYD7U5NJomjKys8ikds7unEF4qy4KmoOXi9jIJx0YFJvUB-VodfnNZt9Bc_ElRjoho1BXp1srmXnP0ytGi2hWKMBh8Ba__-BgQIUaj5nn6wf4wtWRGVFPB2tPUbpEZtAoX5k-b0b09cz3sYQR7YMX7MDt5CcO8CTllJVIZ_hTEDBunzHiXyq8IZkI/s1600/WhatsApp%20Image%202026-08-12%20at%2015.10.42%20(1).jpeg', title:'Lead Training Diagnostic Module', year:'Syngo Carbon Space · 2026' },
   { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4j0WftymgEbwVi7mF3k7EhCbhgf5xlgl8uUngmPpOqn1UduM-Q2IggrlywKZExFamghCSkI_n59_QEPwJ0fw69tgGfq4wvu9BjL9Qiax6FUBsjwzC3kaanDWNZyrJJE6fluHTLpAecwGyrUMRXSBeAxVAvf4oZL10XXbzChq6z1ZDkeQwI-1OyCo_xtQ/s1600/imagesfegrfb.png', title:'Benchmark MHTG to MHJS', year:'Visitation · 2026' },
-  { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJSL_v6mpjYH_ZcKeaD3CtP8NHJBYbi1NdK0dbfVHPtle_96MtPSOXvxQd4298XnZL-ui8IhnVpcb6lkwD0T1J_ve4BYsS8vt5bwZWYOSU5_cLPNgk-oTYF3_1uh3nTqR2c9Y9svyEcG0ExSZ1ObNpgeLCp0oGWSsimwasfvldfLqtNM-dwQRFg2QklOU/s480/1782368794599.jpg', title:'Webinar Digital SSI', year:'Webinar · 2026' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxm8gPKbnLjytmHn4m3wNHwFVWdve-d-pfn_bZsCKloaF5zM_Cgba0OHBq8CPXxCitEylhLNhJsGFdD5My3y8gGFW0Q7Xyi2WlVM8Ip9_KsBidqyhKwsfm27pRd-4fmKVZnrnBb0YT-aQZhNd9Pi6IBCZT0Q0XjsFtAhvN6rqX7XOM32OHK8dS-pyHVM7X/s16000/1000111553.jpg', title:'Simulation HIS to Nuclear Medicine 2', year:'Work · 2026' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsPSSbof0vVS_grnWevqGhKx5P2mTrx6TTqZdn6ECO-x9ga21qt4RuIyFm_CS6xt7frQYTAXf0xLrXGnre_QJG4RmZaa2T61z_9D9p5DDYG-q1zP-et5FcllDbiNVTpSB-mbennH2Ff2AuwmtPg0bTnDrzrbXu5IGHq4TbReS3gI6qmHIH35ZSverStz6G/s16000/1000111550.jpg', title:'Simulation HIS to Nuclear Medicine 1', year:'Work · 2026' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4M871o8i-0bA9mp1YjzEtt4bEO8E7PVnUrhZFB2DytVwOfdvn5qeMMknpJ5jMyJihKEDG5IqSx8BjXUV9A9zv0XBUnJNF5ijdZKAJCS0jy4JB_uHDSHBD3wY6yem8FGmblQE3apesW5vtrOluEfeJIVGcsgyrj0_7VvbcR4-BcS4wqlEWYquIncb-hmKY/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.05%20(1).jpeg', title:'HIS Training New user Jan 2026', year:'Work · 2026' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg', title:'HIS Training New User', year:'Work · 2025' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicQviH8UjWRSXpXMtIIFJQSqkFdFyX6G9_bYVpvRSLc6QzrggQ3HPW2WUes1ePhxkH6tgq4wYuh7pC5p-bOuZ9CAYj3668PpfVaBjsBpVl1ToshoPEUqHYev59uSUA4jJ9k9vV2oTF9OXErarMJTZboerbeSiwt178om7p5qM7-yr5kJhd6tdIwzn7z9ty/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.30.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcH6hyePdxVoGylvvSfoGozTN9crgcpr9XIwkvE8Ked02ntI5e0f-Al_-d801qbjEvzdCZWxOSVn33I2vP3_6MqrTsysyovlfezmCWXsBK0gSCWD3i1ltmTaJHgWnLMADGvO99LoJvgiEBLanhHk-Reyhnh0JkaPuNV15v8uums0FYz67hsCvs6DBiyAko/s16000/wegrfngh.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvFo6Q9PTVBFkUk5DZz138hIa4MDlCcqyQs0nUNuzEWmYZEfVRdiMk_H2Bm60vZldY_YHuYyIZVXAKElcgxgBAT4hwEaGDKDcmMetxXzTWzLdGRScfbZ8CTvmtCIBlFF2ILBKLlNUVBUlB8qg0omLIXlT0VZeAnW4kUf80tUREFYHe8b4t6Yja-gQBeKzo/s16000/WhatsApp%20Image%202026-02-23%20aawfawft%2019.48.05.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJvsi0a1Dhyphenhyphen_ej6qxJWyTeCMJpEI3VF7A5tyXEYS043k1EADmox4iv5swQdkuqEEVf1RuN-XM5QRt3vG_9EKC-pE5jJED7LzXo-W28wg8LpIx82NXl8SAUEYBD4V-25ojoktm0kJuLKIJt2UzpA_mhr_tdiKCCEz6gJQ3tLJYWYStJoVT_JFT7ICrcpINf/s16000/Leadership%20round.jpg', title:'Leadership round to Operational', year:'Work · 2025' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9Sy9Sg0GG28BPoIjnvW8ErCxxATYGspYia9N8aY566OR6ZGz5DMsb_8WkvwvQhF6NrPi_hXDUmYbcbuG2xtUGX9R_rh-d7_XMeH5HgfK7Ba_Qrmh7Z0sz311g_uhcgX3Kh5h-wX84Prmp2ewuxyBGtl4Os-jDHNb3QMbn4O9w_D3EZ9XoEjBs0LfAOHIm/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.31.jpeg', title:'HIS Training New user Nov 2025', year:'Work · 2025' },
+  { cat:'speaking', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJSL_v6mpjYH_ZcKeaD3CtP8NHJBYbi1NdK0dbfVHPtle_96MtPSOXvxQd4298XnZL-ui8IhnVpcb6lkwD0T1J_ve4BYsS8vt5bwZWYOSU5_cLPNgk-oTYF3_1uh3nTqR2c9Y9svyEcG0ExSZ1ObNpgeLCp0oGWSsimwasfvldfLqtNM-dwQRFg2QklOU/s480/1782368794599.jpg', title:'Webinar Digital SSI', year:'Webinar · 2026' },
+   { cat:'speaking', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgApm-S1-JG4TPBxDYR2MqPk-1UlmliPZlHBmp1HSULDDTo_luUiNeDy0ksBdh87Zxz_G_m8zdh3n_CLMzEiSglvs4KKH6liWU9mnAkNO6zdMGExBbmbOd5d-4EOvlNB2RAYJPKyakeuVhb6z5JqAG5zqrcEwAkp_4kM75hW05sG4H6482XoIdlUJE0T8k/s1600/1782368795189.jpg', title:'Sertifikat Narasumber Webinar Digital SSI', year:'Webinar · 2026' },
+  { cat:'speaking', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxm8gPKbnLjytmHn4m3wNHwFVWdve-d-pfn_bZsCKloaF5zM_Cgba0OHBq8CPXxCitEylhLNhJsGFdD5My3y8gGFW0Q7Xyi2WlVM8Ip9_KsBidqyhKwsfm27pRd-4fmKVZnrnBb0YT-aQZhNd9Pi6IBCZT0Q0XjsFtAhvN6rqX7XOM32OHK8dS-pyHVM7X/s16000/1000111553.jpg', title:'Simulation HIS to Nuclear Medicine 2', year:'Work · 2026' },
+  { cat:'speaking', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsPSSbof0vVS_grnWevqGhKx5P2mTrx6TTqZdn6ECO-x9ga21qt4RuIyFm_CS6xt7frQYTAXf0xLrXGnre_QJG4RmZaa2T61z_9D9p5DDYG-q1zP-et5FcllDbiNVTpSB-mbennH2Ff2AuwmtPg0bTnDrzrbXu5IGHq4TbReS3gI6qmHIH35ZSverStz6G/s16000/1000111550.jpg', title:'Simulation HIS to Nuclear Medicine 1', year:'Work · 2026' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4M871o8i-0bA9mp1YjzEtt4bEO8E7PVnUrhZFB2DytVwOfdvn5qeMMknpJ5jMyJihKEDG5IqSx8BjXUV9A9zv0XBUnJNF5ijdZKAJCS0jy4JB_uHDSHBD3wY6yem8FGmblQE3apesW5vtrOluEfeJIVGcsgyrj0_7VvbcR4-BcS4wqlEWYquIncb-hmKY/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.05%20(1).jpeg', title:'HIS Training New user Jan 2026', year:'Work · 2026' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjU2QE1pIt0TQwBYnxwDBnxOxAxSK_u6MPxSL1axGn4ThNladAM7xgzxXV5tcxrddNnKQEtsm5ggqfr9dLRQdU6kmpT98d7feZnby4Yw-PsorRtZEO2QQQiYwNVZAAGFrWMcF9seYcvGvyiXGI_5iSSssMe0OkbR6zTI5uS31-AYSzbwudRinTp4fXx2m1c/s16000/Training%20HIS%203.jpg', title:'HIS Training New User', year:'Work · 2025' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEicQviH8UjWRSXpXMtIIFJQSqkFdFyX6G9_bYVpvRSLc6QzrggQ3HPW2WUes1ePhxkH6tgq4wYuh7pC5p-bOuZ9CAYj3668PpfVaBjsBpVl1ToshoPEUqHYev59uSUA4jJ9k9vV2oTF9OXErarMJTZboerbeSiwt178om7p5qM7-yr5kJhd6tdIwzn7z9ty/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.30.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcH6hyePdxVoGylvvSfoGozTN9crgcpr9XIwkvE8Ked02ntI5e0f-Al_-d801qbjEvzdCZWxOSVn33I2vP3_6MqrTsysyovlfezmCWXsBK0gSCWD3i1ltmTaJHgWnLMADGvO99LoJvgiEBLanhHk-Reyhnh0JkaPuNV15v8uums0FYz67hsCvs6DBiyAko/s16000/wegrfngh.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvFo6Q9PTVBFkUk5DZz138hIa4MDlCcqyQs0nUNuzEWmYZEfVRdiMk_H2Bm60vZldY_YHuYyIZVXAKElcgxgBAT4hwEaGDKDcmMetxXzTWzLdGRScfbZ8CTvmtCIBlFF2ILBKLlNUVBUlB8qg0omLIXlT0VZeAnW4kUf80tUREFYHe8b4t6Yja-gQBeKzo/s16000/WhatsApp%20Image%202026-02-23%20aawfawft%2019.48.05.jpeg', title:'HIS Training New user Dec 2025', year:'Work · 2025' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJvsi0a1Dhyphenhyphen_ej6qxJWyTeCMJpEI3VF7A5tyXEYS043k1EADmox4iv5swQdkuqEEVf1RuN-XM5QRt3vG_9EKC-pE5jJED7LzXo-W28wg8LpIx82NXl8SAUEYBD4V-25ojoktm0kJuLKIJt2UzpA_mhr_tdiKCCEz6gJQ3tLJYWYStJoVT_JFT7ICrcpINf/s16000/Leadership%20round.jpg', title:'Leadership round to Operational', year:'Work · 2025' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj9Sy9Sg0GG28BPoIjnvW8ErCxxATYGspYia9N8aY566OR6ZGz5DMsb_8WkvwvQhF6NrPi_hXDUmYbcbuG2xtUGX9R_rh-d7_XMeH5HgfK7Ba_Qrmh7Z0sz311g_uhcgX3Kh5h-wX84Prmp2ewuxyBGtl4Os-jDHNb3QMbn4O9w_D3EZ9XoEjBs0LfAOHIm/s16000/WhatsApp%20Image%202026-02-23%20at%2019.48.31.jpeg', title:'HIS Training New user Nov 2025', year:'Work · 2025' },
   { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbJVLQbGu7A6-F4ut3kCyYJgr88vJ_2JT79lSORspvuQWQ5fun6htrG6_eFkU91RF9g5zpG7mDyNkdpZOS44ZmpVw_yXQrIwcOBoTF0nIL2oc-92RlIczyjnzX6tFVDOEevLkINcA0JkfQMleHThKYLYutRPKGCLRlgj7Ff7x8LC5GyomC9i9bBAs55G52/s16000/JCI%201.jpg', title:'Re Acredited Internal JCI International', year:'Event · 2025' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwPxXlCVnq1rQOkPIvc4Yt6GzyX1siNkmitFcAmFwp2PAOmf0GGYH6nURHWoHBhWC8nyTqfBYvNSJ2rRy_j_mbUet8lojmmh6gj8CKEgsnHWrUSBWuW8FYHMdvNpaxRP-zkHENOJj3eU3UubeTPPGsc9DDWR4l41aJzwCs8t0XcSjPSZbKuVyQsoBV9o27/s16000/training%20HIS%201.jpg', title:'HIS End User Training 2', year:'Work · 2024' },
-  { cat:'work', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCZlS8WcJ7mNQ9vEEBPztowhGMTs6ZctT2h2LTe0xejryn6dNnJts_caUiOdVd4e533ml4je-MU8RfPHVazqSFqmPYRbS3fF8gJAQHxCUBOq52fX-5-qFQfJt3sXfkp9BtppEPFXcKtyNj8I6uzhnfVPi3-k-YaFaBGfdB3QuAPa3aCUL0ZEQkHAjoFuwo/s16000/training%20HIS%202.jpg', title:'HIS End User Training 1', year:'Work · 2024' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwPxXlCVnq1rQOkPIvc4Yt6GzyX1siNkmitFcAmFwp2PAOmf0GGYH6nURHWoHBhWC8nyTqfBYvNSJ2rRy_j_mbUet8lojmmh6gj8CKEgsnHWrUSBWuW8FYHMdvNpaxRP-zkHENOJj3eU3UubeTPPGsc9DDWR4l41aJzwCs8t0XcSjPSZbKuVyQsoBV9o27/s16000/training%20HIS%201.jpg', title:'HIS End User Training 2', year:'Work · 2024' },
+  { cat:'activity', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCZlS8WcJ7mNQ9vEEBPztowhGMTs6ZctT2h2LTe0xejryn6dNnJts_caUiOdVd4e533ml4je-MU8RfPHVazqSFqmPYRbS3fF8gJAQHxCUBOq52fX-5-qFQfJt3sXfkp9BtppEPFXcKtyNj8I6uzhnfVPi3-k-YaFaBGfdB3QuAPa3aCUL0ZEQkHAjoFuwo/s16000/training%20HIS%202.jpg', title:'HIS End User Training 1', year:'Work · 2024' },
   { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdvK7Uru9xpyx7qJk9Pc9oEDFSZdCaxHwilYj7ZMfZodgQDSCsVDHN1YzyjiWxvbdmqAbQO7mq1xNS0vaArM-dxhaGE6smTgaSRNZBTXlCaUIs8OfyUuqTpe9uUm9TFf3j61KZ9ejuw_VL-Nv6pgxkg-biwoAprs0M2uBNBcVx6GwZwHQrC8U9gxVLb6Mm/s16000/Amazing%20race.jpeg', title:'Amazing Race Mayapada Hospital', year:'Event · 2024' },
   { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilOARnhADuB2LKj00kY1etPZZvfQasgkyfwCPADoT8hKn44cu9mml-tbjgflYETDzGp_cDKUn72JgHhm9bKrYuALqN4AyLlmlpCxLJhAeSyDSKeZM4OlaCt4IjuPFlL0Lo_tDjvLmF-UVX7DNOcjKpd547YEZTEeiuwfVJzS8MCQpm1IrSN-nY31qoEHyD/s16000/DPK%20ppni.jpeg', title:'DPK PPNI Mayapada Hospital Jakarta Selatan', year:'Event · 2024' },
-  { cat:'event', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvcrzqAyo8z10Pd8wIQ8h3v7qZ0EaZWzVCImeBfjoubYiiA-6WuC5YI33Q2bqiXRwQppzlT5k5vrJSWLnEeDtejbThhHpMVHLpDAMJaAj8k8L_R31u6jZqoMvY-Stz22IhFDy9z0A3lrCgEx_3ddglo3gGXMp9eSb0tnPpdH_Zda-Y0CNIxQIQ4-EU8-q6/s320/WhatsApp%20Image%202026-03-04%20at%2023.07.18.jpeg', title:'Reward Mayapada Star', year:'Event · 2023' }
+  { cat:'award', src:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhvcrzqAyo8z10Pd8wIQ8h3v7qZ0EaZWzVCImeBfjoubYiiA-6WuC5YI33Q2bqiXRwQppzlT5k5vrJSWLnEeDtejbThhHpMVHLpDAMJaAj8k8L_R31u6jZqoMvY-Stz22IhFDy9z0A3lrCgEx_3ddglo3gGXMp9eSb0tnPpdH_Zda-Y0CNIxQIQ4-EU8-q6/s320/WhatsApp%20Image%202026-03-04%20at%2023.07.18.jpeg', title:'Reward Mayapada Star', year:'Event · 2023' }
 ];
 
 var galleryCurrentPage = 1;
@@ -1291,7 +1295,7 @@ function renderGalleryGrid() {
   window.currentGalleryPageItems = pageItems;
   grid.innerHTML = pageItems.map(function(g, idx){
     return [
-      '<div class="gallery-item" data-cat="'+g.cat+'" onclick="openLightbox('+idx+')">',
+      '<div class="gallery-item" data-cat="'+g.cat+'" onclick="openLightbox('+idx+',\'gallery\')">',
         '<img src="'+g.src+'" alt="'+g.title+'" loading="lazy">',
         '<div class="gallery-overlay"><p>'+g.title+'</p><span>'+g.year+'</span></div>',
       '</div>'
@@ -1304,8 +1308,13 @@ function renderGalleryGrid() {
 // LIGHTBOX
 // ══════════════════════════════════════════
 var lightboxIndex = 0;
-function openLightbox(idx) {
+var lightboxSource = 'gallery';
+function getLightboxItems() {
+  return lightboxSource === 'cert' ? (window.currentCertPageItems || []) : (window.currentGalleryPageItems || []);
+}
+function openLightbox(idx, source) {
   lightboxIndex = idx;
+  lightboxSource = source || 'gallery';
   updateLightboxContent();
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1315,16 +1324,18 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 function updateLightboxContent() {
-  var items = window.currentGalleryPageItems || [];
+  var items = getLightboxItems();
   if (!items.length) return;
   var g = items[lightboxIndex];
-  document.getElementById('lightboxImg').src = g.src;
+  var src = lightboxSource === 'cert' ? g.img : g.src;
+  var caption = lightboxSource === 'cert' ? (g.issuer + (g.date ? ' · '+g.date : '')) : g.year;
+  document.getElementById('lightboxImg').src = src;
   document.getElementById('lightboxImg').alt = g.title;
   document.getElementById('lightboxTitle').textContent = g.title;
-  document.getElementById('lightboxYear').textContent = g.year;
+  document.getElementById('lightboxYear').textContent = caption;
 }
 function lightboxNav(dir) {
-  var items = window.currentGalleryPageItems || [];
+  var items = getLightboxItems();
   if (!items.length) return;
   lightboxIndex = (lightboxIndex + dir + items.length) % items.length;
   updateLightboxContent();
