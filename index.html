@@ -229,6 +229,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);backgro
 .gallery-item:hover .gallery-overlay{opacity:1}
 .gallery-overlay p{font-size:0.85rem;font-weight:700;color:#fff}
 .gallery-overlay span{font-size:0.68rem;color:var(--gold2);letter-spacing:0.09em;text-transform:uppercase}
+.lightbox{position:fixed;inset:0;background:rgba(10,11,13,0.94);z-index:999;display:none;align-items:center;justify-content:center;padding:40px;opacity:0;transition:opacity 0.25s ease}
+.lightbox.open{display:flex;opacity:1}
+.lightbox-inner{position:relative;max-width:min(90vw,1100px);max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:14px}
+.lightbox-inner img{max-width:100%;max-height:76vh;object-fit:contain;border:1px solid var(--border);background:var(--surface);transform:scale(0.96);transition:transform 0.25s ease}
+.lightbox.open .lightbox-inner img{transform:scale(1)}
+.lightbox-cap{text-align:center}
+.lightbox-cap p{font-size:0.95rem;font-weight:700;color:#fff}
+.lightbox-cap span{font-size:0.72rem;color:var(--gold2);letter-spacing:0.09em;text-transform:uppercase}
+.lightbox-close{position:absolute;top:-6px;right:-6px;width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--tr),color var(--tr)}
+.lightbox-close:hover{background:var(--gold);color:#0d0f12}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:#fff;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--tr),color var(--tr)}
+.lightbox-nav:hover{background:var(--gold);color:#0d0f12}
+.lightbox-prev{left:24px}
+.lightbox-next{right:24px}
+@media (max-width:600px){.lightbox{padding:16px}.lightbox-nav{width:40px;height:40px;font-size:1.1rem}.lightbox-prev{left:8px}.lightbox-next{right:8px}}
 
 /* CONTACT */
 #contact{background:var(--bg2)}
@@ -614,6 +629,49 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
   </div>
 </section>
 
+<!-- PROFESSIONAL & ORGANIZATIONAL INVOLVEMENT -->
+<section id="involvement">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-label">Professional & Organizational Involvement</div>
+      <h2 class="sec-title">Professional &amp; Organizational Involvement</h2>
+    </div>
+    <div class="exp-edu-grid">
+      <div>
+        <div class="exp-col-title reveal">Accreditation &amp; Quality</div>
+        <div class="entry reveal">
+          <div class="entry-date">2025 – Present · Active</div>
+          <div class="entry-title">POKJA MRMIK — LAFKI National Accreditation</div>
+          <div class="entry-org">🏥 Medical Records &amp; Health Information Management Working Group</div>
+          <div class="entry-desc">Contributing to the national accreditation process through assessment and improvement of medical records, health information management, data quality, information systems, and related documentation.</div>
+        </div>
+        <div class="entry reveal">
+          <div class="entry-date">2024 – Present · Active</div>
+          <div class="entry-title">POKJA MOI — JCI International Accreditation</div>
+          <div class="entry-org">🏥 Management of Information Working Group</div>
+          <div class="entry-desc">Contributing to JCI accreditation activities focused on information management, data governance, information systems, data availability, accuracy, security, and utilization for clinical and organizational decision-making.</div>
+        </div>
+        <div class="entry reveal">
+          <div class="entry-date">2025 – Present · Active</div>
+          <div class="entry-title">POKJA CCPC — JCI International Accreditation</div>
+          <div class="entry-org">🏥 Care of Patients / Clinical Care Process Certification</div>
+          <div class="entry-desc">Supporting JCI accreditation activities related to clinical care processes, patient safety, quality of care, and compliance with applicable standards and clinical practices.</div>
+        </div>
+
+      </div>
+      <div>
+        <div class="exp-col-title reveal">Professional Organization</div>
+        <div class="entry reveal">
+          <div class="entry-date">2023 – Present · Active</div>
+          <div class="entry-title">DPK PPNI — Mayapada Hospital Jakarta Selatan</div>
+          <div class="entry-org">Information & Communication Section</div>
+          <div class="entry-desc">Responsible for organizational information dissemination, member communication, and coordination of communication activities within the nursing professional organization.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CERTIFICATION -->
 <section id="certification">
   <div class="container">
@@ -930,6 +988,19 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:48px 0}
 
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" onclick="lightboxNav(-1)">&#8592;</button>
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-cap">
+      <p id="lightboxTitle"></p>
+      <span id="lightboxYear"></span>
+    </div>
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" onclick="lightboxNav(1)">&#8594;</button>
+</div>
+
 <script>
 // ══════════════════════════════════════════
 // THEME
@@ -1213,9 +1284,10 @@ function renderGalleryGrid() {
   var start = (galleryCurrentPage - 1) * galleryPerPage;
   var pageItems = filtered.slice(start, start + galleryPerPage);
   var grid = document.getElementById('galleryGrid');
-  grid.innerHTML = pageItems.map(function(g){
+  window.currentGalleryPageItems = pageItems;
+  grid.innerHTML = pageItems.map(function(g, idx){
     return [
-      '<div class="gallery-item" data-cat="'+g.cat+'">',
+      '<div class="gallery-item" data-cat="'+g.cat+'" onclick="openLightbox('+idx+')">',
         '<img src="'+g.src+'" alt="'+g.title+'" loading="lazy">',
         '<div class="gallery-overlay"><p>'+g.title+'</p><span>'+g.year+'</span></div>',
       '</div>'
@@ -1223,6 +1295,45 @@ function renderGalleryGrid() {
   }).join('');
   renderGalleryPagination(filtered.length, totalPages);
 }
+
+// ══════════════════════════════════════════
+// LIGHTBOX
+// ══════════════════════════════════════════
+var lightboxIndex = 0;
+function openLightbox(idx) {
+  lightboxIndex = idx;
+  updateLightboxContent();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function updateLightboxContent() {
+  var items = window.currentGalleryPageItems || [];
+  if (!items.length) return;
+  var g = items[lightboxIndex];
+  document.getElementById('lightboxImg').src = g.src;
+  document.getElementById('lightboxImg').alt = g.title;
+  document.getElementById('lightboxTitle').textContent = g.title;
+  document.getElementById('lightboxYear').textContent = g.year;
+}
+function lightboxNav(dir) {
+  var items = window.currentGalleryPageItems || [];
+  if (!items.length) return;
+  lightboxIndex = (lightboxIndex + dir + items.length) % items.length;
+  updateLightboxContent();
+}
+document.getElementById('lightbox').addEventListener('click', function(e){
+  if (e.target.id === 'lightbox') closeLightbox();
+});
+document.addEventListener('keydown', function(e){
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+});
 
 function renderGalleryPagination(total, totalPages) {
   var pg = document.getElementById('galleryPagination');
@@ -1439,7 +1550,7 @@ function downloadCV(){
   var origHTML=btn.innerHTML;
   btn.innerHTML='⏳ Downloading...';
   btn.disabled=true;
-  var url='https://drive.google.com/file/d/1quczoXeziETkhrrDTfPmOcwozmhpBNbw/view?usp=sharing';
+  var url='https://drive.google.com/file/d/1ftaOlOAz2viNs2JHQmVsgY2XhC5ROUcW/';
   var a=document.createElement('a');
   a.href=url;a.download='CV_Arief_Fardhiansyah.pdf';a.target='_blank';
   document.body.appendChild(a);a.click();document.body.removeChild(a);
