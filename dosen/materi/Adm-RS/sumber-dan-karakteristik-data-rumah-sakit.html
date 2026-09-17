@@ -269,14 +269,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 0;ma
     <div class="sec-label reveal">Materi Pendukung</div>
     <h2 class="sec-title reveal">Unduh &amp; contoh data</h2>
     <div class="resource-grid reveal">
-      <a href="https://docs.google.com/presentation/d/1aQJCjsFu4RkDWmGHLvM56IRJ1GGNd24A59XVGTpucFk/edit?usp=sharing" class="resource-card" id="pptxLink">
+      <a href="https://docs.google.com/presentation/d/1aQJCjsFu4RkDWmGHLvM56IRJ1GGNd24A59XVGTpucFk/edit?usp=sharing" class="resource-card" id="pptxLink" target="_blank" rel="noopener">
         <div class="resource-ico">📽️</div>
         <div class="resource-body">
           <h4>Slide Presentasi (PPTX)</h4>
           <span>PERTEMUAN 3 - SUMBER DAN KARAKTERISTIK DATA RUMAH SAKIT</span>
         </div>
       </a>
-      <a href="https://tinyurl.com/sampel-pertemuan-3" class="resource-card" id="qnaLink">
+      <a href="https://tinyurl.com/sampel-pertemuan-3" class="resource-card" id="qnaLink" target="_blank" rel="noopener">
         <div class="resource-ico">🗂️</div>
         <div class="resource-body">
           <h4>Contoh data dan informasi</h4>
@@ -305,10 +305,6 @@ themeBtn.onclick=function(){setTheme(getCurrentTheme()==='dark'?'light':'dark');
 
 var revObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('revealed');});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(function(el){revObs.observe(el);});
-
-/* TODO: ganti href di bawah dengan link Google Drive PPTX & Kartu Tanya Jawab */
-document.getElementById('pptxLink').href = '#';
-document.getElementById('qnaLink').href = '#';
 </script>
 
 </body>
